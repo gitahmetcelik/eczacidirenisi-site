@@ -1,0 +1,551 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#e30a17"><meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="../assets/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Source+Serif+4:wght@400;700&display=swap" rel="stylesheet">
+<title>Gaziler ve vatan · Eczacı Direnişi</title><meta name="description" content="Gazilerin hakları, şehitler ve vatansever mesajlar.">
+<link rel="canonical" href="https://gitahmetcelik.github.io/eczacidirenisi-site/kampanya/vatan-gazi.html">
+<meta property="og:type" content="website"><meta property="og:title" content="Gaziler ve vatan · Eczacı Direnişi">
+<meta property="og:description" content="Gazilerin hakları, şehitler ve vatansever mesajlar."><meta property="og:url" content="https://gitahmetcelik.github.io/eczacidirenisi-site/kampanya/vatan-gazi.html">
+<meta property="og:locale" content="tr_TR"><meta property="og:image" content="https://gitahmetcelik.github.io/eczacidirenisi-site/assets/logo.jpg"><meta name="twitter:card" content="summary_large_image">
+
+<script>document.documentElement.classList.add('js')</script>
+<style>/* Eczacı Direnişi: afiş / gazete manşeti dili. Renkler logodan: bayrak kırmızısı + mürekkep siyahı. */
+:root{--paper:#fff;--ink:#16110f;--red:#e30a17;--muted:#5b5651;--soft:#f1efec;--rule:#16110f}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.7 "Source Serif 4",Georgia,"Times New Roman",serif}
+a{color:inherit}
+.hd,nav,.tag,.meta,.kicker,footer,button,input,.btn,h1,h2,.brand{font-family:Oswald,"Arial Narrow",Impact,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+
+/* Üst şerit */
+header.site{background:var(--red);color:#fff;border-bottom:5px solid var(--ink)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;font-weight:700;font-size:28px;line-height:1;letter-spacing:.01em;text-transform:uppercase}
+.brand img{width:52px;height:52px;border-radius:50%;border:3px solid #fff;background:#fff;display:block}
+.brand b{color:var(--ink);font-weight:700}
+nav{display:flex;gap:2px;flex-wrap:wrap;font-size:16px;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+nav a{text-decoration:none;color:#fff;padding:8px 12px;min-height:40px;display:inline-flex;align-items:center;
+  background:linear-gradient(var(--ink),var(--ink)) no-repeat 0 100%/0 100%;transition:background-size .22s cubic-bezier(.2,.7,.2,1)}
+nav a:hover{background-size:100% 100%}
+nav a[aria-current=page]{background-size:100% 100%}
+.brand img{transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.brand:hover img{transform:rotate(-10deg) scale(1.07)}
+
+main{padding:30px 0 60px}
+h1{font-weight:700;font-size:clamp(30px,5vw,52px);line-height:1.05;text-transform:uppercase;letter-spacing:.005em;margin:0 0 14px}
+/* Fırça darbesi başlık bandı (logodaki pankartın yankısı) */
+h2{--brush:polygon(0 12%,1.5% 0,97% 8%,100% 0,99% 90%,100% 100%,2% 94%,0 100%);--brush0:polygon(0 12%,0 0,1% 8%,0 0,1% 90%,0 100%,1% 94%,0 100%);
+  display:table;background:var(--red);color:#fff;font-weight:700;font-size:20px;line-height:1.2;text-transform:uppercase;letter-spacing:.03em;
+  margin:44px 0 20px;padding:5px 18px 4px;clip-path:var(--brush);transition:clip-path .7s cubic-bezier(.2,.7,.2,1)}
+h3{font-family:"Source Serif 4",Georgia,serif}
+.lead{font-size:20px;color:var(--muted);max-width:60ch;margin:0 0 10px}
+.kicker{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+.meta{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+
+/* Manşet */
+.intro{position:relative;padding-top:18px;margin-bottom:8px}
+.intro::before{content:"";position:absolute;left:0;top:0;width:100%;height:6px;background:var(--ink);transform-origin:left;animation:draw .8s cubic-bezier(.2,.7,.2,1) both}
+.intro .kicker{animation:rise .6s .25s cubic-bezier(.2,.7,.2,1) both}
+.intro h1{animation:rise .8s .15s cubic-bezier(.2,.7,.2,1) both}
+@keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes rise{from{clip-path:inset(0 0 100% 0);transform:translateY(24px)}to{clip-path:inset(0 0 -10% 0);transform:none}}
+.hero{display:grid;grid-template-columns:1.6fr 1fr;gap:0 32px;margin-top:6px}
+@media(max-width:760px){.hero{grid-template-columns:1fr}}
+.hero>div{display:grid;align-content:start}
+
+/* Haber blokları: kutu yok, kural çizgisi var */
+.card{display:block;text-decoration:none;padding:14px 0 16px;border-top:3px solid var(--ink)}
+.card h3{font-weight:700;font-size:20px;line-height:1.3;margin:6px 0 6px}
+.card p{margin:0;color:var(--muted);font-size:16px;line-height:1.55}
+a.card:hover h3{color:var(--red);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.big{border-top:6px solid var(--red)}
+.big h3{font-family:Oswald,"Arial Narrow",Impact,sans-serif;text-transform:uppercase;font-size:clamp(28px,4vw,44px);line-height:1.08;margin:8px 0 12px}
+.big p{font-size:19px;color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:0 32px}
+
+.list .item{display:block;padding:16px 0;border-bottom:1px solid var(--ink);text-decoration:none}
+.list .item:first-child{border-top:3px solid var(--ink)}
+.list .item h3{font-weight:700;font-size:20px;line-height:1.3;margin:4px 0}
+.list .item:hover h3{color:var(--red);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.list .item p{margin:0;color:var(--muted);font-size:16px;line-height:1.55}
+
+/* Görseller */
+.thumb{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top center;background:var(--soft);margin-bottom:10px}
+.big .thumb{aspect-ratio:4/3;margin-bottom:14px}
+.list .item.has-img{display:grid;grid-template-columns:104px 1fr;gap:0 16px;align-items:start}
+.list .item.has-img .thumb{aspect-ratio:1;margin:2px 0 0}
+@media(max-width:480px){.list .item.has-img{grid-template-columns:84px 1fr;gap:0 12px}}
+figure.shot{margin:0 0 22px;border:3px solid var(--ink);background:var(--soft)}
+figure.shot img{display:block;width:100%;height:auto}
+.tag{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--red);text-decoration:none;margin:0 14px 4px 0}
+.tag:hover{text-decoration:underline}
+
+article.post{max-width:66ch}
+article.post h1{text-transform:none;font-size:clamp(28px,4.4vw,44px);line-height:1.12;letter-spacing:0}
+article.post .body{white-space:pre-line;font-size:20px;line-height:1.75}
+.facts{font-family:Oswald,sans-serif;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);padding:8px 0;margin:6px 0 22px;display:flex;gap:6px 22px;flex-wrap:wrap}
+.facts b{color:var(--ink);font-weight:600}
+
+.btn{display:inline-block;background:linear-gradient(var(--red),var(--red)) no-repeat 0 0/0 100% var(--ink);color:#fff;text-decoration:none;font-weight:600;font-size:15px;letter-spacing:.06em;text-transform:uppercase;padding:10px 18px;border:2px solid var(--ink);border-radius:0;cursor:pointer;transition:background-size .25s cubic-bezier(.2,.7,.2,1),border-color .25s}
+.btn:hover{background-size:100% 100%;border-color:var(--red)}
+.btn.ghost{background:linear-gradient(var(--ink),var(--ink)) no-repeat 0 0/0 100% transparent;color:var(--ink);transition:background-size .25s cubic-bezier(.2,.7,.2,1),color .25s}
+.btn.ghost:hover{background-size:100% 100%;border-color:var(--ink);color:#fff}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
+
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+.filters button{font-size:14px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;padding:7px 12px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:0;cursor:pointer}
+.filters button:hover{background:var(--soft)}
+.filters button.on{background:var(--ink);color:#fff}
+.filters input{flex:1 1 100%;font:18px "Source Serif 4",Georgia,serif;padding:9px 12px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:0}
+
+.note{border-left:5px solid var(--red);background:var(--soft);padding:12px 16px;font-size:15px;line-height:1.55;color:var(--muted);margin:28px 0}
+
+.pn{display:grid;grid-template-columns:1fr 1fr;gap:0 32px;margin:36px 0}
+@media(max-width:600px){.pn{grid-template-columns:1fr}}
+.pn a{text-decoration:none;border-top:3px solid var(--ink);padding:10px 0;font-weight:700;line-height:1.35}
+.pn a small{display:block;font:500 13px Oswald,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:2px}
+.pn a:hover{color:var(--red)}
+.pn .next{text-align:right}
+
+footer{background:var(--ink);color:#d8d4cf;padding:26px 0;font-size:15px}
+footer a{color:#fff}
+
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:#fff;padding:8px 14px;z-index:30;font:600 14px Oswald,sans-serif}
+.skip:focus{left:8px}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+header.site :focus-visible{outline-color:#fff}
+.progress{position:fixed;left:0;top:0;height:4px;width:0;background:var(--red);z-index:40}
+/* Hareket: yalnızca JS çalışıyorsa gizle, aksi halde içerik her zaman görünür */
+html.js .rv{opacity:0;transform:translateY(12px);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0ms)}
+html.js .rv.in{opacity:1;transform:none}
+html.js h2.rv{opacity:1;transform:none;clip-path:var(--brush0);transition:clip-path .7s cubic-bezier(.2,.7,.2,1)}
+html.js h2.rv.in{clip-path:var(--brush)}
+.list .item h3,.card h3{transition:transform .2s cubic-bezier(.2,.7,.2,1),color .15s}
+.list .item:hover h3,a.card:hover h3{transform:translateX(8px)}
+.big:hover h3{transform:translateX(0)}
+.pn a{transition:padding .2s,color .15s}
+.pn a:hover{padding-left:10px}
+.pn .next:hover{padding-left:0;padding-right:10px}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+  html.js .rv,html.js h2.rv{opacity:1!important;transform:none!important;clip-path:var(--brush)!important}
+  html.js .rv:not(h2){clip-path:none!important}
+}
+@media print{header.site,footer,.actions,.pn,.progress{display:none}}
+</style></head><body>
+<a class="skip" href="#icerik">İçeriğe geç</a>
+<header class="site"><div class="wrap"><a class="brand" href="../index.html" aria-label="Eczacı Direnişi ana sayfa"><img src="../assets/logo.jpg" alt="" width="52" height="52"><span>Eczacı <b>Direnişi</b></span></a><nav aria-label="Ana menü"><a href="../">Ana sayfa</a><a href="../gundem.html">Gündem</a><a href="../kampanyalar.html" class="on" aria-current="page">Kampanyalar</a><a href="../arsiv.html">Arşiv</a><a href="../hakkimizda.html">Hakkımızda</a></nav></div></header>
+<main id="icerik"><div class="wrap"><p class="meta"><a href="../kampanyalar.html">← Kampanyalar</a></p><h1>Gaziler ve vatan</h1>
+<p class="lead">Gazilerin hakları, şehitler ve vatansever mesajlar.</p>
+<p class="facts"><span><b>40</b> paylaşım</span><span>İlk paylaşım <b>1 Aralık 2025</b></span><span><b>2.153</b> toplam beğeni</span></p>
+<h2>Zaman çizelgesi</h2><div class="list"><a class="item has-img" href="../yazi/Df2h_O7M6sA.html" data-themes="vatan-gazi" data-q="gazilerimizin özlük haklarına kavuşması bizim için bir talep değil, bir onur meselesidir. gazilerimizin özlük haklarına kavuşması bizim için bir talep değil, bir onur meselesidir.
+
+bu vatanın bağımsızlığı, bu milletin huzuru ve bayrağımızın göklerde dalgalanması uğruna bedel ödemiş insanlara haklarını teslim etmek bir lütuf değildir. devlet olmanın, millet olmanın ve vefa göstermenin gereğidir.
+
+unutulmamalıdır ki gazilerimiz bu ülkeye minnet borçlu değil, asıl bu ülke onlara vefa borçludur.
+
+gazilerimizin özlük haklarına kavuşması için verilen mücadele, bizim için şeref meselesidir.
+
+çünkü vatan için bedel ödeyenlerin hakkını savunmak, bu vatana duyulan sadakatin gereğidir.">
+<img class="thumb" src="../assets/posts/Df2h_O7M6sA.jpg" alt="" loading="lazy" decoding="async"><div>
+<div class="meta">17 Kasım 2026 · Görsel · 29 beğeni</div>
+<h3>Gazilerimizin özlük haklarına kavuşması bizim için bir talep değil, bir onur meselesidir.</h3><p>Bu vatanın bağımsızlığı, bu milletin huzuru ve bayrağımızın göklerde dalgalanması uğruna bedel ödemiş insanlara haklarını teslim etmek bir lütuf değildir. Devlet olmanın, millet olmanın ve vefa…</p></div></a><a class="item has-img" href="../yazi/Df2dYzBsuyt.html" data-themes="oda-secimleri vatan-gazi" data-q="1. önceliğiniz eczane kârlılığı… 1. önceliğiniz eczane kârlılığı…
+
+4. maddede sıra genç eczacılarda.
+
+biz artık size söyleyecek bir şey bulamıyoruz.
+
+ancak şunu unutmayın: atatürk'ümüzün de dediği gibi, “bütün ümidim gençliktedir.”
+
+bizim de bütün ümidimiz genç eczacılardadır. çünkü bu mesleğin geleceğini, gençleri görmezden gelenler değil, gençlerle birlikte hareket edenler inşa edecektir.
+
+samimiyetine güvendiğimiz odaları seçimlerde gençler olarak destekleyeceğiz.">
+<img class="thumb" src="../assets/posts/Df2dYzBsuyt.jpg" alt="" loading="lazy" decoding="async"><div>
+<div class="meta">17 Kasım 2026 · Görsel · 26 beğeni</div>
+<h3>1. önceliğiniz eczane kârlılığı…</h3><p>4. maddede sıra Genç eczacılarda.
+
+Biz artık size söyleyecek bir şey bulamıyoruz.
+
+Ancak şunu unutmayın: Atatürk'ümüzün de dediği gibi, “Bütün ümidim gençliktedir.”
+
+Bizim de bütün ümidimiz genç…</p></div></a><a class="item has-img" href="../yazi/DfuHs1wDPKs.html" data-themes="gida-takviyesi oda-secimleri yeni-fakulteler vatan-gazi" data-q="uzm.ecz.ahmet nezihi pekcan uzm.ecz.ahmet nezihi pekcan
+uzm. ecz. ahmet nezihi pekcan 22.07.1961 ankara doğumludur.
+
+1977 yılında gazi üniversitesi eczacılık fakültesi’nde yüksek öğrenime başladı.
+
+1981 yılında mezun olup konya’da pekcan eczanesi mesul müdürü ve sahibi olarak halk sağlığına hizmet etmektedir.
+
+uzun yıllar v. bölge konya eczacı odası'nda haysiyet divanı başkanlığı, denetleme kurulu başkanlığı yaptı. konya eczacı odası yönetim kurulu üyeliği ve teb büyük kongre delegeliği görevlerinde bulundu.
+
+2014 yılında yeditepe üniversitesi homeopati programını bitirdi.
+
+2018 yılında medipol üniversitesi klinik eczacılık yüksek lisans eğitimi’ni bitirerek klinik eczacılık anabilim dalı’nda uzmanlığını aldı.">
+<img class="thumb" src="../assets/posts/DfuHs1wDPKs.jpg" alt="" loading="lazy" decoding="async"><div>
+<div class="meta">14 Kasım 2026 · Çoklu görsel · 43 beğeni</div>
+<h3>Uzm.Ecz.Ahmet Nezihi PEKCAN</h3><p>Uzm. Ecz. Ahmet Nezihi Pekcan 22.07.1961 Ankara doğumludur.
+
+1977 yılında Gazi Üniversitesi Eczacılık Fakültesi’nde yüksek öğrenime başladı.
+
+1981 yılında mezun olup Konya’da Pekcan Eczanesi mesul…</p></div></a><a class="item has-img" href="../yazi/Dfpjr5mM2Xi.html" data-themes="vatan-gazi" data-q="helikopterin düşmesi sonucu şehit olan kahraman askerlerimize allah’tan rahmet,… helikopterin düşmesi sonucu şehit olan kahraman askerlerimize allah’tan rahmet, kederli ailelerine ve yakınlarına sabır ve başsağlığı diliyoruz.
+
+aziz şehitlerimizin mekânı cennet, makamı âli olsun.
+
+türk milletinin başı sağ olsun. 🇹🇷">
+<img class="thumb" src="../assets/posts/Dfpjr5mM2Xi.jpg" alt="" loading="lazy" decoding="async"><div>
+<div class="meta">12 Kasım 2026 · Görsel · 43 beğeni</div>
+<h3>Helikopterin düşmesi sonucu şehit olan kahraman askerlerimize Allah’tan rahmet,…</h3><p>Helikopterin düşmesi sonucu şehit olan kahraman askerlerimize Allah’tan rahmet, kederli ailelerine ve yakınlarına sabır ve başsağlığı diliyoruz.
+
+Aziz şehitlerimizin mekânı cennet, makamı âli olsun.…</p></div></a><a class="item has-img" href="../yazi/DfnNJgvM9_K.html" data-themes="vatan-gazi" data-q="türk milliyetçiliğinden ve atatürkçü düşünceden taviz vermeyen eczacılarımızı, 2013… türk milliyetçiliğinden ve atatürkçü düşünceden taviz vermeyen eczacılarımızı, 2013 öncesi veya sonrası ayrımı yapmaksızın aynı çatı altında bir araya getirmeyi hedefliyoruz.
+
+genç meslektaşlarımıza yönelik “gençlere bile bile yazdınız.” gibi hadsiz ve ayrıştırıcı ifadeler kullanmayan, geçmişin tartışmalarına takılıp kalmadan ortak geleceğimiz için mücadele etmeye hazır olan herkese kapımız açık.
+
+whatsapp grubumuza katılmak isteyen meslektaşlarımızın dm üzerinden bize ulaşması yeterlidir.
+
+türk eczacılığını hak ettiği konuma taşımak, mesleğimizin itibarını korumak ve eczacıların hak mücadelesini büyütmek için elimizden gelen her şeyi yapacağız.
+
+terörle arasına net bir mesafe koyamayanlara karşı da demokratik, hukuki ve kararlı mücadelemizi sürdüreceğiz.">
+<img class="thumb" src="../assets/posts/DfnNJgvM9_K.jpg" alt="" loading="lazy" decoding="async"><div>
+<div class="meta">11 Kasım 2026 · Görsel · 41 beğeni</div>
+<h3>Türk milliyetçiliğinden ve Atatürkçü düşünceden taviz vermeyen eczacılarımızı, 2013…</h3><p>Türk milliyetçiliğinden ve Atatürkçü düşünceden taviz vermeyen eczacılarımızı, 2013 öncesi veya sonrası ayrımı yapmaksızın aynı çatı altında bir araya getirmeyi hedefliyoruz.
+
+Genç meslektaşlarımıza…</p></div></a><a class="item" href="../yazi/DfhGSdKsCmx.html" data-themes="vatan-gazi" data-q="mesleğin ahlaklı yapacak olanlar atatürk'ün bütün ümidim dediği türk gençleridir. mesleğin ahlaklı yapacak olanlar atatürk'ün bütün ümidim dediği türk gençleridir.
+
+söz meclisten dışarı eczacılık mesleğini bu hale getirenler ve toplumun eczacıya bakış açısı malumunuzdur.
+
+alper abi gibi meslek büyüklerimiz de bizim için şüphesiz ki yol gösterici olacaktır.">
+<div>
+<div class="meta">9 Kasım 2026 · Görsel · 74 beğeni</div>
+<h3>Mesleğin ahlaklı yapacak olanlar Atatürk'ün bütün ümidim dediği Türk Gençleridir.</h3><p>Söz meclisten dışarı eczacılık mesleğini bu hale getirenler ve toplumun eczacıya bakış açısı malumunuzdur.
+
+Alper abi gibi meslek büyüklerimiz de bizim için şüphesiz ki yol gösterici olacaktır.</p></div></a><a class="item" href="../yazi/DfcKsd6MDKK.html" data-themes="gida-takviyesi vatan-gazi" data-q="**t.c. sağlik bakanliğina** **t.c. sağlik bakanliğina**
+
+**konu: i̇nternet üzerinden i̇laç satışı ve türkiye i̇laç takip sistemi dışında olduğu değerlendirilen ürünlerin satışı hakkında şikâyet**
+
+i̇nternet üzerinden gerçekleştirilen ilaç satışlarına ilişkin tarafımızca yapılan incelemelerde, satışa sunulan bazı ilaçların karekodlarının türkiye menşeli olmadığı ve türkiye i̇laç takip sistemi (i̇ts) kapsamında doğrulanabilir nitelikte bulunmadığı tespit edilmiştir.
+
+i̇laçların gerekli yasal izinler ve denetimler dışında yurt dışından temin edilerek internet üzerinden satışa sunulması, halk sağlığını ciddi şekilde tehlikeye atabilecek bir durumdur.
+
+i̇laçların saklama koşulları, tedarik zinciri, orijinalliği ve güvenilirliği denetlenmeden vatandaşlara ulaştırılması telafisi mümkün olmayan sağlık sorunlarına yol açabilir.
+
+i̇nternet üzerinden yetkisiz ilaç satışı kabul edilemez. halk sağlığını tehlikeye atan bu tür faaliyetlerin önlenmesi, yalnızca mesleki değil, aynı zamanda kamusal bir sorumluluktur.
+
+bu kapsamda;
+
+1. i̇lgili internet sitesi ve satış faaliyetlerinin incelenmesini,
+2. satışa sunulan ilaçların karekodlarının ve tedarik zincirinin i̇ts üzerinden araştırılmasını,
+3. ürünlerin ruhsat, ithalat ve satış izinlerinin kontrol edilmesini,
+4. mevzuata aykırılık tespit edilmesi hâlinde sorumlular hakkında gerekli idari ve adli işlemlerin başlatılmasını,
+5. halk sağlığını tehdit eden bu satış faaliyetlerinin engellenmesini,
+
+saygılarımla arz ve talep ederim.
+
+**şikâyet konusu internet sitesi:** 
+**ürün adı:** 
+**satıcı bilgileri:** 
+**i̇lgili ekran görüntüleri ve karekod örnekleri:** ektedir.
+
+@saglikbakanligi">
+<div>
+<div class="meta">7 Kasım 2026 · Görsel · 46 beğeni</div>
+<h3>**T.C. SAĞLIK BAKANLIĞINA**</h3><p>**Konu: İnternet Üzerinden İlaç Satışı ve Türkiye İlaç Takip Sistemi Dışında Olduğu Değerlendirilen Ürünlerin Satışı Hakkında Şikâyet**
+
+İnternet üzerinden gerçekleştirilen ilaç satışlarına ilişkin…</p></div></a><a class="item" href="../yazi/DfaGSD-Mv75.html" data-themes="vatan-gazi" data-q="değerli vatandaşlarımız, raporlu ilaçların doğrudan eczanelerden alınması uygulaması… değerli vatandaşlarımız, raporlu ilaçların doğrudan eczanelerden alınması uygulaması henüz başlamamıştır. i̇laç temini için reçete zorunluluğu devam etmektedir.">
+<div>
+<div class="meta">6 Kasım 2026 · Görsel · 209 beğeni</div>
+<h3>Değerli vatandaşlarımız, raporlu ilaçların doğrudan eczanelerden alınması uygulaması…</h3><p>Değerli vatandaşlarımız, raporlu ilaçların doğrudan eczanelerden alınması uygulaması henüz başlamamıştır. İlaç temini için reçete zorunluluğu devam etmektedir.</p></div></a><a class="item" href="../yazi/DfSX-8RsP7O.html" data-themes="cumartesi-kapansin oda-secimleri vatan-gazi" data-q="konu: cumartesi günleri eczanelerde nöbet sistemine geçilmesi talebi konu: cumartesi günleri eczanelerde nöbet sistemine geçilmesi talebi
+
+i̇l: …………………
+i̇lçe: …………………
+
+i̇limizde cumartesi günleri eczanelerin normal çalışma düzeninde hizmet vermesi yerine, nöbet sistemine geçilmesini talep ediyorum.
+
+birçok ilde cumartesi günleri eczanelerin çalışma düzeni farklılık göstermekte, bazı bölgelerde cumartesi hizmetleri nöbet sistemiyle yürütülmektedir. i̇limizde de benzer bir uygulamaya geçilerek tüm eczanelerin açık tutulması yerine, belirlenen nöbetçi eczaneler aracılığıyla vatandaşların ilaç ve sağlık hizmetlerine erişiminin sağlanabileceğini düşünüyorum.
+
+cumartesi günleri nöbet sistemi uygulanması, gerekli planlama yapıldığı takdirde sağlık hizmetlerinde herhangi bir aksaklığa neden olmadan vatandaşların ilaç ihtiyaçlarının karşılanmasını sağlayacaktır. aynı zamanda eczacıların ve eczane çalışanlarının dinlenme hakkına katkıda bulunacaktır.
+
+bu doğrultuda, ilimizde cumartesi günleri eczanelerin çalışma düzeninin yeniden değerlendirilmesini ve cumartesi nöbet sistemine geçilmesi için gerekli çalışmaların başlatılmasını talep ediyorum.
+
+aynı talebimi ………………… eczacı odasına da iletiyor; eczacıların ve eczane çalışanlarının çalışma koşullarının iyileştirilmesi, cumartesi günleri nöbet sistemine geçilmesi ve bu konuda gerekli girişimlerin yapılması için odamızın sorumluluk almasını bekliyorum.
+
+hem ilgili sağlık idarelerinin hem de eczacı odasının bu talebi dikkate alarak gerekli adımları atmasını arz ve talep ederim.">
+<div>
+<div class="meta">3 Kasım 2026 · Görsel · 48 beğeni</div>
+<h3>Konu: Cumartesi Günleri Eczanelerde Nöbet Sistemine Geçilmesi Talebi</h3><p>İl: …………………
+İlçe: …………………
+
+İlimizde cumartesi günleri eczanelerin normal çalışma düzeninde hizmet vermesi yerine, nöbet sistemine geçilmesini talep ediyorum.
+
+Birçok ilde cumartesi günleri…</p></div></a><a class="item" href="../yazi/DfNcl7UMpcz.html" data-themes="vatan-gazi" data-q="sözde meslek büyükleri! sözde meslek büyükleri!
+
+yıllarca hem vatandaşı hem de milleti dolandırdınız. kanun açık, suç açık, haksız kazanç ortada! bir de utanmadan diğer eczacıları enayi yerine koydunuz.
+
+“bizim zamanımızda suçu gizlerlerdi.” demek, suçun üzerini örtmeyi marifet sanan bir ahlaksızlığın itirafıdır. suçu gizlemekle övünmek, meslek büyüklüğü değil, mesleğin itibarına ihanettir.
+
+sağlık ve adalet bakanlıklarıyla, emniyet güçlerimizle temaslarımız kararlılıkla sürecektir.
+
+bu mesleği suçları sümen altı edenler değil; atatürk’ün “bütün ümidim gençliktedir.” dediği gençler ayağa kaldıracak! mesleğimizi milletin gözünde yeniden saygın hâle getirecek olanlar, yanlışın karşısında susanlar değil, hakikati haykıranlar olacaktır.">
+<div>
+<div class="meta">1 Kasım 2026 · Görsel · 122 beğeni</div>
+<h3>Sözde meslek büyükleri!</h3><p>Yıllarca hem vatandaşı hem de milleti dolandırdınız. Kanun açık, suç açık, haksız kazanç ortada! Bir de utanmadan diğer eczacıları enayi yerine koydunuz.
+
+“Bizim zamanımızda suçu gizlerlerdi.” demek,…</p></div></a><a class="item" href="../yazi/DfHFrVtsjFN.html" data-themes="vatan-gazi" data-q="değerli eczacılarımız, değerli eczacılarımız,
+şehit teğmen mehmet kıvık’ın okul projesi için ihtiyacın %92’si tamamlandı. bugün bizi yalnız bırakmaz , birer tuğla da siz yollarsanız tamama erdireceğiz.
+vatansever eczacılarımız,
+bağışlarımızla kalan %5i pazartesi'ye kadar tamamlayalım.">
+<div>
+<div class="meta">30 Ekim 2026 · Görsel · 13 beğeni</div>
+<h3>Değerli Eczacılarımız,</h3><p>Şehit Teğmen Mehmet Kıvık’ın okul projesi için ihtiyacın %92’si tamamlandı. Bugün bizi yalnız bırakmaz , birer tuğla da siz yollarsanız tamama erdireceğiz.
+Vatansever eczacılarımız,
+bağışlarımızla…</p></div></a><a class="item" href="../yazi/DdgF8o7sJZT.html" data-themes="oda-secimleri vatan-gazi" data-q="i̇laç kutularından prospektüs artık çıkmayacak. i̇laç kutularından prospektüs artık çıkmayacak.
+
+1 ocak 2027’de başlayacak uygulamayla birlikte kullanma talimatlarına elektronik ortam üzerinden erişim zorunlu hale gelecek. hastalar, dış ambalajdaki karekodu okutarak ilacın kullanma talimatına ulaşabilecek.
+
+peki ya yaşlı hastalarımız?
+
+akıllı telefon kullanmayan, karekod okutamayan veya elektronik ortamda bilgiye erişmekte güçlük yaşayan milyonlarca vatandaşımız ne olacak?
+
+i̇laç, sıradan bir tüketim ürünü değildir. kullanma talimatına erişim bir kolaylık değil, doğrudan hasta güvenliği meselesidir.
+
+birkaç kuruşluk kâğıt ve baskı maliyetinden tasarruf etmek uğruna hastaların ilacın kullanım bilgisine erişimi riske atılmamalıdır.
+
+olası mağduriyetlerin ve telafisi mümkün olmayan sonuçların önüne geçilmesi için uygulama yeniden değerlendirilmelidir.
+
+hasta güvenliği, maliyet hesabına feda edilmemelidir.">
+<div>
+<div class="meta">20 Eylül 2026 · Görsel · 105 beğeni</div>
+<h3>İlaç kutularından prospektüs artık çıkmayacak.</h3><p>1 Ocak 2027’de başlayacak uygulamayla birlikte kullanma talimatlarına elektronik ortam üzerinden erişim zorunlu hale gelecek. Hastalar, dış ambalajdaki karekodu okutarak ilacın kullanma talimatına…</p></div></a><a class="item" href="../yazi/Dddyd-KMep0.html" data-themes="vatan-gazi" data-q="19 eylül gaziler günü… 19 eylül gaziler günü…
+
+bu toprakların bedeli vardır.
+
+kimi cephede kurşunun önüne geçti, kimi vatan uğruna bedeninden bir parça bıraktı. kimi gençliğini, kimi sağlığını, kimi hayatının en güzel yıllarını bu milletin huzuru için feda etti.
+
+bugün özgürce nefes alabiliyorsak, bayrağımız gökyüzünde dalgalanıyorsa, ezanımız minarelerden okunuyorsa bunu yalnızca tarihin sayfalarına değil; kanıyla, canıyla bu vatanı savunan kahramanlarımıza borçluyuz.
+
+gazi, savaş meydanında kalmış bir unvan değildir.
+
+gazi, türk milletinin hafızasında yaşayan bir şereftir.
+
+başta gazi mustafa kemal atatürk olmak üzere, vatanımızın bağımsızlığı ve milletimizin güvenliği için mücadele eden tüm gazilerimizi saygı, minnet ve şükranla anıyorum.
+
+hayatta olan gazilerimizin ellerinden, ebediyete intikal eden gazilerimizin aziz hatıralarından öpüyorum.
+
+bu millet gazisini unutmaz.
+
+unutmayacaktır.
+
+19 eylül gaziler günü kutlu olsun.">
+<div>
+<div class="meta">19 Eylül 2026 · Görsel · 6 beğeni</div>
+<h3>19 Eylül Gaziler Günü…</h3><p>Bu toprakların bedeli vardır.
+
+Kimi cephede kurşunun önüne geçti, kimi vatan uğruna bedeninden bir parça bıraktı. Kimi gençliğini, kimi sağlığını, kimi hayatının en güzel yıllarını bu milletin huzuru…</p></div></a><a class="item" href="../yazi/DdJ871GM3jS.html" data-themes="gida-takviyesi vatan-gazi" data-q="kamuoyunun dikkatine. kamuoyunun dikkatine.
+
+bir eczacı tarafından, bazı ünlü takviye edici gıda markalarının ambalaj ve karekod unsurlarının taklit edildiğine ve bu şekilde farklı ürünlerin internet sitelerinde satışa sunulduğuna ilişkin ciddi iddialar tarafımıza ulaşmıştır.
+
+söz konusu iddialar, gerekli incelemenin yapılması amacıyla yetkili kurumlara ihbar edilmiş ve konu hakkında inceleme başlatılmıştır.
+
+i̇ncelemenin sonucunu ve yetkili kurumların değerlendirmesini bekliyoruz.
+
+kıymetli eczacılarımızın ve vatandaşlarımızın, internet siteleri üzerinden sağlık ve takviye ürünleri satın alırken ürünün kaynağına, satıcısına ve güvenilirliğine özellikle dikkat etmelerini önemle hatırlatıyoruz.
+
+kamu sağlığını ilgilendiren her türlü şüphenin yetkili mercilere bildirilmesi gerektiğini bir kez daha hatırlatıyoruz.
+
+kamuoyuna saygıyla duyurulur.">
+<div>
+<div class="meta">11 Eylül 2026 · Görsel · 119 beğeni</div>
+<h3>Kamuoyunun dikkatine.</h3><p>Bir eczacı tarafından, bazı ünlü takviye edici gıda markalarının ambalaj ve karekod unsurlarının taklit edildiğine ve bu şekilde farklı ürünlerin internet sitelerinde satışa sunulduğuna ilişkin ciddi…</p></div></a><a class="item" href="../yazi/DdEF7Fjs_ij.html" data-themes="vatan-gazi" data-q="yeşil vatan’ımıza, ciğerlerimiz olan ormanlarımıza kasteden hain terör örgütü pkk’yı… yeşil vatan’ımıza, ciğerlerimiz olan ormanlarımıza kasteden hain terör örgütü pkk’yı ve kıl çadırların yakılması talimatını verdiği iddia edilen siyasi uzantılarını şiddetle kınıyoruz.
+
+antalya’da yörüklerimize yaşatılan bu acı unutulmayacak, milletimizin hafızasından asla silinmeyecektir.
+
+bu millet yapılanları unutmaz.
+
+elbet bir gün, hukuk önünde hesabı sorulacaktır.">
+<div>
+<div class="meta">9 Eylül 2026 · Video · 24 beğeni</div>
+<h3>Yeşil Vatan’ımıza, ciğerlerimiz olan ormanlarımıza kasteden hain terör örgütü PKK’yı…</h3><p>Yeşil Vatan’ımıza, ciğerlerimiz olan ormanlarımıza kasteden hain terör örgütü PKK’yı ve kıl çadırların yakılması talimatını verdiği iddia edilen siyasi uzantılarını şiddetle kınıyoruz.
+
+Antalya’da…</p></div></a><a class="item" href="../yazi/DdEFhWuscxo.html" data-themes="vatan-gazi" data-q="9 eylül 1922.. yunan yenilmiş.. ordular i̇zmir'de.. savaşı kazandık sesleri.. atatürk o… 9 eylül 1922.. yunan yenilmiş.. ordular i̇zmir'de.. savaşı kazandık sesleri.. atatürk o gün &quot;hayır, asıl savaş şimdi başlıyor&quot; demişti.">
+<div>
+<div class="meta">9 Eylül 2026 · Video · 29 beğeni</div>
+<h3>9 Eylül 1922.. Yunan yenilmiş.. Ordular İzmir'de.. Savaşı kazandık sesleri.. Atatürk o…</h3><p>9 Eylül 1922.. Yunan yenilmiş.. Ordular İzmir'de.. Savaşı kazandık sesleri.. Atatürk o gün &quot;Hayır, asıl savaş şimdi başlıyor&quot; demişti.</p></div></a><a class="item" href="../yazi/DctkeS-swt9.html" data-themes="oda-secimleri vatan-gazi" data-q="teb neden sadece bi̇r güruhu aniyor? teb neden sadece bi̇r güruhu aniyor?
+
+milliyetçi eczacılar eczacıdan sayılmıyor mu?
+
+29 nisan 1980’de eczanesinde görevi başında kahpece silahla vurulan, yere düştükten sonra dahi başına ateş edilerek şehit edilen ecz. turan i̇bri̇m’i saygı, rahmet ve minnetle anıyoruz.
+
+aynı karanlık dönemde şehit edilen ecz. cemil çöllü, ecz. cihan duman, ecz. osman yokuş, ege eczacılık öğrencisi mesut yergi̇n ve ecz. esin başlamiş’ı da unutmadık, unutmayacağız.
+
+eczacılık camiasının hafızası siyasi tercihlere göre şekillendirilemez. şehit edilen her eczacı ve eczacılık öğrencisi bizim değerimizdir.
+
+ruhları şad, mekânları cennet olsun.
+
+ 29/04/1980
+ 14/11/1979
+ 14/10/1977
+ 25/06/1979
+ 29/08/1980
+eczosmanyokuş 30/08/1980">
+<div>
+<div class="meta">31 Ağustos 2026 · Görsel · 44 beğeni</div>
+<h3>TEB NEDEN SADECE BİR GÜRUHU ANIYOR?</h3><p>Milliyetçi eczacılar eczacıdan sayılmıyor mu?
+
+29 Nisan 1980’de eczanesinde görevi başında kahpece silahla vurulan, yere düştükten sonra dahi başına ateş edilerek şehit edilen Ecz. Turan İBRİM’i…</p></div></a><a class="item" href="../yazi/Db5u09-Mncg.html" data-themes="vatan-gazi" data-q="pkk'lı hain teröristler tarafından şehit edilen eren bülbül ve astsubayımız ferhat… pkk'lı hain teröristler tarafından şehit edilen eren bülbül ve astsubayımız ferhat gedi̇k'i rahmet ve minnetle anıyoruz.">
+<div>
+<div class="meta">11 Ağustos 2026 · Görsel · 47 beğeni</div>
+<h3>Pkk'lı Hain Teröristler Tarafından Şehit Edilen Eren BÜLBÜL ve Astsubayımız Ferhat…</h3><p>Pkk'lı Hain Teröristler Tarafından Şehit Edilen Eren BÜLBÜL ve Astsubayımız Ferhat GEDİK'i Rahmet ve Minnetle Anıyoruz.</p></div></a><a class="item" href="../yazi/Db0T3gusLUB.html" data-themes="vatan-gazi" data-q="abdullah öcalan bebek katili bir terörist,sözde elebaşıdır. pkk bir terör örgütüdür. abdullah öcalan bebek katili bir terörist,sözde elebaşıdır. pkk bir terör örgütüdür.
+
+terör devletine(is**il) onun maşası olan hain terör ötgütlerine, sempatizanlarına karşı lanet okuyoruz.
+
+diş hekimleri ve tip doktoru vatansever arkadaşlarımızı da aynı tepkiye davet ediyoruz.
+
+eczacı direnişi ekibi">
+<div>
+<div class="meta">9 Ağustos 2026 · Görsel · 173 beğeni</div>
+<h3>Abdullah Öcalan bebek katili bir terörist,sözde elebaşıdır. Pkk bir terör örgütüdür.</h3><p>Terör devletine(is**il) onun maşası olan hain terör ötgütlerine, sempatizanlarına karşı lanet okuyoruz.
+
+Diş Hekimleri ve Tip Doktoru vatansever arkadaşlarımızı da aynı tepkiye davet ediyoruz.…</p></div></a><a class="item" href="../yazi/DboEUr2Mp5v.html" data-themes="vatan-gazi" data-q="yıllardır hastalar, fahiş fiyatlarla ve çoğu zaman kayıt dışı ödemelerle bu ürünleri… yıllardır hastalar, fahiş fiyatlarla ve çoğu zaman kayıt dışı ödemelerle bu ürünleri dışarıdan temin etmeye zorlandı. hastayı gelir kapısı hâline getiren bu anlayışa son verilmesi yerinde bir adımdır. sağlık ticaret değil, kamu hizmetidir; vatandaşın cebini hedef alan bu düzene göz yumulmamalıdır.">
+<div>
+<div class="meta">4 Ağustos 2026 · Görsel · 153 beğeni</div>
+<h3>Yıllardır hastalar, fahiş fiyatlarla ve çoğu zaman kayıt dışı ödemelerle bu ürünleri…</h3><p>Yıllardır hastalar, fahiş fiyatlarla ve çoğu zaman kayıt dışı ödemelerle bu ürünleri dışarıdan temin etmeye zorlandı. Hastayı gelir kapısı hâline getiren bu anlayışa son verilmesi yerinde bir…</p></div></a><a class="item" href="../yazi/DbnbR8hsazJ.html" data-themes="vatan-gazi" data-q="türkistan'ın bağımsızlığı uğruna mücadele ederken şehit düşen enver paşa'yı… türkistan'ın bağımsızlığı uğruna mücadele ederken şehit düşen enver paşa'yı şehadetinin yıl dönümünde rahmet ve saygıyla anıyoruz.
+
+ruhu şad olsun.">
+<div>
+<div class="meta">4 Ağustos 2026 · Görsel · 19 beğeni</div>
+<h3>Türkistan'ın bağımsızlığı uğruna mücadele ederken şehit düşen Enver Paşa'yı…</h3><p>Türkistan'ın bağımsızlığı uğruna mücadele ederken şehit düşen Enver Paşa'yı şehadetinin yıl dönümünde rahmet ve saygıyla anıyoruz.
+
+Ruhu şad olsun.</p></div></a><a class="item" href="../yazi/DbEJGsoMk-2.html" data-themes="vatan-gazi" data-q="eczacı direnişi ekip arkadaşları arıyor. eczacı direnişi ekip arkadaşları arıyor.
+öğrenci veya mezun olmanız farketmez.
+tek şartımız atatürkçü olmanız.
+
+katılmak için dm atabilirsiniz.">
+<div>
+<div class="meta">21 Temmuz 2026 · Video · 22 beğeni</div>
+<h3>Eczacı direnişi ekip arkadaşları arıyor.</h3><p>Öğrenci veya mezun olmanız farketmez.
+Tek şartımız Atatürkçü olmanız.
+
+Katılmak için dm atabilirsiniz.</p></div></a><a class="item" href="../yazi/DbD72a1DJVv.html" data-themes="oda-secimleri vatan-gazi" data-q="gaziantep'te muvazaa açmaya çalışan şahıs ihbar hattımıza düştü. gaziantep'te muvazaa açmaya çalışan şahıs ihbar hattımıza düştü.
+
+mehmet arslan daha önce de şanliurfa ilinde muvazaa açmış.
+
+gerekli soruşturmanın yapılmasını talep ediyoruz.emniyet güçleriyle gerekli bilgileri paylaşacağız.
+
+muvazaa komisyonlarınız çok güzel çalışıyor.
+
+şanlıurfa eczacı odası ve il sağlık müdürlüğü hakkında soruşturma başlatılmasını talep ediyoruz.
+
+@emniyetgm @saglikbakanligi @adalet_bakanlik">
+<div>
+<div class="meta">21 Temmuz 2026 · Çoklu görsel · 119 beğeni</div>
+<h3>Gaziantep'te muvazaa açmaya çalışan şahıs ihbar hattımıza düştü.</h3><p>Mehmet Arslan daha önce de Şanliurfa ilinde muvazaa açmış.
+
+Gerekli soruşturmanın yapılmasını talep ediyoruz.Emniyet güçleriyle gerekli bilgileri paylaşacağız.
+
+Muvazaa komisyonlarınız çok güzel…</p></div></a><a class="item" href="../yazi/Da7eBrospsn.html" data-themes="vatan-gazi" data-q="bu vatanın gerçek tapusu, gazilerimizin bedeninde taşıdığı yaralardır. bu vatanın gerçek tapusu, gazilerimizin bedeninde taşıdığı yaralardır.
+
+onları unutanın da hakkını görmezden gelenin de vatan nutku sahtedir!
+
+gazilerimiz yalnız değildir.">
+<div>
+<div class="meta">18 Temmuz 2026 · Görsel · 42 beğeni</div>
+<h3>Bu vatanın gerçek tapusu, gazilerimizin bedeninde taşıdığı yaralardır.</h3><p>Onları unutanın da hakkını görmezden gelenin de vatan nutku sahtedir!
+
+Gazilerimiz yalnız değildir.</p></div></a><a class="item" href="../yazi/DarAOgEMOxD.html" data-themes="oda-secimleri yeni-fakulteler vatan-gazi" data-q="yarınki röportajımızın konuğu uzman eczacı ahmet nezih pekcan. eczacılık mesleği adına… yarınki röportajımızın konuğu uzman eczacı ahmet nezih pekcan. eczacılık mesleği adına çok önemli çalışmalara imza atan kıymetli hocamızı hep birlikte daha yakından tanıyalım.
+
+22 temmuz 1961 tarihinde ankara’da doğan uzm. ecz. ahmet nezih pekcan, 1977 yılında gazi üniversitesi eczacılık fakültesinde yükseköğrenimine başladı ve 1981 yılında mezun oldu. mezuniyetinin ardından konya’da pekcan eczanesinin mesul müdürü ve sahibi olarak halk sağlığına hizmet etmeye başladı.
+
+uzun yıllar v. bölge konya eczacı odasında haysiyet divanı başkanlığı ve denetleme kurulu başkanlığı görevlerini üstlendi. ayrıca konya eczacı odası yönetim kurulu üyeliği ve türk eczacıları birliği büyük kongre delegeliği görevlerinde bulundu.
+
+2014 yılında yeditepe üniversitesi homeopati programını tamamladı. 2018 yılında medipol üniversitesi klinik eczacılık yüksek lisans programından mezun olarak klinik eczacılık anabilim dalında uzmanlık unvanını aldı.
+
+nisan 2018’de, türkiye’de ilk kez konya’da düzenlenen ve majistral eczacılık alanına odaklanan majistral zirve’nin gerçekleştirilmesinde görev aldı.
+
+türk farmakopesi çalışma grubu üyesi olan pekcan; majistral makaleler i, majistral makaleler ii, 101 majistral formül ve gizli formüller adlı dört kitabın yazarıdır.
+
+majistral eczacıları derneğinin kurucu üyeleri arasında yer alan pekcan, hâlen derneğin yönetim kurulu başkanlığı görevini sürdürmektedir. farmazi akademi’de eğitimci, lokman hekim üniversitesi eczacılık fakültesinde ise misafir öğretim görevlisi olarak görev yapmaktadır.
+
+ege üniversitesi farmasötik teknoloji bölümünde doktora eğitimine devam eden ahmet nezih pekcan; eczacılık fakültelerinde ve meslek örgütlerinde gerçekleştirdiği sunumlarla “majistral sanatı” alanındaki bilgi ve deneyimlerini paylaşmaktadır.">
+<div>
+<div class="meta">11 Temmuz 2026 · Görsel · 9 beğeni</div>
+<h3>Yarınki röportajımızın konuğu Uzman Eczacı Ahmet Nezih Pekcan. Eczacılık mesleği adına…</h3><p>Yarınki röportajımızın konuğu Uzman Eczacı Ahmet Nezih Pekcan. Eczacılık mesleği adına çok önemli çalışmalara imza atan kıymetli hocamızı hep birlikte daha yakından tanıyalım.
+
+22 Temmuz 1961…</p></div></a><a class="item" href="../yazi/DaYbdYMsQVq.html" data-themes="vatan-gazi" data-q="rahmetli nihat genç'in bu sözleri hepimize ışık olsun. rahmetli nihat genç'in bu sözleri hepimize ışık olsun.
+
+meslek onurumuz elden giderken bizimle yanyana duran yılana sarılmayan vatansever eczacılarımıza selam olsun.">
+<div>
+<div class="meta">4 Temmuz 2026 · Video · 27 beğeni</div>
+<h3>Rahmetli Nihat Genç'in bu sözleri hepimize ışık olsun.</h3><p>Meslek onurumuz elden giderken bizimle yanyana duran yılana sarılmayan vatansever eczacılarımıza selam olsun.</p></div></a><a class="item" href="../yazi/DaLqGPosUSA.html" data-themes="atama-kadro yeni-fakulteler vatan-gazi" data-q="türkiye geneli whatsapp grubumuz açılmıştır. türkiye geneli whatsapp grubumuz açılmıştır.
+
+amacımız, 2013 sonrası eczacılar olarak meslek haklarımızı geri almak; emeğimizi, geleceğimizi ve meslek onurumuzu savunmaktır.
+
+atatürkçü, milliyetçi; akla, bilime ve yeniliğe bağlı eczacılar olarak il il örgütleneceğiz. meslek içindeki her türlü hukuk dışı yapılanmaya, çıkar grubuna ve baskı düzenine karşı da net duracağız.
+
+gruba katılım şartımız; atatürk ilke ve inkılaplarına bağlı olmak ve gruba alınmadan önce kendinizi kısaca tanıtmaktır. tanıtım sonrası uygun görülen arkadaşlarımız gruba dahil edilecektir.
+
+tweet atmak dışında çözüm istiyorsanız bize katılın.">
+<div>
+<div class="meta">29 Haziran 2026 · Görsel · 20 beğeni</div>
+<h3>Türkiye Geneli WhatsApp grubumuz açılmıştır.</h3><p>Amacımız, 2013 sonrası eczacılar olarak meslek haklarımızı geri almak; emeğimizi, geleceğimizi ve meslek onurumuzu savunmaktır.
+
+Atatürkçü, milliyetçi; akla, bilime ve yeniliğe bağlı eczacılar olarak…</p></div></a><a class="item" href="../yazi/DVt1sunDOmo.html" data-themes="atama-kadro yeni-fakulteler vatan-gazi" data-q="e-nabız'a &quot;i̇lacım nerede?&quot; özelliği geldi. e-nabız'a &quot;i̇lacım nerede?&quot; özelliği geldi.
+
+vatandaşlar, reçetelenen ilaçlarının hangi eczanelerde bulunduğunu uygulamadan öğrenebilecek.">
+<div>
+<div class="meta">10 Mart 2026 · Görsel · 47 beğeni</div>
+<h3>e-Nabız'a &quot;İlacım Nerede?&quot; özelliği geldi.</h3><p>Vatandaşlar, reçetelenen ilaçlarının hangi eczanelerde bulunduğunu uygulamadan öğrenebilecek.</p></div></a><a class="item" href="../yazi/DTku0MaDC9M.html" data-themes="vatan-gazi" data-q="atatürk’ü müfredattan çıkarıyorsunuz. atatürk’ü müfredattan çıkarıyorsunuz.
+yetmiyor, çocukların karnelerinden siliyorsunuz.
+
+oysa farkında değilsiniz; atatürk bir ders konusu değil, emperyalizmle hesaplaşmadır. bir ulusun bağımsızlık iradesidir, ortak hafızasıdır.
+
+cumhuriyetin kurucu değerlerini görünmez kılmaya yönelik bu adımlar, yalnızca eğitimi değil, toplumsal belleği de zedelemektedir.
+
+türk eczacıları olarak bu süreci endişeyle takip ediyoruz.">
+<div>
+<div class="meta">16 Ocak 2026 · Görsel · 21 beğeni</div>
+<h3>Atatürk’ü müfredattan çıkarıyorsunuz.</h3><p>Yetmiyor, çocukların karnelerinden siliyorsunuz.
+
+Oysa farkında değilsiniz; Atatürk bir ders konusu değil, emperyalizmle hesaplaşmadır. Bir ulusun bağımsızlık iradesidir, ortak hafızasıdır.…</p></div></a><a class="item" href="../yazi/DS136dqDK91.html" data-themes="vatan-gazi" data-q="aziz şehitlerimize allah’tan rahmet, ailelerine ve milletimize sabır, yaralılarımıza… aziz şehitlerimize allah’tan rahmet, ailelerine ve milletimize sabır, yaralılarımıza rabbimizden acil şifalar diliyoruz.">
+<div>
+<div class="meta">29 Aralık 2025 · Görsel · 22 beğeni</div>
+<h3>Aziz Şehitlerimize Allah’tan Rahmet, Ailelerine ve Milletimize Sabır, Yaralılarımıza…</h3><p>Aziz Şehitlerimize Allah’tan Rahmet, Ailelerine ve Milletimize Sabır, Yaralılarımıza Rabbimizden Acil Şifalar Diliyoruz.</p></div></a><a class="item" href="../yazi/DSsY1FWDEfX.html" data-themes="vatan-gazi" data-q="27 aralık’ta anıtkabir’de buluşuyoruz. bu çağrı, bir siyasi hesaplaşmanın değil;… 27 aralık’ta anıtkabir’de buluşuyoruz. bu çağrı, bir siyasi hesaplaşmanın değil; cumhuriyetin, şehitlerimizin ve bu ülkenin bölünmez bütünlüğünün çağrısıdır. terör örgütü pkk’ya karşı yürütülen sözde “çözüm” arayışları, milletin hafızasında açılmış yaraları yeniden kanatmaktadır. terörle müzakere olmaz, terörle mücadele olur.
+
+bu ülkenin hekimleri, eczacıları, diş hekimleri; hayat kurtaran, toplum sağlığını ayakta tutan onurlu meslek gruplarıdır. beyaz önlük, sadece bir kıyafet değil; bilimin, aklın ve cumhuriyet değerlerinin simgesidir. bizler bu ülkenin geleceğini sırtlanan sağlık emekçileri olarak, teröre karşı sessiz kalmayacağız.
+
+eczacıları, diş hekimlerini, doktorları beyaz önlükleriyle anıtkabir’de bekliyoruz. bu duruş nefretten değil, vatan sevgisinden; intikamdan değil, adaletten beslenmektedir. teröre karşı en net cevap, cumhuriyetin kurucusunun huzurunda omuz omuza durmaktır.">
+<div>
+<div class="meta">25 Aralık 2025 · Görsel · 53 beğeni</div>
+<h3>27 Aralık’ta Anıtkabir’de buluşuyoruz. Bu çağrı, bir siyasi hesaplaşmanın değil;…</h3><p>27 Aralık’ta Anıtkabir’de buluşuyoruz. Bu çağrı, bir siyasi hesaplaşmanın değil; Cumhuriyetin, şehitlerimizin ve bu ülkenin bölünmez bütünlüğünün çağrısıdır. Terör örgütü PKK’ya karşı yürütülen sözde…</p></div></a><a class="item" href="../yazi/DSBCKj7jF8-.html" data-themes="vatan-gazi" data-q="selçuk ecza yalniz deği̇ldi̇r ‼️ selçuk ecza yalniz deği̇ldi̇r ‼️
+i̇rticai faaliyetten kasıt şeyh sait seyit rıza ve fetö gibi örgütlerin peşinden gidip cumhuriyet'i yıkmaya çalışmaktır.
+karşı çıktıkları atatürk i̇lke ve i̇nkılapları anayasa'da yer almaktadır.
+anayasanın 2. maddesi de şu şekildedir:
+&quot;türkiye cumhuriyeti, toplumun huzuru, millî dayanışma ve adalet anlayışı içinde, insan haklarına saygılı, atatürk milliyetçiliğine bağlı, başlangıçta belirtilen temel ilkelere dayanan, demokratik, lâik ve sosyal bir hukuk devletidir.&quot;
+anayasaya karşı çıkmak darbe niteliğindedir,vatana ihanettir.
+vatana ihanetin cezası ise idamdır.
+biz eczacılar olarak çoğunluk selçuk ecza deposuyla çalışmaktayız,çalışmaya devam edeceğiz.🇹🇷">
+<div>
+<div class="meta">8 Aralık 2025 · Görsel · 35 beğeni</div>
+<h3>SELÇUK ECZA YALNIZ DEĞİLDİR ‼️</h3><p>İrticai Faaliyetten kasıt Şeyh Sait Seyit Rıza ve Fetö gibi örgütlerin peşinden gidip Cumhuriyet'i yıkmaya çalışmaktır.
+Karşı çıktıkları Atatürk İlke ve İnkılapları Anayasa'da yer almaktadır.…</p></div></a><a class="item" href="../yazi/DR5KNiBjHzy.html" data-themes="vatan-gazi" data-q="&quot;uyuyan milletler ya ölür ya da köle olarak uyanır.&quot; &quot;uyuyan milletler ya ölür ya da köle olarak uyanır.&quot;
+- gazi mustafa kemal atatürk">
+<div>
+<div class="meta">5 Aralık 2025 · Görsel · 15 beğeni</div>
+<h3>&quot;Uyuyan milletler ya ölür ya da köle olarak uyanır.&quot;</h3><p>- Gazi Mustafa Kemal Atatürk</p></div></a><a class="item" href="../yazi/DRu8F3wDPsP.html" data-themes="vatan-gazi" data-q="merhaba ben ecz. buse alpaydın. eczanesine &quot;en iyi ilaç: atatürk ve türk bayrağı&quot;… merhaba ben ecz. buse alpaydın. eczanesine &quot;en iyi ilaç: atatürk ve türk bayrağı&quot; yazısını asan eczacı yani.
+eczane açmadan önce henüz aklımda eczane açma fikri yokken böyle bir şey yapmak aklıma gelmişti. eğer eczanem olursa yaptırıp başımın üstüne asacağım diyordum. allah'a şükür kısmet oldu. mayıs ayında açılışımı yaptıktan sonra sosyal medya hesaplarımdan paylaşım yapmıştım. mutluluğumu paylaşmak amacıyla kendi halimde yaptığım bir paylaşımdı. ancak kısa sürede yayıldı. çokça beğeni ve destek alırken aynı zamanda tanımadığım bir sürü insandan küfür, hakaret ve beddua içerikli yorumlar (!) da aldım. ve bu olumsuz yorumlarda yalnızca bana değil atatürk'e hakaret içerenler de mevcuttu. buna şaşırmamak lazım. çünkü reel hayatta gözümüzün içine baka baka kurucu liderimize küfür edemeyecek veya bayraktan rahatsız olduğunu dile getiremeyecek olan korkakların sosyal medyada ekranlar arkasından efelik taslaması olağandır. güler geçeriz. tabi ki bu linç ve hakaretlerin yanında bolca destek aldım. tanımadığım birçok insandan güzel dualar aldım. meslektaşlarım da büyük destek oldu. her birine teşekkür ediyorum. ve cumhuriyetin nimetleriyle büyüyen bir kız çocuğu olarak kurucu liderimi ve bayrağımı başımın üstünde taşımaya devam edeceğim.">
+<div>
+<div class="meta">1 Aralık 2025 · Görsel · 32 beğeni</div>
+<h3>Merhaba ben Ecz. Buse Alpaydın. Eczanesine &quot;en iyi ilaç: Atatürk ve Türk bayrağı&quot;…</h3><p>Merhaba ben Ecz. Buse Alpaydın. Eczanesine &quot;en iyi ilaç: Atatürk ve Türk bayrağı&quot; yazısını asan eczacı yani.
+Eczane açmadan önce henüz aklımda eczane açma fikri yokken böyle bir şey yapmak aklıma…</p></div></a></div></div></main>
+<footer><div class="wrap">Örnek çalışma, resmî site değildir · İçerik <a href="https://www.instagram.com/eczacidirenisi/">@eczacidirenisi</a> Instagram hesabından derlenmiştir.</div></footer>
+<script>
+(function(){
+  var els=[].slice.call(document.querySelectorAll('main h2,.card,.list .item,.pn a,.note,.facts'));
+  var idx=new Map();
+  els.forEach(function(e){var p=e.parentNode,n=idx.get(p)||0;idx.set(p,n+1);e.classList.add('rv');e.style.setProperty('--d',Math.min(n,5)*70+'ms')});
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:0});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body></html>

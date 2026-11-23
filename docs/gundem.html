@@ -1,0 +1,610 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#e30a17"><meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="./assets/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Source+Serif+4:wght@400;700&display=swap" rel="stylesheet">
+<title>Gündem · Eczacı Direnişi</title><meta name="description" content="Son açıklamalar ve tepkiler.">
+<link rel="canonical" href="https://gitahmetcelik.github.io/eczacidirenisi-site/gundem.html">
+<meta property="og:type" content="website"><meta property="og:title" content="Gündem · Eczacı Direnişi">
+<meta property="og:description" content="Son açıklamalar ve tepkiler."><meta property="og:url" content="https://gitahmetcelik.github.io/eczacidirenisi-site/gundem.html">
+<meta property="og:locale" content="tr_TR"><meta property="og:image" content="https://gitahmetcelik.github.io/eczacidirenisi-site/assets/logo.jpg"><meta name="twitter:card" content="summary_large_image">
+
+<script>document.documentElement.classList.add('js')</script>
+<style>/* Eczacı Direnişi: afiş / gazete manşeti dili. Renkler logodan: bayrak kırmızısı + mürekkep siyahı. */
+:root{--paper:#fff;--ink:#16110f;--red:#e30a17;--muted:#5b5651;--soft:#f1efec;--rule:#16110f}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.7 "Source Serif 4",Georgia,"Times New Roman",serif}
+a{color:inherit}
+.hd,nav,.tag,.meta,.kicker,footer,button,input,.btn,h1,h2,.brand{font-family:Oswald,"Arial Narrow",Impact,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+
+/* Üst şerit */
+header.site{background:var(--red);color:#fff;border-bottom:5px solid var(--ink)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;font-weight:700;font-size:28px;line-height:1;letter-spacing:.01em;text-transform:uppercase}
+.brand img{width:52px;height:52px;border-radius:50%;border:3px solid #fff;background:#fff;display:block}
+.brand b{color:var(--ink);font-weight:700}
+nav{display:flex;gap:2px;flex-wrap:wrap;font-size:16px;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+nav a{text-decoration:none;color:#fff;padding:8px 12px;min-height:40px;display:inline-flex;align-items:center;
+  background:linear-gradient(var(--ink),var(--ink)) no-repeat 0 100%/0 100%;transition:background-size .22s cubic-bezier(.2,.7,.2,1)}
+nav a:hover{background-size:100% 100%}
+nav a[aria-current=page]{background-size:100% 100%}
+.brand img{transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.brand:hover img{transform:rotate(-10deg) scale(1.07)}
+
+main{padding:30px 0 60px}
+h1{font-weight:700;font-size:clamp(30px,5vw,52px);line-height:1.05;text-transform:uppercase;letter-spacing:.005em;margin:0 0 14px}
+/* Fırça darbesi başlık bandı (logodaki pankartın yankısı) */
+h2{--brush:polygon(0 12%,1.5% 0,97% 8%,100% 0,99% 90%,100% 100%,2% 94%,0 100%);--brush0:polygon(0 12%,0 0,1% 8%,0 0,1% 90%,0 100%,1% 94%,0 100%);
+  display:table;background:var(--red);color:#fff;font-weight:700;font-size:20px;line-height:1.2;text-transform:uppercase;letter-spacing:.03em;
+  margin:44px 0 20px;padding:5px 18px 4px;clip-path:var(--brush);transition:clip-path .7s cubic-bezier(.2,.7,.2,1)}
+h3{font-family:"Source Serif 4",Georgia,serif}
+.lead{font-size:20px;color:var(--muted);max-width:60ch;margin:0 0 10px}
+.kicker{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+.meta{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+
+/* Manşet */
+.intro{position:relative;padding-top:18px;margin-bottom:8px}
+.intro::before{content:"";position:absolute;left:0;top:0;width:100%;height:6px;background:var(--ink);transform-origin:left;animation:draw .8s cubic-bezier(.2,.7,.2,1) both}
+.intro .kicker{animation:rise .6s .25s cubic-bezier(.2,.7,.2,1) both}
+.intro h1{animation:rise .8s .15s cubic-bezier(.2,.7,.2,1) both}
+@keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes rise{from{clip-path:inset(0 0 100% 0);transform:translateY(24px)}to{clip-path:inset(0 0 -10% 0);transform:none}}
+.hero{display:grid;grid-template-columns:1.6fr 1fr;gap:0 32px;margin-top:6px}
+@media(max-width:760px){.hero{grid-template-columns:1fr}}
+.hero>div{display:grid;align-content:start}
+
+/* Haber blokları: kutu yok, kural çizgisi var */
+.card{display:block;text-decoration:none;padding:14px 0 16px;border-top:3px solid var(--ink)}
+.card h3{font-weight:700;font-size:20px;line-height:1.3;margin:6px 0 6px}
+.card p{margin:0;color:var(--muted);font-size:16px;line-height:1.55}
+a.card:hover h3{color:var(--red);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.big{border-top:6px solid var(--red)}
+.big h3{font-family:Oswald,"Arial Narrow",Impact,sans-serif;text-transform:uppercase;font-size:clamp(28px,4vw,44px);line-height:1.08;margin:8px 0 12px}
+.big p{font-size:19px;color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:0 32px}
+
+.list .item{display:block;padding:16px 0;border-bottom:1px solid var(--ink);text-decoration:none}
+.list .item:first-child{border-top:3px solid var(--ink)}
+.list .item h3{font-weight:700;font-size:20px;line-height:1.3;margin:4px 0}
+.list .item:hover h3{color:var(--red);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.list .item p{margin:0;color:var(--muted);font-size:16px;line-height:1.55}
+
+/* Görseller */
+.thumb{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top center;background:var(--soft);margin-bottom:10px}
+.big .thumb{aspect-ratio:4/3;margin-bottom:14px}
+.list .item.has-img{display:grid;grid-template-columns:104px 1fr;gap:0 16px;align-items:start}
+.list .item.has-img .thumb{aspect-ratio:1;margin:2px 0 0}
+@media(max-width:480px){.list .item.has-img{grid-template-columns:84px 1fr;gap:0 12px}}
+figure.shot{margin:0 0 22px;border:3px solid var(--ink);background:var(--soft)}
+figure.shot img{display:block;width:100%;height:auto}
+.tag{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--red);text-decoration:none;margin:0 14px 4px 0}
+.tag:hover{text-decoration:underline}
+
+article.post{max-width:66ch}
+article.post h1{text-transform:none;font-size:clamp(28px,4.4vw,44px);line-height:1.12;letter-spacing:0}
+article.post .body{white-space:pre-line;font-size:20px;line-height:1.75}
+.facts{font-family:Oswald,sans-serif;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);padding:8px 0;margin:6px 0 22px;display:flex;gap:6px 22px;flex-wrap:wrap}
+.facts b{color:var(--ink);font-weight:600}
+
+.btn{display:inline-block;background:linear-gradient(var(--red),var(--red)) no-repeat 0 0/0 100% var(--ink);color:#fff;text-decoration:none;font-weight:600;font-size:15px;letter-spacing:.06em;text-transform:uppercase;padding:10px 18px;border:2px solid var(--ink);border-radius:0;cursor:pointer;transition:background-size .25s cubic-bezier(.2,.7,.2,1),border-color .25s}
+.btn:hover{background-size:100% 100%;border-color:var(--red)}
+.btn.ghost{background:linear-gradient(var(--ink),var(--ink)) no-repeat 0 0/0 100% transparent;color:var(--ink);transition:background-size .25s cubic-bezier(.2,.7,.2,1),color .25s}
+.btn.ghost:hover{background-size:100% 100%;border-color:var(--ink);color:#fff}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
+
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+.filters button{font-size:14px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;padding:7px 12px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:0;cursor:pointer}
+.filters button:hover{background:var(--soft)}
+.filters button.on{background:var(--ink);color:#fff}
+.filters input{flex:1 1 100%;font:18px "Source Serif 4",Georgia,serif;padding:9px 12px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:0}
+
+.note{border-left:5px solid var(--red);background:var(--soft);padding:12px 16px;font-size:15px;line-height:1.55;color:var(--muted);margin:28px 0}
+
+.pn{display:grid;grid-template-columns:1fr 1fr;gap:0 32px;margin:36px 0}
+@media(max-width:600px){.pn{grid-template-columns:1fr}}
+.pn a{text-decoration:none;border-top:3px solid var(--ink);padding:10px 0;font-weight:700;line-height:1.35}
+.pn a small{display:block;font:500 13px Oswald,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:2px}
+.pn a:hover{color:var(--red)}
+.pn .next{text-align:right}
+
+footer{background:var(--ink);color:#d8d4cf;padding:26px 0;font-size:15px}
+footer a{color:#fff}
+
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:#fff;padding:8px 14px;z-index:30;font:600 14px Oswald,sans-serif}
+.skip:focus{left:8px}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+header.site :focus-visible{outline-color:#fff}
+.progress{position:fixed;left:0;top:0;height:4px;width:0;background:var(--red);z-index:40}
+/* Hareket: yalnızca JS çalışıyorsa gizle, aksi halde içerik her zaman görünür */
+html.js .rv{opacity:0;transform:translateY(12px);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0ms)}
+html.js .rv.in{opacity:1;transform:none}
+html.js h2.rv{opacity:1;transform:none;clip-path:var(--brush0);transition:clip-path .7s cubic-bezier(.2,.7,.2,1)}
+html.js h2.rv.in{clip-path:var(--brush)}
+.list .item h3,.card h3{transition:transform .2s cubic-bezier(.2,.7,.2,1),color .15s}
+.list .item:hover h3,a.card:hover h3{transform:translateX(8px)}
+.big:hover h3{transform:translateX(0)}
+.pn a{transition:padding .2s,color .15s}
+.pn a:hover{padding-left:10px}
+.pn .next:hover{padding-left:0;padding-right:10px}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+  html.js .rv,html.js h2.rv{opacity:1!important;transform:none!important;clip-path:var(--brush)!important}
+  html.js .rv:not(h2){clip-path:none!important}
+}
+@media print{header.site,footer,.actions,.pn,.progress{display:none}}
+</style></head><body>
+<a class="skip" href="#icerik">İçeriğe geç</a>
+<header class="site"><div class="wrap"><a class="brand" href="./index.html" aria-label="Eczacı Direnişi ana sayfa"><img src="./assets/logo.jpg" alt="" width="52" height="52"><span>Eczacı <b>Direnişi</b></span></a><nav aria-label="Ana menü"><a href="./">Ana sayfa</a><a href="./gundem.html" class="on" aria-current="page">Gündem</a><a href="./kampanyalar.html">Kampanyalar</a><a href="./arsiv.html">Arşiv</a><a href="./hakkimizda.html">Hakkımızda</a></nav></div></header>
+<main id="icerik"><div class="wrap"><h1>Gündem</h1><p class="lead">Son açıklamalar ve tepkiler, tarih sırasıyla.</p>
+<div class="list"><a class="item has-img" href="./yazi/Df2h_O7M6sA.html" data-themes="vatan-gazi" data-q="gazilerimizin özlük haklarına kavuşması bizim için bir talep değil, bir onur meselesidir. gazilerimizin özlük haklarına kavuşması bizim için bir talep değil, bir onur meselesidir.
+
+bu vatanın bağımsızlığı, bu milletin huzuru ve bayrağımızın göklerde dalgalanması uğruna bedel ödemiş insanlara haklarını teslim etmek bir lütuf değildir. devlet olmanın, millet olmanın ve vefa göstermenin gereğidir.
+
+unutulmamalıdır ki gazilerimiz bu ülkeye minnet borçlu değil, asıl bu ülke onlara vefa borçludur.
+
+gazilerimizin özlük haklarına kavuşması için verilen mücadele, bizim için şeref meselesidir.
+
+çünkü vatan için bedel ödeyenlerin hakkını savunmak, bu vatana duyulan sadakatin gereğidir.">
+<img class="thumb" src="./assets/posts/Df2h_O7M6sA.jpg" alt="" loading="lazy" decoding="async"><div>
+<div class="meta">17 Kasım 2026 · Görsel · 29 beğeni</div>
+<h3>Gazilerimizin özlük haklarına kavuşması bizim için bir talep değil, bir onur meselesidir.</h3><p>Bu vatanın bağımsızlığı, bu milletin huzuru ve bayrağımızın göklerde dalgalanması uğruna bedel ödemiş insanlara haklarını teslim etmek bir lütuf değildir. Devlet olmanın, millet olmanın ve vefa…</p></div></a><a class="item has-img" href="./yazi/Df2gH3oMVAo.html" data-themes="oda-secimleri" data-q="erzincan eczacı odası başkanı @eczburak24 gençlerin desteğini sonuna kadar haketmiştir. erzincan eczacı odası başkanı @eczburak24 gençlerin desteğini sonuna kadar haketmiştir.
+i̇lk destek açıklamamız erzincan eczacı odası seçimleri için eczacı burak sarıkaya'ya.
+çalışmalarının devamını merakla takip edeceğiz.">
+<img class="thumb" src="./assets/posts/Df2gH3oMVAo.jpg" alt="" loading="lazy" decoding="async"><div>
+<div class="meta">17 Kasım 2026 · Video · 24 beğeni</div>
+<h3>Erzincan Eczacı Odası Başkanı @EczBurak24 gençlerin desteğini sonuna kadar haketmiştir.</h3><p>İlk destek açıklamamız Erzincan Eczacı Odası seçimleri için Eczacı Burak Sarıkaya'ya.
+Çalışmalarının devamını merakla takip edeceğiz.</p></div></a><a class="item has-img" href="./yazi/Df2dYzBsuyt.html" data-themes="oda-secimleri vatan-gazi" data-q="1. önceliğiniz eczane kârlılığı… 1. önceliğiniz eczane kârlılığı…
+
+4. maddede sıra genç eczacılarda.
+
+biz artık size söyleyecek bir şey bulamıyoruz.
+
+ancak şunu unutmayın: atatürk'ümüzün de dediği gibi, “bütün ümidim gençliktedir.”
+
+bizim de bütün ümidimiz genç eczacılardadır. çünkü bu mesleğin geleceğini, gençleri görmezden gelenler değil, gençlerle birlikte hareket edenler inşa edecektir.
+
+samimiyetine güvendiğimiz odaları seçimlerde gençler olarak destekleyeceğiz.">
+<img class="thumb" src="./assets/posts/Df2dYzBsuyt.jpg" alt="" loading="lazy" decoding="async"><div>
+<div class="meta">17 Kasım 2026 · Görsel · 26 beğeni</div>
+<h3>1. önceliğiniz eczane kârlılığı…</h3><p>4. maddede sıra Genç eczacılarda.
+
+Biz artık size söyleyecek bir şey bulamıyoruz.
+
+Ancak şunu unutmayın: Atatürk'ümüzün de dediği gibi, “Bütün ümidim gençliktedir.”
+
+Bizim de bütün ümidimiz genç…</p></div></a><a class="item has-img" href="./yazi/Df0JgGWDAlm.html" data-themes="gida-takviyesi" data-q="kâr amacı gütmüyoruz. kâr amacı gütmüyoruz.
+bilgilendirme amaçlıdır.
+zeytin veya ceviz tarlamız yoktur.
+(takvi̇ye ve i̇laç almadan doktorunuza ve eczaciniza danişin sağlicakla kalin)">
+<img class="thumb" src="./assets/posts/Df0JgGWDAlm.jpg" alt="" loading="lazy" decoding="async"><div>
+<div class="meta">16 Kasım 2026 · Çoklu görsel · 27 beğeni</div>
+<h3>Kâr amacı gütmüyoruz.</h3><p>Bilgilendirme amaçlıdır.
+Zeytin veya ceviz tarlamız yoktur.
+(TAKVİYE VE İLAÇ ALMADAN DOKTORUNUZA VE ECZACINIZA DANIŞIN SAĞLICAKLA KALIN)</p></div></a><a class="item has-img" href="./yazi/Dfus6r1s8_L.html" data-themes="gida-takviyesi" data-q="i̇nternet üzerinden takviye edici gıda satışına son verilmelidir. takviye edici gıda… i̇nternet üzerinden takviye edici gıda satışına son verilmelidir. takviye edici gıda sektöründe faaliyet gösteren firmalar, acilen sağlık bakanlığı denetimine alınmalı ve gerekli onay süreçleri sağlık bakanlığı bünyesinde yürütülmelidir.
+
+halk sağlığını doğrudan ilgilendiren bir konuda ticari kaygılar, toplum sağlığının önüne geçirilemez.
+
+bu alanda düzenleme yapılmasına yönelik mevcut çalışmaları ticari çıkarları doğrultusunda eleştiren firmaları kınıyoruz.
+
+bizim önceliğimiz sektörün ticari çıkarları değil, halk sağlığıdır. takviye edici gıdalar kontrolsüz bir ticaret alanı olmaktan çıkarılmalı, bilimsel esaslara ve etkin kamu denetimine tabi tutulmalıdır.">
+<img class="thumb" src="./assets/posts/Dfus6r1s8_L.jpg" alt="" loading="lazy" decoding="async"><div>
+<div class="meta">14 Kasım 2026 · Görsel · 747 beğeni</div>
+<h3>İnternet üzerinden takviye edici gıda satışına son verilmelidir. Takviye edici gıda…</h3><p>İnternet üzerinden takviye edici gıda satışına son verilmelidir. Takviye edici gıda sektöründe faaliyet gösteren firmalar, acilen Sağlık Bakanlığı denetimine alınmalı ve gerekli onay süreçleri Sağlık…</p></div></a><a class="item has-img" href="./yazi/DfuHs1wDPKs.html" data-themes="gida-takviyesi oda-secimleri yeni-fakulteler vatan-gazi" data-q="uzm.ecz.ahmet nezihi pekcan uzm.ecz.ahmet nezihi pekcan
+uzm. ecz. ahmet nezihi pekcan 22.07.1961 ankara doğumludur.
+
+1977 yılında gazi üniversitesi eczacılık fakültesi’nde yüksek öğrenime başladı.
+
+1981 yılında mezun olup konya’da pekcan eczanesi mesul müdürü ve sahibi olarak halk sağlığına hizmet etmektedir.
+
+uzun yıllar v. bölge konya eczacı odası'nda haysiyet divanı başkanlığı, denetleme kurulu başkanlığı yaptı. konya eczacı odası yönetim kurulu üyeliği ve teb büyük kongre delegeliği görevlerinde bulundu.
+
+2014 yılında yeditepe üniversitesi homeopati programını bitirdi.
+
+2018 yılında medipol üniversitesi klinik eczacılık yüksek lisans eğitimi’ni bitirerek klinik eczacılık anabilim dalı’nda uzmanlığını aldı.">
+<img class="thumb" src="./assets/posts/DfuHs1wDPKs.jpg" alt="" loading="lazy" decoding="async"><div>
+<div class="meta">14 Kasım 2026 · Çoklu görsel · 43 beğeni</div>
+<h3>Uzm.Ecz.Ahmet Nezihi PEKCAN</h3><p>Uzm. Ecz. Ahmet Nezihi Pekcan 22.07.1961 Ankara doğumludur.
+
+1977 yılında Gazi Üniversitesi Eczacılık Fakültesi’nde yüksek öğrenime başladı.
+
+1981 yılında mezun olup Konya’da Pekcan Eczanesi mesul…</p></div></a><a class="item has-img" href="./yazi/Dfpjr5mM2Xi.html" data-themes="vatan-gazi" data-q="helikopterin düşmesi sonucu şehit olan kahraman askerlerimize allah’tan rahmet,… helikopterin düşmesi sonucu şehit olan kahraman askerlerimize allah’tan rahmet, kederli ailelerine ve yakınlarına sabır ve başsağlığı diliyoruz.
+
+aziz şehitlerimizin mekânı cennet, makamı âli olsun.
+
+türk milletinin başı sağ olsun. 🇹🇷">
+<img class="thumb" src="./assets/posts/Dfpjr5mM2Xi.jpg" alt="" loading="lazy" decoding="async"><div>
+<div class="meta">12 Kasım 2026 · Görsel · 43 beğeni</div>
+<h3>Helikopterin düşmesi sonucu şehit olan kahraman askerlerimize Allah’tan rahmet,…</h3><p>Helikopterin düşmesi sonucu şehit olan kahraman askerlerimize Allah’tan rahmet, kederli ailelerine ve yakınlarına sabır ve başsağlığı diliyoruz.
+
+Aziz şehitlerimizin mekânı cennet, makamı âli olsun.…</p></div></a><a class="item has-img" href="./yazi/DfnNJgvM9_K.html" data-themes="vatan-gazi" data-q="türk milliyetçiliğinden ve atatürkçü düşünceden taviz vermeyen eczacılarımızı, 2013… türk milliyetçiliğinden ve atatürkçü düşünceden taviz vermeyen eczacılarımızı, 2013 öncesi veya sonrası ayrımı yapmaksızın aynı çatı altında bir araya getirmeyi hedefliyoruz.
+
+genç meslektaşlarımıza yönelik “gençlere bile bile yazdınız.” gibi hadsiz ve ayrıştırıcı ifadeler kullanmayan, geçmişin tartışmalarına takılıp kalmadan ortak geleceğimiz için mücadele etmeye hazır olan herkese kapımız açık.
+
+whatsapp grubumuza katılmak isteyen meslektaşlarımızın dm üzerinden bize ulaşması yeterlidir.
+
+türk eczacılığını hak ettiği konuma taşımak, mesleğimizin itibarını korumak ve eczacıların hak mücadelesini büyütmek için elimizden gelen her şeyi yapacağız.
+
+terörle arasına net bir mesafe koyamayanlara karşı da demokratik, hukuki ve kararlı mücadelemizi sürdüreceğiz.">
+<img class="thumb" src="./assets/posts/DfnNJgvM9_K.jpg" alt="" loading="lazy" decoding="async"><div>
+<div class="meta">11 Kasım 2026 · Görsel · 41 beğeni</div>
+<h3>Türk milliyetçiliğinden ve Atatürkçü düşünceden taviz vermeyen eczacılarımızı, 2013…</h3><p>Türk milliyetçiliğinden ve Atatürkçü düşünceden taviz vermeyen eczacılarımızı, 2013 öncesi veya sonrası ayrımı yapmaksızın aynı çatı altında bir araya getirmeyi hedefliyoruz.
+
+Genç meslektaşlarımıza…</p></div></a><a class="item has-img" href="./yazi/DfmlPYsMLSb.html" data-themes="gida-takviyesi" data-q="🎁 eczaci di̇reni̇şi̇ çeki̇li̇şi̇ başliyor!🇹🇷 🎁 eczaci di̇reni̇şi̇ çeki̇li̇şi̇ başliyor!🇹🇷
+
+tarihe, kültüre ve türk dünyasının köklü mirasına ilgi duyanlar için güzel bir sürprizimiz var!
+
+atölye mahirayi iş birliğiyle gerçekleştirdiğimiz çekilişimizde **3 takipçimize birbirinden özel hediyeler** veriyoruz.
+
+çekilişe katılmak oldukça kolay:
+
+1️⃣ @eczacidirenisi ve @tbearsworkshop hesaplarını takip et.
+2️⃣ bu gönderiyi hikâyende repostla.
+3️⃣ yorumlara bir arkadaşını etiketle.
+4️⃣ bu gönderiyi beğen.
+
+🎁 **3 şanslı takipçimiz hediye kazanacak!**
+
+📌 çekiliş sonuçları 24 kasım tarihinde açıklanacaktır.
+
+hem kültürümüzü yaşatıyor hem de dayanışmamızı büyütüyoruz.
+
+şimdiden tüm katılımcılara bol şans!">
+<img class="thumb" src="./assets/posts/DfmlPYsMLSb.jpg" alt="" loading="lazy" decoding="async"><div>
+<div class="meta">11 Kasım 2026 · Görsel · 77 beğeni</div>
+<h3>🎁 ECZACI DİRENİŞİ ÇEKİLİŞİ BAŞLIYOR!🇹🇷</h3><p>Tarihe, kültüre ve Türk dünyasının köklü mirasına ilgi duyanlar için güzel bir sürprizimiz var!
+
+Atölye Mahirayi iş birliğiyle gerçekleştirdiğimiz çekilişimizde **3 takipçimize birbirinden özel…</p></div></a><a class="item" href="./yazi/DflxyZbMnoX.html" data-themes="gida-takviyesi oda-secimleri" data-q="teb bölgelerarası toplantısı trabzon’da gerçekleştirilecek. teb bölgelerarası toplantısı trabzon’da gerçekleştirilecek.
+
+emin olduğumuz tek bir şey var: gençlerin yine konuşulmayacağı…
+
+ancak bu kez hak veriyoruz. çünkü gıda takviyesi meselesinin zincir eczane tartışmasına bağlanacağını kendileri de beklemiyordu.
+
+anlaşılan, bu toplantıda gençlerden önce başka meseleler gündemi meşgul edecek.">
+<div>
+<div class="meta">11 Kasım 2026 · Görsel · 48 beğeni</div>
+<h3>TEB Bölgelerarası Toplantısı Trabzon’da gerçekleştirilecek.</h3><p>Emin olduğumuz tek bir şey var: Gençlerin yine konuşulmayacağı…
+
+Ancak bu kez hak veriyoruz. Çünkü gıda takviyesi meselesinin zincir eczane tartışmasına bağlanacağını kendileri de beklemiyordu.…</p></div></a><a class="item" href="./yazi/DfkKlWwN0hn.html" data-themes="" data-q="antalya'da eczane görünümlü 8 i̇şletmeye milyonluk ceza uygulandı.. antalya'da eczane görünümlü 8 i̇şletmeye milyonluk ceza uygulandı..
+
+@antalyaeczaciodasi">
+<div>
+<div class="meta">10 Kasım 2026 · Görsel · 104 beğeni</div>
+<h3>Antalya'da Eczane Görünümlü 8 İşletmeye Milyonluk Ceza Uygulandı..</h3><p>@antalyaeczaciodasi</p></div></a><a class="item" href="./yazi/DfhGSdKsCmx.html" data-themes="vatan-gazi" data-q="mesleğin ahlaklı yapacak olanlar atatürk'ün bütün ümidim dediği türk gençleridir. mesleğin ahlaklı yapacak olanlar atatürk'ün bütün ümidim dediği türk gençleridir.
+
+söz meclisten dışarı eczacılık mesleğini bu hale getirenler ve toplumun eczacıya bakış açısı malumunuzdur.
+
+alper abi gibi meslek büyüklerimiz de bizim için şüphesiz ki yol gösterici olacaktır.">
+<div>
+<div class="meta">9 Kasım 2026 · Görsel · 74 beğeni</div>
+<h3>Mesleğin ahlaklı yapacak olanlar Atatürk'ün bütün ümidim dediği Türk Gençleridir.</h3><p>Söz meclisten dışarı eczacılık mesleğini bu hale getirenler ve toplumun eczacıya bakış açısı malumunuzdur.
+
+Alper abi gibi meslek büyüklerimiz de bizim için şüphesiz ki yol gösterici olacaktır.</p></div></a><a class="item" href="./yazi/Dfg_TM2s0l3.html" data-themes="" data-q="teşekkür ederi̇z son 2 haftada 1.5 mi̇lyon görüntülenme aldik 🥳🥳🥳🥳 teşekkür ederi̇z son 2 haftada 1.5 mi̇lyon görüntülenme aldik 🥳🥳🥳🥳
+bi̇rli̇kte daha güçlüyüz 💪💪">
+<div>
+<div class="meta">9 Kasım 2026 · Görsel · 13 beğeni</div>
+<h3>TEŞEKKÜR EDERİZ SON 2 HAFTADA 1.5 MİLYON GÖRÜNTÜLENME ALDIK 🥳🥳🥳🥳</h3><p>BİRLİKTE DAHA GÜÇLÜYÜZ 💪💪</p></div></a><a class="item" href="./yazi/Dfg6SjrMnSt.html" data-themes="yok-tartismasi" data-q="eczacılar diş hekimleri ve mühendislerden eczacılar diş hekimleri ve mühendislerden
+
+sayın cumhurbaşkanı recep tayyip erdoğan beyfendiye
+
+çağrı:
+
+erol özvar'ın açıklamaları skandaldır. kabul edilemez.
+
+görevden affını istemelidir.">
+<div>
+<div class="meta">9 Kasım 2026 · Görsel · 878 beğeni</div>
+<h3>Eczacılar Diş Hekimleri ve Mühendislerden</h3><p>Sayın Cumhurbaşkanı Recep Tayyip Erdoğan beyfendiye
+
+çağrı:
+
+EROL ÖZVAR'ın açıklamaları skandaldır. Kabul edilemez.
+
+Görevden affını istemelidir.</p></div></a><a class="item" href="./yazi/Dfg6JTTs3kW.html" data-themes="yok-tartismasi" data-q="eczacılar diş hekimleri ve mühendislerden eczacılar diş hekimleri ve mühendislerden
+
+sayın cumhurbaşkanı recep tayyip erdoğan beyfendiye
+
+çağrı:
+
+erol özvar'ın açıklamaları skandaldır. kabul edilemez.
+
+görevden affını istemelidir.">
+<div>
+<div class="meta">9 Kasım 2026 · Video · 106 beğeni</div>
+<h3>Eczacılar Diş Hekimleri ve Mühendislerden</h3><p>Sayın Cumhurbaşkanı Recep Tayyip Erdoğan beyfendiye
+
+çağrı:
+
+EROL ÖZVAR'ın açıklamaları skandaldır. Kabul edilemez.
+
+Görevden affını istemelidir.</p></div></a><a class="item" href="./yazi/DfgwiZcjIrs.html" data-themes="gida-takviyesi" data-q="saçlarınız dökülüyor diye aldığınız vitaminin, aslında saçlarınızı döken asıl sebep… saçlarınız dökülüyor diye aldığınız vitaminin, aslında saçlarınızı döken asıl sebep olabileceğini biliyor muydunuz?
+
+klinik pratikte sıkça karşılaştığımız &quot;takviye polifarmasisi&quot; (aynı anda birden fazla takviyenin bilinçsizce kullanılması), faydadan çok zarar getirebiliyor. selenyum bunun en çarpıcı örneklerinden biri.
+
+ vitamintakviyesi sağlıklıyaşam klinikeczacılık dermokozmetik etiketokuma">
+<div>
+<div class="meta">9 Kasım 2026 · Çoklu görsel · 37 beğeni</div>
+<h3>Saçlarınız dökülüyor diye aldığınız vitaminin, aslında saçlarınızı döken asıl sebep…</h3><p>Saçlarınız dökülüyor diye aldığınız vitaminin, aslında saçlarınızı döken asıl sebep olabileceğini biliyor muydunuz?
+
+Klinik pratikte sıkça karşılaştığımız &quot;Takviye Polifarmasisi&quot; (aynı anda birden…</p></div></a><a class="item has-img" href="./yazi/DffWVW4s9t2.html" data-themes="yok-tartismasi" data-q="eczacılar diş hekimleri ve mühendislerden eczacılar diş hekimleri ve mühendislerden
+
+sayın cumhurbaşkanı recep tayyip erdoğan beyfendiye
+
+çağrı:
+
+erol özvar'ın açıklamaları skandaldır. kabul edilemez.
+
+görevden affını istemelidir.">
+<img class="thumb" src="./assets/posts/DffWVW4s9t2.jpg" alt="" loading="lazy" decoding="async"><div>
+<div class="meta">8 Kasım 2026 · Görsel · 2271 beğeni</div>
+<h3>Eczacılar Diş Hekimleri ve Mühendislerden</h3><p>Sayın Cumhurbaşkanı Recep Tayyip Erdoğan beyfendiye
+
+çağrı:
+
+EROL ÖZVAR'ın açıklamaları skandaldır. Kabul edilemez.
+
+Görevden affını istemelidir.</p></div></a><a class="item" href="./yazi/DffTQPOMVas.html" data-themes="yok-tartismasi" data-q="eczacılar diş hekimleri ve mühendislerden eczacılar diş hekimleri ve mühendislerden
+
+sayın cumhurbaşkanı recep tayyip erdoğan beyfendiye
+
+çağrı:
+
+erol özvar'ın açıklamaları skandaldır. kabul edilemez.
+
+görevden affını istemelidir.">
+<div>
+<div class="meta">8 Kasım 2026 · Görsel · 143 beğeni</div>
+<h3>Eczacılar Diş Hekimleri ve Mühendislerden</h3><p>Sayın Cumhurbaşkanı Recep Tayyip Erdoğan beyfendiye
+
+çağrı:
+
+EROL ÖZVAR'ın açıklamaları skandaldır. Kabul edilemez.
+
+Görevden affını istemelidir.</p></div></a><a class="item" href="./yazi/DffRASeMoDQ.html" data-themes="yok-tartismasi" data-q="eczacılar diş hekimleri ve mühendislerden eczacılar diş hekimleri ve mühendislerden
+
+sayın cumhurbaşkanı recep tayyip erdoğan beyfendiye
+
+çağrı:
+
+erol özvar'ın açıklamaları skandaldır. kabul edilemez.
+
+görevden affını istemelidir.">
+<div>
+<div class="meta">8 Kasım 2026 · Görsel · 248 beğeni</div>
+<h3>Eczacılar Diş Hekimleri ve Mühendislerden</h3><p>Sayın Cumhurbaşkanı Recep Tayyip Erdoğan beyfendiye
+
+çağrı:
+
+EROL ÖZVAR'ın açıklamaları skandaldır. Kabul edilemez.
+
+Görevden affını istemelidir.</p></div></a><a class="item" href="./yazi/DfcKsd6MDKK.html" data-themes="gida-takviyesi vatan-gazi" data-q="**t.c. sağlik bakanliğina** **t.c. sağlik bakanliğina**
+
+**konu: i̇nternet üzerinden i̇laç satışı ve türkiye i̇laç takip sistemi dışında olduğu değerlendirilen ürünlerin satışı hakkında şikâyet**
+
+i̇nternet üzerinden gerçekleştirilen ilaç satışlarına ilişkin tarafımızca yapılan incelemelerde, satışa sunulan bazı ilaçların karekodlarının türkiye menşeli olmadığı ve türkiye i̇laç takip sistemi (i̇ts) kapsamında doğrulanabilir nitelikte bulunmadığı tespit edilmiştir.
+
+i̇laçların gerekli yasal izinler ve denetimler dışında yurt dışından temin edilerek internet üzerinden satışa sunulması, halk sağlığını ciddi şekilde tehlikeye atabilecek bir durumdur.
+
+i̇laçların saklama koşulları, tedarik zinciri, orijinalliği ve güvenilirliği denetlenmeden vatandaşlara ulaştırılması telafisi mümkün olmayan sağlık sorunlarına yol açabilir.
+
+i̇nternet üzerinden yetkisiz ilaç satışı kabul edilemez. halk sağlığını tehlikeye atan bu tür faaliyetlerin önlenmesi, yalnızca mesleki değil, aynı zamanda kamusal bir sorumluluktur.
+
+bu kapsamda;
+
+1. i̇lgili internet sitesi ve satış faaliyetlerinin incelenmesini,
+2. satışa sunulan ilaçların karekodlarının ve tedarik zincirinin i̇ts üzerinden araştırılmasını,
+3. ürünlerin ruhsat, ithalat ve satış izinlerinin kontrol edilmesini,
+4. mevzuata aykırılık tespit edilmesi hâlinde sorumlular hakkında gerekli idari ve adli işlemlerin başlatılmasını,
+5. halk sağlığını tehdit eden bu satış faaliyetlerinin engellenmesini,
+
+saygılarımla arz ve talep ederim.
+
+**şikâyet konusu internet sitesi:** 
+**ürün adı:** 
+**satıcı bilgileri:** 
+**i̇lgili ekran görüntüleri ve karekod örnekleri:** ektedir.
+
+@saglikbakanligi">
+<div>
+<div class="meta">7 Kasım 2026 · Görsel · 46 beğeni</div>
+<h3>**T.C. SAĞLIK BAKANLIĞINA**</h3><p>**Konu: İnternet Üzerinden İlaç Satışı ve Türkiye İlaç Takip Sistemi Dışında Olduğu Değerlendirilen Ürünlerin Satışı Hakkında Şikâyet**
+
+İnternet üzerinden gerçekleştirilen ilaç satışlarına ilişkin…</p></div></a><a class="item" href="./yazi/DfaGSD-Mv75.html" data-themes="vatan-gazi" data-q="değerli vatandaşlarımız, raporlu ilaçların doğrudan eczanelerden alınması uygulaması… değerli vatandaşlarımız, raporlu ilaçların doğrudan eczanelerden alınması uygulaması henüz başlamamıştır. i̇laç temini için reçete zorunluluğu devam etmektedir.">
+<div>
+<div class="meta">6 Kasım 2026 · Görsel · 209 beğeni</div>
+<h3>Değerli vatandaşlarımız, raporlu ilaçların doğrudan eczanelerden alınması uygulaması…</h3><p>Değerli vatandaşlarımız, raporlu ilaçların doğrudan eczanelerden alınması uygulaması henüz başlamamıştır. İlaç temini için reçete zorunluluğu devam etmektedir.</p></div></a><a class="item" href="./yazi/DfZA3U_MAC5.html" data-themes="" data-q="ordu'da i̇laç soruşturmasi deri̇nleşi̇yor: aralarinda başheki̇m de var, 11 şüpheli̇ adli̇yede! ordu'da i̇laç soruşturmasi deri̇nleşi̇yor: aralarinda başheki̇m de var, 11 şüpheli̇ adli̇yede!
+
+ordu'nun ünye ilçesinde reçeteli ilaçların usulsüz temini ve satışı iddiasıyla yürütülen soruşturma genişletildi.
+
+i̇lk operasyonda gözaltına alınan ve aralarında eski ünye devlet hastanesi başhekimi a.a.'nın da bulunduğu 11 şüpheli adliyeye sevk edildi.
+
+soruşturmanın derinleştirilmesiyle sağlık çalışanları ve hastane personelinin de aralarında olduğu 7 kişi daha gözaltına alındı.
+
+operasyonda gözaltına alınan toplam şüpheli sayısı 18'e yükseldi. ekipler, ilaç temin zincirini aydınlatmak için çalışmalarını sürdürüyor.
+
+(@orducu.haber )">
+<div>
+<div class="meta">6 Kasım 2026 · Görsel · 63 beğeni</div>
+<h3>ORDU'DA İLAÇ SORUŞTURMASI DERİNLEŞİYOR: ARALARINDA BAŞHEKİM DE VAR, 11 ŞÜPHELİ ADLİYEDE!</h3><p>Ordu'nun Ünye ilçesinde reçeteli ilaçların usulsüz temini ve satışı iddiasıyla yürütülen soruşturma genişletildi.
+
+İlk operasyonda gözaltına alınan ve aralarında eski Ünye Devlet Hastanesi Başhekimi…</p></div></a><a class="item" href="./yazi/DfY8SbGsSY3.html" data-themes="atama-kadro" data-q="zaten kolay kolay atanamıyoruz. biz atanamıyoruz, kadro bekliyoruz dedikçe tuzu kuru… zaten kolay kolay atanamıyoruz. biz atanamıyoruz, kadro bekliyoruz dedikçe tuzu kuru olanlar sırf inat olsun diye atamalara başvuruyor.
+
+özellikle 2013 öncesi meslektaşlarımızın bir kısmı bu durumu açıkça kötü niyetle kullanıyor. ardından da çıkıp 2013 sonrası eczacılara düşmanlık yapılıyor demesinler!
+
+biz kimseye düşmanlık etmiyoruz. biz yalnızca hakkımızı arıyoruz.">
+<div>
+<div class="meta">6 Kasım 2026 · Görsel · 84 beğeni</div>
+<h3>Zaten kolay kolay atanamıyoruz. Biz atanamıyoruz, kadro bekliyoruz dedikçe tuzu kuru…</h3><p>Zaten kolay kolay atanamıyoruz. Biz atanamıyoruz, kadro bekliyoruz dedikçe tuzu kuru olanlar sırf inat olsun diye atamalara başvuruyor.
+
+Özellikle 2013 öncesi meslektaşlarımızın bir kısmı bu durumu…</p></div></a><a class="item" href="./yazi/DfXhbBjM7dH.html" data-themes="" data-q="eczacılardan türk eczacıları birliği’nin son dakika gençlikten habersiz şekilde eyleme… eczacılardan türk eczacıları birliği’nin son dakika gençlikten habersiz şekilde eyleme katılmalarına tepkiler geliyor.">
+<div>
+<div class="meta">5 Kasım 2026 · Görsel · 54 beğeni</div>
+<h3>Eczacılardan Türk Eczacıları Birliği’nin son dakika gençlikten habersiz şekilde eyleme…</h3><p>Eczacılardan Türk Eczacıları Birliği’nin son dakika gençlikten habersiz şekilde eyleme katılmalarına tepkiler geliyor.</p></div></a><a class="item" href="./yazi/DfXZu85MNxr.html" data-themes="" data-q="eczacılardan türk eczacıları birliği’nin son dakika gençlikten habersiz şekilde eyleme… eczacılardan türk eczacıları birliği’nin son dakika gençlikten habersiz şekilde eyleme katılmalarına tepkiler geliyor.">
+<div>
+<div class="meta">5 Kasım 2026 · Video · 301 beğeni</div>
+<h3>Eczacılardan Türk Eczacıları Birliği’nin son dakika gençlikten habersiz şekilde eyleme…</h3><p>Eczacılardan Türk Eczacıları Birliği’nin son dakika gençlikten habersiz şekilde eyleme katılmalarına tepkiler geliyor.</p></div></a><a class="item" href="./yazi/DfXTPLfs1jF.html" data-themes="" data-q="eczacılardan türk eczacıları birliği’nin son dakika gençlikten habersiz şekilde eyleme… eczacılardan türk eczacıları birliği’nin son dakika gençlikten habersiz şekilde eyleme katılmalarına tepkiler geliyor.">
+<div>
+<div class="meta">5 Kasım 2026 · Görsel · 31 beğeni</div>
+<h3>Eczacılardan Türk Eczacıları Birliği’nin son dakika gençlikten habersiz şekilde eyleme…</h3><p>Eczacılardan Türk Eczacıları Birliği’nin son dakika gençlikten habersiz şekilde eyleme katılmalarına tepkiler geliyor.</p></div></a><a class="item" href="./yazi/DfXNzMtM33h.html" data-themes="ucret-sgk" data-q="merhabalar sevgili takipçilerimiz, merhabalar sevgili takipçilerimiz,
+
+mesleki sorunlarımızı özgürce konuşabilmeniz, düşüncelerinizi ve önerilerinizi paylaşabilmeniz için özgür köşe’yi açıyoruz.
+
+genç, yaşlı, öğrenci veya meslektaş fark etmeksizin herkesin sözüne yer vermek istiyoruz. yazılarınızı hiçbir ücret talep etmeden, özgürce ifade edebilmeniz için platformumuzda yayımlayacağız.
+
+özgür köşe’de yer almak ve sesinizi duyurmak için bize dm üzerinden ulaşmanız yeterli.
+
+çünkü mesleğimizin sorunları ancak konuşarak, tartışarak ve sesimizi birleştirerek çözülebilir.">
+<div>
+<div class="meta">5 Kasım 2026 · Görsel · 16 beğeni</div>
+<h3>Merhabalar sevgili takipçilerimiz,</h3><p>Mesleki sorunlarımızı özgürce konuşabilmeniz, düşüncelerinizi ve önerilerinizi paylaşabilmeniz için Özgür Köşe’yi açıyoruz.
+
+Genç, yaşlı, öğrenci veya meslektaş fark etmeksizin herkesin sözüne yer…</p></div></a><a class="item" href="./yazi/DfXKFmxM_Nj.html" data-themes="" data-q="eczacılardan türk eczacıları birliği’nin son dakika gençlikten habersiz şekilde eyleme… eczacılardan türk eczacıları birliği’nin son dakika gençlikten habersiz şekilde eyleme katılmalarına tepkiler geliyor.">
+<div>
+<div class="meta">5 Kasım 2026 · Görsel · 82 beğeni</div>
+<h3>Eczacılardan Türk Eczacıları Birliği’nin son dakika gençlikten habersiz şekilde eyleme…</h3><p>Eczacılardan Türk Eczacıları Birliği’nin son dakika gençlikten habersiz şekilde eyleme katılmalarına tepkiler geliyor.</p></div></a><a class="item" href="./yazi/DfXIuHSseFh.html" data-themes="" data-q="eczacılardan türk eczacıları birliği’nin son dakika gençlikten habersiz şekilde eyleme… eczacılardan türk eczacıları birliği’nin son dakika gençlikten habersiz şekilde eyleme katılmalarına tepkiler geliyor.">
+<div>
+<div class="meta">5 Kasım 2026 · Görsel · 36 beğeni</div>
+<h3>Eczacılardan Türk Eczacıları Birliği’nin son dakika gençlikten habersiz şekilde eyleme…</h3><p>Eczacılardan Türk Eczacıları Birliği’nin son dakika gençlikten habersiz şekilde eyleme katılmalarına tepkiler geliyor.</p></div></a><a class="item" href="./yazi/DfXAcEqsw2u.html" data-themes="" data-q="eczacılardan türk eczacıları birliği’nin son dakika gençlikten habersiz şekilde eyleme… eczacılardan türk eczacıları birliği’nin son dakika gençlikten habersiz şekilde eyleme katılmalarına tepkiler geliyor.">
+<div>
+<div class="meta">5 Kasım 2026 · Görsel · 65 beğeni</div>
+<h3>Eczacılardan Türk Eczacıları Birliği’nin son dakika gençlikten habersiz şekilde eyleme…</h3><p>Eczacılardan Türk Eczacıları Birliği’nin son dakika gençlikten habersiz şekilde eyleme katılmalarına tepkiler geliyor.</p></div></a><a class="item" href="./yazi/DfW7_VPsULt.html" data-themes="" data-q="eczacılardan türk eczacıları birliği’nin son dakika gençlikten habersiz şekilde eyleme… eczacılardan türk eczacıları birliği’nin son dakika gençlikten habersiz şekilde eyleme katılmalarına tepkiler geliyor.">
+<div>
+<div class="meta">5 Kasım 2026 · Görsel · 37 beğeni</div>
+<h3>Eczacılardan Türk Eczacıları Birliği’nin son dakika gençlikten habersiz şekilde eyleme…</h3><p>Eczacılardan Türk Eczacıları Birliği’nin son dakika gençlikten habersiz şekilde eyleme katılmalarına tepkiler geliyor.</p></div></a><a class="item" href="./yazi/DfW6OsisGf0.html" data-themes="yeni-fakulteler" data-q="türk eczacıları birliği’nin sağlık bakanlığı önünde gerçekleştirilecek toplanma… türk eczacıları birliği’nin sağlık bakanlığı önünde gerçekleştirilecek toplanma eylemine katılma kararı almasını olumlu karşılıyoruz. ancak mesele yalnızca bir eyleme katılmış olmak değildir.
+
+bu eylem, son dakika alınmış bir kararla, tepkiler üzerine kenarından ilişilecek bir eylem olmamalıydı. böyle bir tepki, mesleğin yıllardır biriken sorunlarının büyüklüğünü karşılamaz.
+
+yapılması gereken bellidir: eylem yeniden planlanmalı, tarihi ve organizasyonu önceden duyurulmalı, ulaşım ve lojistik imkânları hazırlanmalı, 81 ilden eczacı odaları harekete geçirilmelidir.
+
+binlerce eczacı, genç eczacı ve eczacılık fakültesi öğrencisi ankara'da buluşmalıdır.
+
+çünkü bu mesele birkaç yöneticinin bakanlık önünde fotoğraf vermesi meselesi değildir. bu, bir mesleğin geleceğine sahip çıkma meselesidir.
+
+artık günü kurtaran açıklamalara, göstermelik katılımlara değil; örgütlü, kararlı ve kitlesel bir meslek mücadelesine ihtiyaç var. eczacının sesini duyurmanın yolu, o sesi binlerce kişiyle aynı meydanda buluşturmaktan geçer.">
+<div>
+<div class="meta">5 Kasım 2026 · Görsel · 115 beğeni</div>
+<h3>Türk Eczacıları Birliği’nin Sağlık Bakanlığı önünde gerçekleştirilecek toplanma…</h3><p>Türk Eczacıları Birliği’nin Sağlık Bakanlığı önünde gerçekleştirilecek toplanma eylemine katılma kararı almasını olumlu karşılıyoruz. Ancak mesele yalnızca bir eyleme katılmış olmak değildir.
+
+Bu…</p></div></a><a class="item" href="./yazi/DfW5AarMArg.html" data-themes="" data-q="diş hekimleri ve eczacılar sağlık bakanlığı önünde ! diş hekimleri ve eczacılar sağlık bakanlığı önünde !
+
+türk eczacıları birliği duyuru yapmadan ani bir kararla katılım sağladı.">
+<div>
+<div class="meta">5 Kasım 2026 · Görsel · 458 beğeni</div>
+<h3>Diş Hekimleri ve Eczacılar Sağlık Bakanlığı önünde !</h3><p>Türk Eczacıları Birliği duyuru yapmadan ani bir kararla katılım sağladı.</p></div></a><a class="item" href="./yazi/DfW2FIiM500.html" data-themes="atama-kadro ucret-sgk" data-q="çözüm önerilerimiz de gayet açık: çözüm önerilerimiz de gayet açık:
+
+1. 65 yaş üzerindeki eczacılar için emekliliğe geçiş düzenlemesi yapılmalı, gençlere meslekte alan açılmalıdır.
+
+2. yardımcı eczacılık uygulamasının kontenjanı azaltılmalı, ardından uygulama kaldırılmalıdır.
+
+3. sağlık bakanlığı eczacı atama kadrolarını artırmalıdır.
+
+4. gençlerin ruhsat devralabilmesi ve kendi eczanesini açabilmesi önündeki ekonomik ve mevzuata dayalı engeller kaldırılmalıdır.
+
+5. genç eczacıların emeğinin karşılığını alması için ücret ve özlük haklarına yönelik düzenlemeler yapılmalıdır.
+
+6.
+
+eczacı yerleştirme sistemi, gençlerin geleceğini yıllarca belirsizliğe mahkûm etmeyecek şekilde yeniden düzenlenmelidir.
+
+bunlar yıllardır konuşulan, herkesin bildiği önerilerdir. bize akıl verirken &quot;bu noktaya mı geldiniz, bunları mı paylaşıyorsunuz?&quot; diye soranlara biz de">
+<div>
+<div class="meta">5 Kasım 2026 · Görsel · 123 beğeni</div>
+<h3>Çözüm önerilerimiz de gayet açık:</h3><p>1. 65 yaş üzerindeki eczacılar için emekliliğe geçiş düzenlemesi yapılmalı, gençlere meslekte alan açılmalıdır.
+
+2. Yardımcı eczacılık uygulamasının kontenjanı azaltılmalı, ardından uygulama…</p></div></a><a class="item" href="./yazi/DfWY2Pes5-y.html" data-themes="" data-q="mesleğin haysiyeti, gençlerin susmasıyla korunmaz. gençlerin emeğini sömürerek,… mesleğin haysiyeti, gençlerin susmasıyla korunmaz. gençlerin emeğini sömürerek, geleceğini ipotek altına alarak, onları yıllarca bekleme sıralarına mahkûm ederek de korunmaz.
+
+bizim derdimiz geçmişin eczacılarıyla kavga etmek değil. geçmişin imkânlarına sahip olamayan bir kuşağın geleceğini kurtarmak.
+
+genç eczacılar ayrıcalık istemiyor. haklarını, emeklerinin karşılığını ve mesleklerini onuruyla yapabilecekleri bir gelecek istiyor.
+
+gençlerin lehine düzenlemelere karşı çıkanların bugün onları zincir eczane fikri üzerinden suçlaması, bu çelişkinin en açık göstergesidir.
+
+siz gençlere akıl vermeden önce, yıllardır savunduğunuz düzenin gençlere ne bıraktığına bakın.">
+<div>
+<div class="meta">5 Kasım 2026 · Görsel · 143 beğeni</div>
+<h3>Mesleğin haysiyeti, gençlerin susmasıyla korunmaz. Gençlerin emeğini sömürerek,…</h3><p>Mesleğin haysiyeti, gençlerin susmasıyla korunmaz. Gençlerin emeğini sömürerek, geleceğini ipotek altına alarak, onları yıllarca bekleme sıralarına mahkûm ederek de korunmaz.
+
+Bizim derdimiz geçmişin…</p></div></a><a class="item" href="./yazi/DfWYkzbMPzs.html" data-themes="atama-kadro ucret-sgk" data-q="çözüm önerilerimiz de gayet açık: çözüm önerilerimiz de gayet açık:
+
+1. 65 yaş üzerindeki eczacılar için emekliliğe geçiş düzenlemesi yapılmalı, gençlere meslekte alan açılmalıdır.
+
+2. yardımcı eczacılık uygulamasının kontenjanı azaltılmalı, ardından uygulama kaldırılmalıdır.
+
+3. sağlık bakanlığı eczacı atama kadrolarını artırmalıdır.
+
+4. gençlerin ruhsat devralabilmesi ve kendi eczanesini açabilmesi önündeki ekonomik ve mevzuata dayalı engeller kaldırılmalıdır.
+
+5. genç eczacıların emeğinin karşılığını alması için ücret ve özlük haklarına yönelik düzenlemeler yapılmalıdır.
+
+6.
+
+eczacı yerleştirme sistemi, gençlerin geleceğini yıllarca belirsizliğe mahkûm etmeyecek şekilde yeniden düzenlenmelidir.
+
+bunlar yıllardır konuşulan, herkesin bildiği önerilerdir. bize akıl verirken &quot;bu noktaya mı geldiniz, bunları mı paylaşıyorsunuz?&quot; diye soranlara biz de">
+<div>
+<div class="meta">5 Kasım 2026 · Görsel · 77 beğeni</div>
+<h3>Çözüm önerilerimiz de gayet açık:</h3><p>1. 65 yaş üzerindeki eczacılar için emekliliğe geçiş düzenlemesi yapılmalı, gençlere meslekte alan açılmalıdır.
+
+2. Yardımcı eczacılık uygulamasının kontenjanı azaltılmalı, ardından uygulama…</p></div></a><a class="item" href="./yazi/DfWYeTpM2Y3.html" data-themes="atama-kadro ucret-sgk" data-q="çözüm önerilerimiz de gayet açık: çözüm önerilerimiz de gayet açık:
+
+1. 65 yaş üzerindeki eczacılar için emekliliğe geçiş düzenlemesi yapılmalı, gençlere meslekte alan açılmalıdır.
+
+2. yardımcı eczacılık uygulamasının kontenjanı azaltılmalı, ardından uygulama kaldırılmalıdır.
+
+3. sağlık bakanlığı eczacı atama kadrolarını artırmalıdır.
+
+4. gençlerin ruhsat devralabilmesi ve kendi eczanesini açabilmesi önündeki ekonomik ve mevzuata dayalı engeller kaldırılmalıdır.
+
+5. genç eczacıların emeğinin karşılığını alması için ücret ve özlük haklarına yönelik düzenlemeler yapılmalıdır.
+
+6.
+
+eczacı yerleştirme sistemi, gençlerin geleceğini yıllarca belirsizliğe mahkûm etmeyecek şekilde yeniden düzenlenmelidir.
+
+bunlar yıllardır konuşulan, herkesin bildiği önerilerdir. bize akıl verirken &quot;bu noktaya mı geldiniz, bunları mı paylaşıyorsunuz?&quot; diye soranlara biz de">
+<div>
+<div class="meta">5 Kasım 2026 · Görsel · 412 beğeni</div>
+<h3>Çözüm önerilerimiz de gayet açık:</h3><p>1. 65 yaş üzerindeki eczacılar için emekliliğe geçiş düzenlemesi yapılmalı, gençlere meslekte alan açılmalıdır.
+
+2. Yardımcı eczacılık uygulamasının kontenjanı azaltılmalı, ardından uygulama…</p></div></a><a class="item" href="./yazi/DfVSZodjARF.html" data-themes="ucret-sgk" data-q="zincir eczane mi ? i̇stemi̇yoruz kalsin ! zincir eczane mi ? i̇stemi̇yoruz kalsin !
+
+zincir eczane fikrini sizce gençler gerçekten mantıklı buldukları için mi istiyorlar?
+
+hayır! gençleri bu noktaya getiren şey çaresizliktir.
+
+durum artık işler acısı bir hâl almıştır. genç eczacılar, başka meslektaşlarının eczanelerinde asgari ücretle çalışmak yerine, iki zengin ailenin kurduğu büyük markaların zincir eczanelerinde tutunmaya çalışacak noktaya sürüklenmiştir.
+
+buradaki asıl mesele zincir eczane değildir. mesele, mesleğimizde giderek derinleşen sınıfsal uçurumdur.">
+<div>
+<div class="meta">4 Kasım 2026 · Çoklu görsel · 291 beğeni</div>
+<h3>Zincir Eczane Mi ? İSTEMİYORUZ KALSIN !</h3><p>Zincir eczane fikrini sizce gençler gerçekten mantıklı buldukları için mi istiyorlar?
+
+Hayır! Gençleri bu noktaya getiren şey çaresizliktir.
+
+Durum artık işler acısı bir hâl almıştır. Genç eczacılar,…</p></div></a><a class="item" href="./yazi/DfUqYUWsOSE.html" data-themes="oda-secimleri" data-q="mesleklerin kaymağını sıyıranlar, gençler için olumlu sonuçlar doğurabilecek bir yasa… mesleklerin kaymağını sıyıranlar, gençler için olumlu sonuçlar doğurabilecek bir yasa tasarısını gençlerin hayatını daha da zorlaştıracak hâle getirip yine aynı şekilde “dostlar alışverişte görsün” anlayışıyla hareket eden bir meslek odasına ziyarette bulunmuş.
+
+yine de hakkını teslim edelim; en azından onlardan daha fazla çalışıyorlar!
+
+bununla beraber ortak eylem düzenleyebilirlerse katılacağımızı da belirtelim.">
+<div>
+<div class="meta">4 Kasım 2026 · Görsel · 31 beğeni</div>
+<h3>Mesleklerin kaymağını sıyıranlar, gençler için olumlu sonuçlar doğurabilecek bir yasa…</h3><p>Mesleklerin kaymağını sıyıranlar, gençler için olumlu sonuçlar doğurabilecek bir yasa tasarısını gençlerin hayatını daha da zorlaştıracak hâle getirip yine aynı şekilde “dostlar alışverişte görsün”…</p></div></a><a class="item" href="./yazi/DfTy2PmMvd8.html" data-themes="" data-q="radikal sorunlar radikal düşünceleri beraberinde getirir. radikal sorunlar radikal düşünceleri beraberinde getirir.
+pastadan pay vermiyorsanız ortada pasta kalmaz.">
+<div>
+<div class="meta">4 Kasım 2026 · Görsel · 63 beğeni</div>
+<h3>Radikal sorunlar radikal düşünceleri beraberinde getirir.</h3><p>Pastadan pay vermiyorsanız ortada pasta kalmaz.</p></div></a></div>
+<p><a class="btn ghost" href="arsiv.html">Daha eski paylaşımlar için arşiv →</a></p></div></main>
+<footer><div class="wrap">Örnek çalışma, resmî site değildir · İçerik <a href="https://www.instagram.com/eczacidirenisi/">@eczacidirenisi</a> Instagram hesabından derlenmiştir.</div></footer>
+<script>
+(function(){
+  var els=[].slice.call(document.querySelectorAll('main h2,.card,.list .item,.pn a,.note,.facts'));
+  var idx=new Map();
+  els.forEach(function(e){var p=e.parentNode,n=idx.get(p)||0;idx.set(p,n+1);e.classList.add('rv');e.style.setProperty('--d',Math.min(n,5)*70+'ms')});
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:0});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body></html>

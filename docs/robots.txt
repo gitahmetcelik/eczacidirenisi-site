@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://gitahmetcelik.github.io/eczacidirenisi-site/sitemap.xml

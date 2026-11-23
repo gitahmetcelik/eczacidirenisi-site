@@ -50,7 +50,7 @@ const articles = posts.filter(p => p.article);
 // ---------- Şablon ----------
 const CSS = fs.readFileSync(path.join(ROOT, "style.css"), "utf-8");
 
-const NAV = [["/", "Ana sayfa"], ["/gundem.html", "Gündem"], ["/kampanyalar.html", "Kampanyalar"], ["/arsiv.html", "Arşiv"], ["/hakkimizda.html", "Hakkımızda"]];
+const NAV = [["/", "Ana sayfa"], ["/gundem.html", "Gündem"], ["/is-ilanlari.html", "İş ilanları"], ["/devir-ilanlari.html", "Devir ilanları"], ["/arsiv.html", "Arşiv"], ["/hakkimizda.html", "Hakkımızda"]];
 
 const SITE_URL = "https://gitahmetcelik.github.io/eczacidirenisi-site"; // alt yol dahil, sonunda / yok
 
@@ -75,10 +75,10 @@ ${ld ? `<script type="application/ld+json">${JSON.stringify(ld)}</script>` : ""}
 <a class="skip" href="#icerik">İçeriğe geç</a>
 <header class="site"><div class="wrap"><a class="brand" href="${base}index.html" aria-label="Eczacı Direnişi ana sayfa"><img src="${base}assets/logo.jpg" alt="" width="52" height="52"><span>Eczacı <b>Direnişi</b></span></a><nav aria-label="Ana menü">${nav}</nav></div></header>
 <main id="icerik"><div class="wrap">${body}</div></main>
-<footer><div class="wrap">Örnek çalışma, resmî site değildir · İçerik <a href="https://www.instagram.com/eczacidirenisi/">@eczacidirenisi</a> Instagram hesabından derlenmiştir.</div></footer>
+<footer><div class="wrap"><a href="${base}konular.html">Konular</a> · Örnek çalışma, resmî site değildir · İçerik <a href="https://www.instagram.com/eczacidirenisi/">@eczacidirenisi</a> Instagram hesabından derlenmiştir.</div></footer>
 <script>
 (function(){
-  var els=[].slice.call(document.querySelectorAll('main h2,.card,.list .item,.pn a,.note,.facts'));
+  var els=[].slice.call(document.querySelectorAll('main h2,.card,.list .item,.pn a,.note,.facts,.ilan,.empty'));
   var idx=new Map();
   els.forEach(function(e){var p=e.parentNode,n=idx.get(p)||0;idx.set(p,n+1);e.classList.add('rv');e.style.setProperty('--d',Math.min(n,5)*70+'ms')});
   if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
@@ -90,7 +90,7 @@ ${ld ? `<script type="application/ld+json">${JSON.stringify(ld)}</script>` : ""}
 }
 
 const themeBy = slug => THEMES.find(t => t.slug === slug);
-const tags = (p, base) => p.themes.slice(0, 3).map(s => `<a class="tag" href="${base}kampanya/${s}.html">${esc(themeBy(s).name)}</a>`).join("");
+const tags = (p, base) => p.themes.slice(0, 3).map(s => `<a class="tag" href="${base}konu/${s}.html">${esc(themeBy(s).name)}</a>`).join("");
 const excerpt = (t, n = 160) => t.length > n ? t.slice(0, n).replace(/\s+\S*$/, "") + "…" : t;
 const postHref = (p, base) => p.article ? `${base}yazi/${p.slug}.html` : p.url;
 
@@ -126,15 +126,58 @@ const popular = byLikes.slice(1, 4);
 const latest = rich.slice(0, 9);
 const counts = Object.fromEntries(THEMES.map(t => [t.slug, posts.filter(p => p.themes.includes(t.slug)).length]));
 
+// ---------- İlanlar (ilanlar.json) ----------
+// Alanlar: tur ("is" | "devir"), baslik, sehir, ilce, aciklama, iletisim, tarih (YYYY-AA-GG), pozisyon, ucret, aktif (false ise gizlenir)
+const ILAN_FILE = process.env.ILAN_FILE || path.join(ROOT, "ilanlar.json");
+const ilanlar = fs.existsSync(ILAN_FILE) ? JSON.parse(fs.readFileSync(ILAN_FILE, "utf-8")) : [];
+const DM = "https://ig.me/m/eczacidirenisi";
+const ILAN = {
+  is: { file: "is-ilanlari.html", title: "İş ilanları", lead: "Eczane ve eczacılık alanında eleman arayanlar ile iş arayanlar için ilanlar.", empty: "Henüz iş ilanı yok.", cta: "İş ilanı ver" },
+  devir: { file: "devir-ilanlari.html", title: "Devir ilanları", lead: "Devredilecek eczaneler ve devir arayanlar için ilanlar.", empty: "Henüz devir ilanı yok.", cta: "Devir ilanı ver" },
+};
+const ilanList = k => ilanlar.filter(l => l.tur === k && l.aktif !== false).sort((a, b) => (b.tarih || "").localeCompare(a.tarih || ""));
+const fmtDay = s => (s && /^\d{4}-\d{2}-\d{2}$/.test(s)) ? fmtDate(s + "T12:00:00Z") : "";
+function ilanHtml(l) {
+  const where = [l.sehir, l.ilce].filter(Boolean).join(" / ");
+  const meta = [where, fmtDay(l.tarih)].filter(Boolean).join(" · ");
+  const facts = [l.pozisyon && `Pozisyon <b>${esc(l.pozisyon)}</b>`, l.ucret && `Ücret <b>${esc(l.ucret)}</b>`].filter(Boolean).map(x => `<span>${x}</span>`).join("");
+  return `<article class="ilan" data-q="${esc([l.baslik, where, l.aciklama, l.pozisyon].filter(Boolean).join(" ").toLowerCase())}">
+<div class="meta">${esc(meta)}</div><h3>${esc(l.baslik || "İlan")}</h3>
+${facts ? `<p class="facts">${facts}</p>` : ""}${l.aciklama ? `<p class="body-s">${esc(l.aciklama)}</p>` : ""}
+${l.iletisim ? `<p class="iletisim"><b>İletişim:</b> ${esc(l.iletisim)}</p>` : ""}</article>`;
+}
+const emptyHtml = k => `<div class="empty"><h3>${ILAN[k].empty}</h3><p>İlan vermek için Instagram'dan mesaj gönderebilirsin.</p><a class="btn" href="${DM}">${ILAN[k].cta}</a></div>`;
+
+for (const [k, T] of Object.entries(ILAN)) {
+  const list = ilanList(k);
+  write(T.file, layout({
+    title: `${T.title} · Eczacı Direnişi`, desc: T.lead, active: `/${T.file}`, path: T.file,
+    body: `<h1>${T.title}</h1><p class="lead">${T.lead}</p>
+${list.length ? `<div class="actions"><a class="btn" href="${DM}">${T.cta}</a></div>
+<div class="filters"><input id="q" type="search" placeholder="Şehir, pozisyon ya da kelime ara…" aria-label="İlanlarda ara"></div>
+<p class="meta" id="count">${list.length} ilan</p><div class="ilanlar" id="il">${list.map(ilanHtml).join("")}</div>
+<p class="note">Görüşmeden önce ilan bilgilerini ilan sahibiyle teyit edin.</p>
+<script>
+const q=document.getElementById('q'),els=[...document.querySelectorAll('#il .ilan')],c=document.getElementById('count');
+q.addEventListener('input',()=>{const s=q.value.toLowerCase().trim();let n=0;els.forEach(e=>{const ok=!s||e.dataset.q.includes(s);e.style.display=ok?'':'none';if(ok)n++});c.textContent=n+' ilan'});
+</script>` : emptyHtml(k)}`
+  }));
+}
+const homeIlan = k => {
+  const list = ilanList(k);
+  return `<div><h3 class="sub">${ILAN[k].title}</h3>${list.length ? list.slice(0, 3).map(ilanHtml).join("") : emptyHtml(k)}
+<p><a class="btn ghost" href="${ILAN[k].file}">${list.length ? `Tüm ${ILAN[k].title.toLowerCase()} →` : `${ILAN[k].title} sayfası →`}</a></p></div>`;
+};
+
 write("index.html", layout({
   title: "Eczacı Direnişi", desc: "Vatansever Genç Türk Eczacılar Topluluğu", active: "/", path: "",
   ld: { "@context": "https://schema.org", "@type": "Organization", name: "Eczacı Direnişi", url: SITE_URL, sameAs: ["https://www.instagram.com/eczacidirenisi/"] },
-  body: `<div class="intro"><span class="kicker">${posts.length} paylaşım · ${THEMES.length} kampanya</span>
+  body: `<div class="intro"><span class="kicker">${posts.length} paylaşım · ${ilanList("is").length} iş ilanı · ${ilanList("devir").length} devir ilanı</span>
 <h1>Vatansever Genç Türk Eczacılar Topluluğu</h1></div>
 <h2>Öne çıkan</h2>
 <div class="hero">${card(featured, "./", true)}<div style="display:grid;gap:16px">${popular.map(p => card(p, "./")).join("")}</div></div>
-<h2>Kampanyalar</h2>
-<div class="grid">${THEMES.map(t => `<a class="card" href="kampanya/${t.slug}.html"><div class="meta">${counts[t.slug]} paylaşım</div><h3>${esc(t.name)}</h3><p>${esc(t.desc)}</p></a>`).join("")}</div>
+<h2>İlanlar</h2>
+<div class="cols2">${homeIlan("is")}${homeIlan("devir")}</div>
 <h2>Son yazılar</h2><div class="list">${latest.map(p => item(p, "./")).join("")}</div>
 <p><a class="btn ghost" href="arsiv.html">Tüm arşiv →</a></p>`
 }));
@@ -147,19 +190,19 @@ write("gundem.html", layout({
 <p><a class="btn ghost" href="arsiv.html">Daha eski paylaşımlar için arşiv →</a></p>`
 }));
 
-// ---------- Kampanyalar ----------
-write("kampanyalar.html", layout({
-  title: "Kampanyalar · Eczacı Direnişi", active: "/kampanyalar.html", path: "kampanyalar.html", desc: "Süreklilik gösteren konular, tek sayfada.",
-  body: `<h1>Kampanyalar</h1><p class="lead">Süreklilik gösteren konular, tek sayfada toplanmış.</p>
-<div class="grid" style="margin-top:20px">${THEMES.map(t => `<a class="card" href="kampanya/${t.slug}.html"><div class="meta">${counts[t.slug]} paylaşım</div><h3>${esc(t.name)}</h3><p>${esc(t.desc)}</p></a>`).join("")}</div>`
+// ---------- Konular ----------
+write("konular.html", layout({
+  title: "Konular · Eczacı Direnişi", active: "/konular.html", path: "konular.html", desc: "Süreklilik gösteren konular, tek sayfada.",
+  body: `<h1>Konular</h1><p class="lead">Süreklilik gösteren konular, tek sayfada toplanmış.</p>
+<div class="grid" style="margin-top:20px">${THEMES.map(t => `<a class="card" href="konu/${t.slug}.html"><div class="meta">${counts[t.slug]} paylaşım</div><h3>${esc(t.name)}</h3><p>${esc(t.desc)}</p></a>`).join("")}</div>`
 }));
 
 for (const t of THEMES) {
   const list = posts.filter(p => p.themes.includes(t.slug));
   const tl = list.filter(p => p.article);
-  write(`kampanya/${t.slug}.html`, layout({
-    title: `${t.name} · Eczacı Direnişi`, desc: t.desc, active: "/kampanyalar.html", depth: 1, path: `kampanya/${t.slug}.html`,
-    body: `<p class="meta"><a href="../kampanyalar.html">← Kampanyalar</a></p><h1>${esc(t.name)}</h1>
+  write(`konu/${t.slug}.html`, layout({
+    title: `${t.name} · Eczacı Direnişi`, desc: t.desc, active: "/konular.html", depth: 1, path: `konu/${t.slug}.html`,
+    body: `<p class="meta"><a href="../konular.html">← Konular</a></p><h1>${esc(t.name)}</h1>
 <p class="lead">${esc(t.desc)}</p>
 <p class="facts"><span><b>${list.length}</b> paylaşım</span><span>İlk paylaşım <b>${list.length ? fmtDate(list[list.length - 1].date) : "-"}</b></span><span><b>${list.reduce((s, p) => s + p.likes, 0).toLocaleString("tr-TR")}</b> toplam beğeni</span></p>
 <h2>Zaman çizelgesi</h2><div class="list">${(tl.length ? tl : list).slice(0, 60).map(p => item(p, "../")).join("")}</div>`
@@ -199,8 +242,8 @@ write("404.html", layout({
   body: `<h1>Sayfa bulunamadı</h1><p class="lead">Aradığın sayfa taşınmış ya da hiç var olmamış olabilir.</p>
 <p><a class="btn" href="${SITE_URL}/index.html">Ana sayfaya dön</a> <a class="btn ghost" href="${SITE_URL}/arsiv.html">Arşivde ara</a></p>`
 }));
-const urls = ["", "gundem.html", "kampanyalar.html", "arsiv.html", "hakkimizda.html",
-  ...THEMES.map(t => `kampanya/${t.slug}.html`), ...articles.map(p => `yazi/${p.slug}.html`)];
+const urls = ["", "gundem.html", "is-ilanlari.html", "devir-ilanlari.html", "konular.html", "arsiv.html", "hakkimizda.html",
+  ...THEMES.map(t => `konu/${t.slug}.html`), ...articles.map(p => `yazi/${p.slug}.html`)];
 write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map(u => `<url><loc>${SITE_URL}/${u}</loc></url>`).join("")}</urlset>`);
 write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}/sitemap.xml\n`);
 
@@ -228,4 +271,4 @@ write("hakkimizda.html", layout({
 }));
 
 console.log("Ana sayfa görselsiz:", [featured, ...popular, ...latest].filter(p => !p.img).map(p => p.slug).join(" ") || "yok");
-console.log(`Üretildi: ${posts.length} paylaşım, ${articles.length} yazı sayfası, ${THEMES.length} kampanya → docs/`);
+console.log(`Üretildi: ${posts.length} paylaşım, ${articles.length} yazı sayfası, ${ilanList("is").length} iş ilanı, ${ilanList("devir").length} devir ilanı → docs/`);

@@ -1,0 +1,24 @@
+[
+  {
+    "tur": "is",
+    "baslik": "ÖRNEK: Eczacı aranıyor",
+    "sehir": "Ankara",
+    "ilce": "Çankaya",
+    "pozisyon": "Eczacı (tam zamanlı)",
+    "ucret": "Görüşülür",
+    "aciklama": "Bu bir örnek kayıttır, gerçek ilan değildir.",
+    "iletisim": "ornek@ornek.com",
+    "tarih": "2026-11-23",
+    "aktif": true
+  },
+  {
+    "tur": "devir",
+    "baslik": "ÖRNEK: Devren eczane",
+    "sehir": "İzmir",
+    "ilce": "Karşıyaka",
+    "aciklama": "Bu bir örnek kayıttır, gerçek ilan değildir.",
+    "iletisim": "Instagram DM",
+    "tarih": "2026-11-23",
+    "aktif": true
+  }
+]

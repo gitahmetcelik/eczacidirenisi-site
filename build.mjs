@@ -146,14 +146,14 @@ function ilanHtml(l) {
 ${facts ? `<p class="facts">${facts}</p>` : ""}${l.aciklama ? `<p class="body-s">${esc(l.aciklama)}</p>` : ""}
 ${l.iletisim ? `<p class="iletisim"><b>İletişim:</b> ${esc(l.iletisim)}</p>` : ""}</article>`;
 }
-const emptyHtml = k => `<div class="empty"><h3>${ILAN[k].empty}</h3><p>İlan vermek için Instagram'dan mesaj gönderebilirsin.</p><a class="btn" href="${DM}">${ILAN[k].cta}</a></div>`;
+const emptyHtml = k => `<div class="empty"><h3>${ILAN[k].empty}</h3><p>İlan vermek için formu doldurabilirsin.</p><a class="btn" href="ilan-ver.html?tur=${k}">${ILAN[k].cta}</a></div>`;
 
 for (const [k, T] of Object.entries(ILAN)) {
   const list = ilanList(k);
   write(T.file, layout({
     title: `${T.title} · Eczacı Direnişi`, desc: T.lead, active: `/${T.file}`, path: T.file,
     body: `<h1>${T.title}</h1><p class="lead">${T.lead}</p>
-${list.length ? `<div class="actions"><a class="btn" href="${DM}">${T.cta}</a></div>
+${list.length ? `<div class="actions"><a class="btn" href="ilan-ver.html?tur=${k}">${T.cta}</a></div>
 <div class="filters"><input id="q" type="search" placeholder="Şehir, pozisyon ya da kelime ara…" aria-label="İlanlarda ara"></div>
 <p class="meta" id="count">${list.length} ilan</p><div class="ilanlar" id="il">${list.map(ilanHtml).join("")}</div>
 <p class="note">Görüşmeden önce ilan bilgilerini ilan sahibiyle teyit edin.</p>
@@ -163,6 +163,57 @@ q.addEventListener('input',()=>{const s=q.value.toLowerCase().trim();let n=0;els
 </script>` : emptyHtml(k)}`
   }));
 }
+// ---------- İlan ver (form) ----------
+// Sunucu yok: form bilgileri hazır bir mesaj metnine çevirir, kopyalar ve Instagram mesajını açar. Hiçbir bilgi sitede saklanmaz.
+write("ilan-ver.html", layout({
+  title: "İlan ver · Eczacı Direnişi", active: "", path: "ilan-ver.html", desc: "İş ya da devir ilanı vermek için formu doldur.",
+  body: `<h1>İlan ver</h1>
+<p class="lead">Formu doldur, hazırlanan metni Instagram'dan <b>@eczacidirenisi</b> hesabına mesaj olarak gönder.</p>
+<form id="f" class="form" novalidate>
+<fieldset><legend>İlan türü</legend>
+<label class="radio"><input type="radio" name="tur" value="is" checked> İş ilanı</label>
+<label class="radio"><input type="radio" name="tur" value="devir"> Devir ilanı</label></fieldset>
+<label>Başlık <span class="req">*</span><input name="baslik" required maxlength="120" placeholder="Örn. Eczacı aranıyor / Devren eczane"></label>
+<div class="row2"><label>Şehir <span class="req">*</span><input name="sehir" required maxlength="40"></label>
+<label>İlçe<input name="ilce" maxlength="40"></label></div>
+<div class="row2" id="isalan"><label>Pozisyon<input name="pozisyon" maxlength="80" placeholder="Örn. Eczacı, tam zamanlı"></label>
+<label>Ücret<input name="ucret" maxlength="60" placeholder="Örn. Görüşülür"></label></div>
+<label>Açıklama<textarea name="aciklama" rows="5" maxlength="1200" placeholder="Detayları yaz."></textarea></label>
+<label>İletişim <span class="req">*</span><input name="iletisim" required maxlength="120" placeholder="Telefon ya da e-posta"></label>
+<p class="note">İletişim bilgisi ilanla birlikte herkese açık yayınlanabilir. Başkasının bilgisini onayı olmadan yazma.</p>
+<button class="btn" type="submit">Metni hazırla</button>
+</form>
+<div id="sonuc" class="sonuc" hidden>
+<h2>Mesajın hazır</h2>
+<p class="lead" id="durum"></p>
+<textarea id="metin" rows="9" readonly aria-label="Hazırlanan ilan metni"></textarea>
+<div class="actions"><button class="btn ghost" id="kopyala" type="button">Metni kopyala</button>
+<a class="btn" href="${DM}" target="_blank" rel="noopener">Instagram'da mesaj aç</a></div>
+<p class="note">Bu site ilanı kendiliğinden yayınlamaz ve bilgileri saklamaz. Mesajı gönderdikten sonra ilan, onaylanırsa siteye eklenir.</p>
+</div>
+<script>
+(function(){
+  var f=document.getElementById('f'),s=document.getElementById('sonuc'),m=document.getElementById('metin'),d=document.getElementById('durum');
+  var t=new URLSearchParams(location.search).get('tur'); if(t==='is'||t==='devir'){f.querySelector('input[name=tur][value='+t+']').checked=true}
+  var isalan=document.getElementById('isalan');
+  function tog(){isalan.style.display=f.tur.value==='is'?'':'none'} f.addEventListener('change',tog); tog();
+  function build(){var v=function(n){return (f.elements[n].value||'').trim()};
+    var L=['İLAN: '+(f.tur.value==='is'?'İş ilanı':'Devir ilanı'),'Başlık: '+v('baslik'),'Şehir / İlçe: '+[v('sehir'),v('ilce')].filter(Boolean).join(' / ')];
+    if(f.tur.value==='is'){if(v('pozisyon'))L.push('Pozisyon: '+v('pozisyon'));if(v('ucret'))L.push('Ücret: '+v('ucret'))}
+    if(v('aciklama'))L.push('Açıklama: '+v('aciklama'));L.push('İletişim: '+v('iletisim'));return L.join('\\n')}
+  function copy(){return navigator.clipboard.writeText(m.value).then(function(){return true},function(){m.select();return false})}
+  f.addEventListener('submit',function(e){e.preventDefault();
+    var bad=[].slice.call(f.querySelectorAll('[required]')).filter(function(x){return !x.value.trim()});
+    [].slice.call(f.querySelectorAll('.bad')).forEach(function(x){x.classList.remove('bad')});
+    if(bad.length){bad.forEach(function(x){x.classList.add('bad')});bad[0].focus();return}
+    m.value=build();s.hidden=false;
+    copy().then(function(ok){d.textContent=ok?'Metin panoya kopyalandı. Instagram mesajına yapıştırıp gönder.':'Metni seçip kopyala, sonra Instagram mesajına yapıştır.'});
+    s.scrollIntoView({behavior:'smooth',block:'start'})});
+  document.getElementById('kopyala').addEventListener('click',function(e){var b=e.currentTarget;copy().then(function(ok){b.textContent=ok?'Kopyalandı ✓':'Kopyalanamadı';setTimeout(function(){b.textContent='Metni kopyala'},2000)})});
+})();
+</script>`
+}));
+
 const homeIlan = k => {
   const list = ilanList(k);
   return `<div><h3 class="sub">${ILAN[k].title}</h3>${list.length ? list.slice(0, 3).map(ilanHtml).join("") : emptyHtml(k)}
@@ -242,7 +293,7 @@ write("404.html", layout({
   body: `<h1>Sayfa bulunamadı</h1><p class="lead">Aradığın sayfa taşınmış ya da hiç var olmamış olabilir.</p>
 <p><a class="btn" href="${SITE_URL}/index.html">Ana sayfaya dön</a> <a class="btn ghost" href="${SITE_URL}/arsiv.html">Arşivde ara</a></p>`
 }));
-const urls = ["", "gundem.html", "is-ilanlari.html", "devir-ilanlari.html", "konular.html", "arsiv.html", "hakkimizda.html",
+const urls = ["", "gundem.html", "is-ilanlari.html", "devir-ilanlari.html", "ilan-ver.html", "konular.html", "arsiv.html", "hakkimizda.html",
   ...THEMES.map(t => `konu/${t.slug}.html`), ...articles.map(p => `yazi/${p.slug}.html`)];
 write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map(u => `<url><loc>${SITE_URL}/${u}</loc></url>`).join("")}</urlset>`);
 write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}/sitemap.xml\n`);

@@ -1,0 +1,5 @@
+{
+  "client": "",
+  "slots": { "sol": "", "sag": "", "icerik": "" },
+  "not": "Google AdSense hesabın onaylandığında 'client' alanına yayıncı kimliğini (ca-pub-0000000000000000) ve her konum için AdSense'ten aldığın reklam birimi numarasını (slots) yaz, sonra siteyi yeniden üret. Boşken siteye hiçbir reklam ya da çerez bildirimi eklenmez. Not: AdSense ads.txt dosyasını alan adının kök dizininde arar (github.io alt yolunda çalışmaz), kendi alan adı gerekir."
+}

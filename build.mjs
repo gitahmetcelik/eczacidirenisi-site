@@ -1,11 +1,10 @@
-// Örnek site üreticisi: data/posts.jsonl -> docs/ (GitHub Pages)
+// Site üreticisi: statik kabuk sayfaları üretir (içerik Supabase veritabanından gelir) -> docs/ (GitHub Pages)
 import fs from "node:fs";
 import path from "node:path";
 
 const ROOT = path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
 const DIST = path.join(ROOT, "docs");
-const posts = fs.readFileSync(path.join(ROOT, "data/posts.jsonl"), "utf-8")
-  .split("\n").filter(Boolean).map(l => JSON.parse(l));
+const SEED = fs.existsSync(path.join(ROOT, "data/seed-yazilar.json")) ? JSON.parse(fs.readFileSync(path.join(ROOT, "data/seed-yazilar.json"), "utf-8")) : [];
 
 // ---------- Temalar / kampanyalar ----------
 const THEMES = [
@@ -31,36 +30,20 @@ const TR_MONTHS = ["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","A
 const fmtDate = iso => { const d = new Date(iso); return `${d.getUTCDate()} ${TR_MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`; };
 const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 
-function clean(c) { return c.replace(/#\S+/g, "").replace(/[ \t]+/g, " ").replace(/\n{3,}/g, "\n\n").trim(); }
-
-for (const p of posts) {
-  p.text = clean(p.caption);
-  p.themes = THEMES.filter(t => t.re.test(p.caption)).map(t => t.slug);
-  const first = (p.text.split(/\n/).find(l => l.trim()) || "").trim();
-  p.title = first.length > 90 ? first.slice(0, 87).replace(/\s+\S*$/, "") + "…" : first;
-  p.img = fs.existsSync(path.join(ROOT, "assets/posts", p.shortcode + ".jpg"));
-  p.rich = p.text.length >= 80;                  // metni yeterince uzun
-  p.article = p.rich || p.img;                   // görseli ya da metni varsa kendi sayfası olur
-  if (!p.title) p.title = `Görsel paylaşım · ${fmtDate(p.date)}`;
-  p.slug = p.shortcode;
-}
-posts.sort((a, b) => b.date.localeCompare(a.date));
-const articles = posts.filter(p => p.article);
-
 // ---------- Şablon ----------
 const CSS = fs.readFileSync(path.join(ROOT, "style.css"), "utf-8");
 
-const NAV = [["/", "Ana sayfa"], ["/gundem.html", "Gündem"], ["/is-ilanlari.html", "İş ilanları"], ["/devir-ilanlari.html", "Devir ilanları"], ["/arsiv.html", "Arşiv"], ["/hakkimizda.html", "Hakkımızda"]];
+const NAV = [["/", "Ana sayfa"], ["/gundem.html", "Gündem"], ["/akis.html", "Akış"], ["/is-ilanlari.html", "İş ilanları"], ["/devir-ilanlari.html", "Devir ilanları"], ["/arsiv.html", "Arşiv"], ["/hakkimizda.html", "Hakkımızda"]];
 
 const SITE_URL = "https://gitahmetcelik.github.io/eczacidirenisi-site"; // alt yol dahil, sonunda / yok
 
-function layout({ title, desc = "", body, active = "/", depth = 0, path: pagePath = "", ld = null, type = "website", image = "assets/logo.jpg" }) {
+function layout({ title, desc = "", body, active = "/", depth = 0, path: pagePath = "", ld = null, type = "website", image = "assets/logo.jpg", noindex = false }) {
   const base = depth ? "../".repeat(depth) : "./";
   const nav = NAV.map(([h, n]) => `<a href="${base}${h.slice(1)}"${h === active ? ' class="on" aria-current="page"' : ""}>${n}</a>`).join("");
   const url = `${SITE_URL}/${pagePath}`;
-  return `<!doctype html><html lang="tr"><head><meta charset="utf-8">
+  return `<!doctype html><html lang="tr" data-base="${base}"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#e30a17">
+<meta name="theme-color" content="#e30a17">${noindex ? `<meta name="robots" content="noindex,nofollow">` : ""}
 <link rel="icon" href="${base}assets/logo.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Source+Serif+4:wght@400;700&display=swap" rel="stylesheet">
@@ -70,12 +53,14 @@ function layout({ title, desc = "", body, active = "/", depth = 0, path: pagePat
 <meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${url}">
 <meta property="og:locale" content="tr_TR"><meta property="og:image" content="${SITE_URL}/${image || "assets/logo.jpg"}"><meta name="twitter:card" content="summary_large_image">
 ${ld ? `<script type="application/ld+json">${JSON.stringify(ld)}</script>` : ""}
-<script>document.documentElement.classList.add('js')</script>
+<script>document.documentElement.classList.add('js');try{var _t=localStorage.getItem('ed-tema');if(_t==='koyu'||(_t==='sistem'&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
 <style>${CSS}</style></head><body>
 <a class="skip" href="#icerik">İçeriğe geç</a>
-<header class="site"><div class="wrap"><a class="brand" href="${base}index.html" aria-label="Eczacı Direnişi ana sayfa"><img src="${base}assets/logo.jpg" alt="" width="52" height="52"><span>Eczacı <b>Direnişi</b></span></a><nav aria-label="Ana menü">${nav}</nav></div></header>
+<header class="site"><div class="wrap"><a class="brand" href="${base}index.html" aria-label="Eczacı Direnişi ana sayfa"><img src="${base}assets/logo.jpg" alt="" width="52" height="52"><span>Eczacı <b>Direnişi</b></span></a><nav aria-label="Ana menü">${nav}</nav><div class="hdr-tools"><button class="tema-btn" id="tema" type="button" aria-label="Tema">◐</button><div class="auth" id="auth"></div></div></div></header>
+<div class="shell"><aside class="rail rail-l" aria-label="Reklam alanı"><div class="ad-slot" data-slot="sol" data-etiket="Reklam"></div></aside>
 <main id="icerik"><div class="wrap">${body}</div></main>
-<footer><div class="wrap"><a href="${base}konular.html">Konular</a> · Örnek çalışma, resmî site değildir · İçerik <a href="https://www.instagram.com/eczacidirenisi/">@eczacidirenisi</a> Instagram hesabından derlenmiştir.</div></footer>
+<aside class="rail rail-r" aria-label="Reklam alanı"><div class="ad-slot" data-slot="sag" data-etiket="Reklam"></div></aside></div>
+<footer><div class="wrap"><a href="${base}konular.html">Konular</a> · <a href="${base}gizlilik.html">Gizlilik</a> · <button class="linkbtn" id="cerez-ac" type="button" hidden>Çerez tercihleri</button><span id="cerez-ayrac" hidden> · </span>Örnek çalışma, resmî site değildir · İçerik <a href="https://www.instagram.com/eczacidirenisi/">@eczacidirenisi</a> Instagram hesabından derlenmiştir.</div></footer>
 <script>
 (function(){
   var els=[].slice.call(document.querySelectorAll('main h2,.card,.list .item,.pn a,.note,.facts,.ilan,.empty'));
@@ -86,26 +71,29 @@ ${ld ? `<script type="application/ld+json">${JSON.stringify(ld)}</script>` : ""}
   els.forEach(function(e){io.observe(e)});
 })();
 </script>
+<script>
+(function(){
+  var b=document.getElementById('tema'); if(!b) return;
+  var ADLAR={acik:'Açık tema',koyu:'Koyu tema',sistem:'Sistem teması'}, SIMGE={acik:'☀',koyu:'☾',sistem:'◐'};
+  function tercih(){try{return localStorage.getItem('ed-tema')||'acik'}catch(e){return 'acik'}}
+  function uygula(t){
+    var koyu=t==='koyu'||(t==='sistem'&&matchMedia('(prefers-color-scheme: dark)').matches);
+    if(koyu)document.documentElement.setAttribute('data-theme','dark');else document.documentElement.removeAttribute('data-theme');
+    b.textContent=SIMGE[t];b.title=ADLAR[t]+' (değiştirmek için tıkla)';b.setAttribute('aria-label',ADLAR[t]+', değiştirmek için tıkla');
+    var m=document.querySelector('meta[name=theme-color]');if(m)m.setAttribute('content',koyu?'#8f0710':'#e30a17');
+  }
+  b.addEventListener('click',function(){var s={acik:'koyu',koyu:'sistem',sistem:'acik'}[tercih()]||'koyu';try{localStorage.setItem('ed-tema',s)}catch(e){}uygula(s)});
+  if(window.matchMedia)matchMedia('(prefers-color-scheme: dark)').addEventListener&&matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(){if(tercih()==='sistem')uygula('sistem')});
+  uygula(tercih());
+})();
+</script>
+<script src="${base}assets/config.js"></script>
+<script src="${base}assets/reklam-ayar.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="${base}assets/app.js" defer></script>
+<script src="${base}assets/icerik.js" defer></script>
+<script src="${base}assets/reklam.js" defer></script>
 </body></html>`;
-}
-
-const themeBy = slug => THEMES.find(t => t.slug === slug);
-const tags = (p, base) => p.themes.slice(0, 3).map(s => `<a class="tag" href="${base}konu/${s}.html">${esc(themeBy(s).name)}</a>`).join("");
-const excerpt = (t, n = 160) => t.length > n ? t.slice(0, n).replace(/\s+\S*$/, "") + "…" : t;
-const postHref = (p, base) => p.article ? `${base}yazi/${p.slug}.html` : p.url;
-
-const imgSrc = (p, base) => `${base}assets/posts/${p.slug}.jpg`;
-function card(p, base, big = false) {
-  return `<a class="card${big ? " big" : ""}" href="${postHref(p, base)}">${p.img ? `<img class="thumb" src="${imgSrc(p, base)}" alt="" loading="${big ? "eager" : "lazy"}" decoding="async">` : ""}
-<div class="meta">${fmtDate(p.date)} · ${p.likes} beğeni</div><h3>${esc(p.title)}</h3>
-<p>${esc(excerpt(p.text.replace(p.title, "").trim() || p.text, big ? 260 : 140))}</p></a>`;
-}
-function item(p, base) {
-  const sub = p.rich ? `<p>${esc(excerpt(p.text.replace(p.title, "").trim(), 200))}</p>` : `<p>İçerik görselin içinde.</p>`;
-  return `<a class="item${p.img ? " has-img" : ""}" href="${postHref(p, base)}" data-themes="${p.themes.join(" ")}" data-q="${esc((p.title + " " + p.text).toLowerCase())}">
-${p.img ? `<img class="thumb" src="${imgSrc(p, base)}" alt="" loading="lazy" decoding="async">` : ""}<div>
-<div class="meta">${fmtDate(p.date)} · ${p.type === "GraphVideo" ? "Video" : p.type === "GraphSidecar" ? "Çoklu görsel" : "Görsel"} · ${p.likes} beğeni</div>
-<h3>${esc(p.title)}</h3>${sub}</div></a>`;
 }
 
 function write(rel, html) {
@@ -116,175 +104,206 @@ function write(rel, html) {
 
 fs.rmSync(DIST, { recursive: true, force: true });
 fs.cpSync(path.join(ROOT, "assets"), path.join(DIST, "assets"), { recursive: true });
+// Reklam ayarları (ads.json): Google AdSense için hazır alt yapı. "client" boşsa hiçbir reklam ya da çerez bildirimi gösterilmez.
+const ADS = fs.existsSync(path.join(ROOT, "ads.json")) ? JSON.parse(fs.readFileSync(path.join(ROOT, "ads.json"), "utf-8")) : { client: "", slots: {} };
+const ADS_ON = /^ca-pub-\d{10,20}$/.test(ADS.client || "");
+fs.writeFileSync(path.join(DIST, "assets/reklam-ayar.js"), "window.ED_ADS=" + JSON.stringify({ client: ADS_ON ? ADS.client : "", slots: ADS.slots || {} }) + ";\n", "utf-8");
+if (ADS_ON) write("ads.txt", `google.com, ${ADS.client.replace("ca-", "")}, DIRECT, f08c47fec0942fa0\n`);
 
-// ---------- Ana sayfa ----------
-const rich = posts.filter(p => p.rich);
-const seenTitles = new Set();
-const byLikes = [...rich].sort((a, b) => b.likes - a.likes).filter(p => !seenTitles.has(p.title) && seenTitles.add(p.title));
-const featured = byLikes[0];
-const popular = byLikes.slice(1, 4);
-const latest = rich.slice(0, 9);
-const counts = Object.fromEntries(THEMES.map(t => [t.slug, posts.filter(p => p.themes.includes(t.slug)).length]));
-
-// ---------- İlanlar (ilanlar.json) ----------
-// Alanlar: tur ("is" | "devir"), baslik, sehir, ilce, aciklama, iletisim, tarih (YYYY-AA-GG), pozisyon, ucret, aktif (false ise gizlenir)
-const ILAN_FILE = process.env.ILAN_FILE || path.join(ROOT, "ilanlar.json");
-const ilanlar = fs.existsSync(ILAN_FILE) ? JSON.parse(fs.readFileSync(ILAN_FILE, "utf-8")) : [];
-const DM = "https://ig.me/m/eczacidirenisi";
+// ---------- Üyelik, akış, ilanlar (Supabase; kurulum: supabase/schema.sql, anahtarlar: assets/config.js) ----------
 const ILAN = {
-  is: { file: "is-ilanlari.html", title: "İş ilanları", lead: "Eczane ve eczacılık alanında eleman arayanlar ile iş arayanlar için ilanlar.", empty: "Henüz iş ilanı yok.", cta: "İş ilanı ver" },
-  devir: { file: "devir-ilanlari.html", title: "Devir ilanları", lead: "Devredilecek eczaneler ve devir arayanlar için ilanlar.", empty: "Henüz devir ilanı yok.", cta: "Devir ilanı ver" },
+  is: { file: "is-ilanlari.html", title: "İş ilanları", lead: "Eczane ve eczacılık alanında eleman arayanlar ile iş arayanlar için ilanlar." },
+  devir: { file: "devir-ilanlari.html", title: "Devir ilanları", lead: "Devredilecek eczaneler ve devir arayanlar için ilanlar." },
 };
-const ilanList = k => ilanlar.filter(l => l.tur === k && l.aktif !== false).sort((a, b) => (b.tarih || "").localeCompare(a.tarih || ""));
-const fmtDay = s => (s && /^\d{4}-\d{2}-\d{2}$/.test(s)) ? fmtDate(s + "T12:00:00Z") : "";
-function ilanHtml(l) {
-  const where = [l.sehir, l.ilce].filter(Boolean).join(" / ");
-  const meta = [where, fmtDay(l.tarih)].filter(Boolean).join(" · ");
-  const facts = [l.pozisyon && `Pozisyon <b>${esc(l.pozisyon)}</b>`, l.ucret && `Ücret <b>${esc(l.ucret)}</b>`].filter(Boolean).map(x => `<span>${x}</span>`).join("");
-  return `<article class="ilan" data-q="${esc([l.baslik, where, l.aciklama, l.pozisyon].filter(Boolean).join(" ").toLowerCase())}">
-<div class="meta">${esc(meta)}</div><h3>${esc(l.baslik || "İlan")}</h3>
-${facts ? `<p class="facts">${facts}</p>` : ""}${l.aciklama ? `<p class="body-s">${esc(l.aciklama)}</p>` : ""}
-${l.iletisim ? `<p class="iletisim"><b>İletişim:</b> ${esc(l.iletisim)}</p>` : ""}</article>`;
-}
-const emptyHtml = k => `<div class="empty"><h3>${ILAN[k].empty}</h3><p>İlan vermek için formu doldurabilirsin.</p><a class="btn" href="ilan-ver.html?tur=${k}">${ILAN[k].cta}</a></div>`;
-
+const LISTS = JSON.parse(fs.readFileSync(path.join(ROOT, "lists.json"), "utf-8"));
+const opts = a => a.map(x => `<option value="${esc(x)}">${esc(x)}</option>`).join("");
 for (const [k, T] of Object.entries(ILAN)) {
-  const list = ilanList(k);
   write(T.file, layout({
     title: `${T.title} · Eczacı Direnişi`, desc: T.lead, active: `/${T.file}`, path: T.file,
     body: `<h1>${T.title}</h1><p class="lead">${T.lead}</p>
-${list.length ? `<div class="actions"><a class="btn" href="ilan-ver.html?tur=${k}">${T.cta}</a></div>
-<div class="filters"><input id="q" type="search" placeholder="Şehir, pozisyon ya da kelime ara…" aria-label="İlanlarda ara"></div>
-<p class="meta" id="count">${list.length} ilan</p><div class="ilanlar" id="il">${list.map(ilanHtml).join("")}</div>
-<p class="note">Görüşmeden önce ilan bilgilerini ilan sahibiyle teyit edin.</p>
-<script>
-const q=document.getElementById('q'),els=[...document.querySelectorAll('#il .ilan')],c=document.getElementById('count');
-q.addEventListener('input',()=>{const s=q.value.toLowerCase().trim();let n=0;els.forEach(e=>{const ok=!s||e.dataset.q.includes(s);e.style.display=ok?'':'none';if(ok)n++});c.textContent=n+' ilan'});
-</script>` : emptyHtml(k)}`
+<div class="actions"><a class="btn" href="ilan-ver.html?tur=${k}">İlan ver</a></div>
+<div id="il-own" class="ownbox" hidden></div>
+<div class="filters filters-ilan"><select id="il-sehir" aria-label="Şehre göre filtrele"><option value="">Tüm şehirler</option>${opts(LISTS.iller)}</select>${k === "is" ? `<select id="il-poz" aria-label="Pozisyona göre filtrele"><option value="">Tüm pozisyonlar</option>${opts(LISTS.pozisyonlar)}</select>` : ""}<input id="il-q" type="search" placeholder="Kelime ara…" aria-label="İlanlarda ara"></div>
+<p class="meta" id="il-count"></p>
+<div class="ilanlar" id="il" data-tur="${k}" data-limit="100"><p class="muted">İlanlar yükleniyor…</p></div>
+<noscript><p class="note">İlanları görmek için JavaScript gerekir.</p></noscript>
+<p class="note">Görüşmeden önce ilan bilgilerini ilan sahibiyle teyit edin. İletişim bilgileri yalnızca üyelere gösterilir.</p>`
   }));
 }
-// ---------- İlan ver (form) ----------
-// Sunucu yok: form bilgileri hazır bir mesaj metnine çevirir, kopyalar ve Instagram mesajını açar. Hiçbir bilgi sitede saklanmaz.
+const homeIlan = k => `<div><h3 class="sub">${ILAN[k].title}</h3>
+<div class="ilanlar" data-tur="${k}" data-limit="3"><p class="muted">Yükleniyor…</p></div>
+<p><a class="btn ghost" href="${ILAN[k].file}">Tüm ${ILAN[k].title.toLowerCase()} →</a></p></div>`;
+
 write("ilan-ver.html", layout({
-  title: "İlan ver · Eczacı Direnişi", active: "", path: "ilan-ver.html", desc: "İş ya da devir ilanı vermek için formu doldur.",
+  title: "İlan ver · Eczacı Direnişi", active: "", path: "ilan-ver.html", desc: "İş ya da devir ilanı ver.",
   body: `<h1>İlan ver</h1>
-<p class="lead">Formu doldur, hazırlanan metni Instagram'dan <b>@eczacidirenisi</b> hesabına mesaj olarak gönder.</p>
+<p class="lead">İlanın yönetici onayından sonra sitede yayınlanır. İlan vermek için üye olman gerekir.</p>
+<div id="ilan-form"><div class="msg" hidden></div>
 <form id="f" class="form" novalidate>
 <fieldset><legend>İlan türü</legend>
 <label class="radio"><input type="radio" name="tur" value="is" checked> İş ilanı</label>
 <label class="radio"><input type="radio" name="tur" value="devir"> Devir ilanı</label></fieldset>
 <label>Başlık <span class="req">*</span><input name="baslik" required maxlength="120" placeholder="Örn. Eczacı aranıyor / Devren eczane"></label>
-<div class="row2"><label>Şehir <span class="req">*</span><input name="sehir" required maxlength="40"></label>
-<label>İlçe<input name="ilce" maxlength="40"></label></div>
-<div class="row2" id="isalan"><label>Pozisyon<input name="pozisyon" maxlength="80" placeholder="Örn. Eczacı, tam zamanlı"></label>
-<label>Ücret<input name="ucret" maxlength="60" placeholder="Örn. Görüşülür"></label></div>
+<div class="row2"><label>Şehir <span class="req">*</span><select name="sehir" required><option value="">Şehir seç…</option>${opts(LISTS.iller)}</select></label>
+<label>İlçe <span class="req">*</span><select name="ilce" required disabled><option value="">Önce şehir seç…</option></select></label></div>
+<div class="row2" id="isalan"><label>Pozisyon<select name="pozisyon"><option value="">Seç…</option>${opts(LISTS.pozisyonlar)}</select></label>
+<label>Ücret (aylık)<select name="ucret"><option value="">Seç…</option>${opts(LISTS.ucretler)}</select></label></div>
 <label>Açıklama<textarea name="aciklama" rows="5" maxlength="1200" placeholder="Detayları yaz."></textarea></label>
-<label>İletişim <span class="req">*</span><input name="iletisim" required maxlength="120" placeholder="Telefon ya da e-posta"></label>
-<p class="note">İletişim bilgisi ilanla birlikte herkese açık yayınlanabilir. Başkasının bilgisini onayı olmadan yazma.</p>
-<button class="btn" type="submit">Metni hazırla</button>
-</form>
-<div id="sonuc" class="sonuc" hidden>
-<h2>Mesajın hazır</h2>
-<p class="lead" id="durum"></p>
-<textarea id="metin" rows="9" readonly aria-label="Hazırlanan ilan metni"></textarea>
-<div class="actions"><button class="btn ghost" id="kopyala" type="button">Metni kopyala</button>
-<a class="btn" href="${DM}" target="_blank" rel="noopener">Instagram'da mesaj aç</a></div>
-<p class="note">Bu site ilanı kendiliğinden yayınlamaz ve bilgileri saklamaz. Mesajı gönderdikten sonra ilan, onaylanırsa siteye eklenir.</p>
+<fieldset class="iletisim-set"><legend>İletişim</legend>
+<p class="hint">Telefon ya da e-posta bilgisinden en az birini ver. Telefon vermezsen e-posta zorunludur. Bu bilgiler yalnızca giriş yapmış üyelere gösterilir. Başkasının bilgisini onayı olmadan yazma.</p>
+<label>Telefon türü<select name="tel_tur"><option value="">Telefon vermek istemiyorum</option><option value="cep">Kişisel cep telefonu</option><option value="sabit">İş / sabit hat</option><option value="dahili">Santral + dahili hat</option></select></label>
+<div id="tel-grup" hidden>
+<label><span id="tel-etiket">Telefon numarası</span> <span class="req">*</span><input name="tel" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="17" placeholder="0 (5__) ___ __ __"><span class="hint" id="tel-ipucu"></span><span class="fielderr" id="tel-hata"></span></label>
+<label id="dahili-grup" hidden>Dahili no <span class="req">*</span><input name="dahili" inputmode="numeric" maxlength="6" placeholder="Örn. 214"><span class="fielderr" id="dahili-hata"></span></label>
 </div>
-<script>
-(function(){
-  var f=document.getElementById('f'),s=document.getElementById('sonuc'),m=document.getElementById('metin'),d=document.getElementById('durum');
-  var t=new URLSearchParams(location.search).get('tur'); if(t==='is'||t==='devir'){f.querySelector('input[name=tur][value='+t+']').checked=true}
-  var isalan=document.getElementById('isalan');
-  function tog(){isalan.style.display=f.tur.value==='is'?'':'none'} f.addEventListener('change',tog); tog();
-  function build(){var v=function(n){return (f.elements[n].value||'').trim()};
-    var L=['İLAN: '+(f.tur.value==='is'?'İş ilanı':'Devir ilanı'),'Başlık: '+v('baslik'),'Şehir / İlçe: '+[v('sehir'),v('ilce')].filter(Boolean).join(' / ')];
-    if(f.tur.value==='is'){if(v('pozisyon'))L.push('Pozisyon: '+v('pozisyon'));if(v('ucret'))L.push('Ücret: '+v('ucret'))}
-    if(v('aciklama'))L.push('Açıklama: '+v('aciklama'));L.push('İletişim: '+v('iletisim'));return L.join('\\n')}
-  function copy(){return navigator.clipboard.writeText(m.value).then(function(){return true},function(){m.select();return false})}
-  f.addEventListener('submit',function(e){e.preventDefault();
-    var bad=[].slice.call(f.querySelectorAll('[required]')).filter(function(x){return !x.value.trim()});
-    [].slice.call(f.querySelectorAll('.bad')).forEach(function(x){x.classList.remove('bad')});
-    if(bad.length){bad.forEach(function(x){x.classList.add('bad')});bad[0].focus();return}
-    m.value=build();s.hidden=false;
-    copy().then(function(ok){d.textContent=ok?'Metin panoya kopyalandı. Instagram mesajına yapıştırıp gönder.':'Metni seçip kopyala, sonra Instagram mesajına yapıştır.'});
-    s.scrollIntoView({behavior:'smooth',block:'start'})});
-  document.getElementById('kopyala').addEventListener('click',function(e){var b=e.currentTarget;copy().then(function(ok){b.textContent=ok?'Kopyalandı ✓':'Kopyalanamadı';setTimeout(function(){b.textContent='Metni kopyala'},2000)})});
-})();
-</script>`
+<label>E-posta <span class="req" id="eposta-zorunlu">*</span><input name="eposta" type="email" inputmode="email" autocomplete="email" maxlength="120" placeholder="ad@ornek.com"><span class="sug" id="eposta-oner"></span><span class="fielderr" id="eposta-hata"></span></label>
+</fieldset>
+<button class="btn" type="submit">İlanı gönder</button>
+</form></div>
+<noscript><p class="note">İlan vermek için JavaScript gerekir.</p></noscript>`
 }));
 
-const homeIlan = k => {
-  const list = ilanList(k);
-  return `<div><h3 class="sub">${ILAN[k].title}</h3>${list.length ? list.slice(0, 3).map(ilanHtml).join("") : emptyHtml(k)}
-<p><a class="btn ghost" href="${ILAN[k].file}">${list.length ? `Tüm ${ILAN[k].title.toLowerCase()} →` : `${ILAN[k].title} sayfası →`}</a></p></div>`;
-};
+write("giris.html", layout({
+  title: "Giriş / Kayıt · Eczacı Direnişi", active: "", path: "giris.html", desc: "Üye ol ya da giriş yap.", noindex: true,
+  body: `<h1>Üyelik</h1>
+<div id="auth-box" class="authbox">
+<div class="tabs" role="tablist"><button type="button" class="tab on" data-tab="giris">Giriş yap</button><button type="button" class="tab" data-tab="kayit">Üye ol</button></div>
+<div class="msg" hidden></div>
+<form id="f-giris" class="form" data-panel="giris">
+<label>E-posta<input type="email" name="email" required autocomplete="email"></label>
+<label>Şifre<input type="password" name="password" required autocomplete="current-password"></label>
+<button class="btn" type="submit">Giriş yap</button>
+<p><button type="button" class="linkbtn dark" id="unuttum">Şifremi unuttum</button></p>
+</form>
+<form id="f-kayit" class="form" data-panel="kayit" hidden>
+<label>Kullanıcı adı<input name="username" required minlength="3" maxlength="20" autocomplete="username" placeholder="3-20 karakter: harf, rakam, _"></label>
+<label>E-posta<input type="email" name="email" required autocomplete="email"></label>
+<label>Şifre<input type="password" name="password" required minlength="8" autocomplete="new-password" placeholder="En az 8 karakter"></label>
+<label class="radio check"><input type="checkbox" name="onay"> <span><a href="gizlilik.html" target="_blank">Gizlilik bilgilendirmesini</a> okudum, kabul ediyorum.</span></label>
+<button class="btn" type="submit">Üye ol</button>
+</form>
+</div>
+<noscript><p class="note">Giriş için JavaScript gerekir.</p></noscript>`
+}));
+
+write("akis.html", layout({
+  title: "Akış · Eczacı Direnişi", active: "/akis.html", path: "akis.html", desc: "Üyelerin kısa paylaşımları.",
+  body: `<h1>Akış</h1><p class="lead">Üyelerin kısa paylaşımları. Okumak için üye olmak gerekmez, yazmak için gerekir.</p>
+<div id="akis"><p class="muted">Yükleniyor…</p></div>
+<noscript><p class="note">Akışı görmek için JavaScript gerekir.</p></noscript>`
+}));
+
+write("paylasimlar.html", layout({
+  title: "Paylaşımlar · Eczacı Direnişi", active: "", path: "paylasimlar.html", desc: "Instagram'dan seçilen paylaşımlar.",
+  body: `<h1>Paylaşımlar</h1><p class="lead">Instagram hesabından seçilen paylaşımlar, yeniden eskiye.</p>
+<div class="igs" id="ig-all" data-limit="12" data-more="1"><p class="muted">Yükleniyor…</p></div>
+<noscript><p class="note">Paylaşımları görmek için JavaScript gerekir.</p></noscript>`
+}));
+
+write("yonetim.html", layout({
+  title: "Yönetim · Eczacı Direnişi", active: "", path: "yonetim.html", noindex: true,
+  body: `<h1>Yönetim</h1>
+<div id="yonetim"><div id="icerik-admin"></div>
+<div id="konu-admin"></div>
+<h2>Instagram paylaşımı ekle</h2>
+<form id="ig-form" class="form" novalidate>
+<p class="lead">Instagram'daki gönderinin bağlantısını yapıştır. Paylaşım ana sayfada ve "Tüm paylaşımlar" sayfasında görünür.</p>
+<label>Instagram bağlantısı <span class="req">*</span><input name="url" type="url" required placeholder="https://www.instagram.com/p/..."></label>
+<label>Başlık (isteğe bağlı)<input name="baslik" maxlength="160" placeholder="Gönderinin üstünde görünecek kısa not"></label>
+<div class="msg" hidden></div>
+<button class="btn" type="submit">Ana sayfaya ekle</button>
+</form>
+<div class="igs" id="ig-admin-list" data-limit="6"></div>
+<h2>Onay bekleyen ilanlar</h2><div id="adm-ilan"><p class="muted">Yükleniyor…</p></div>
+<h2>Bildirilen gönderiler</h2><div id="adm-rep"><p class="muted">Yükleniyor…</p></div></div>`
+}));
+
+write("gizlilik.html", layout({
+  title: "Gizlilik bilgilendirmesi · Eczacı Direnişi", active: "", path: "gizlilik.html", desc: "Kişisel verilerin nasıl işlendiği.",
+  body: `<article class="post"><h1>Gizlilik bilgilendirmesi</h1>
+<p class="note"><b>Tamamlanacak:</b> Veri sorumlusu adı ve iletişim bilgisi: [VERİ SORUMLUSU ADI] · [İLETİŞİM E-POSTASI]</p>
+<h2>Hangi verileri topluyoruz?</h2>
+<p>Üye olurken e-posta adresin, kullanıcı adın ve şifren. Şifren yalnızca doğrulama için, şifrelenmiş olarak saklanır. Ayrıca yazdığın gönderiler, yorumlar, beğeniler ve verdiğin ilanlar.</p>
+<h2>İlanlardaki iletişim bilgileri</h2>
+<p>İlan verirken yazdığın telefon numarası (kişisel, iş ya da santral/dahili) ve e-posta adresi, ilan sayfalarında yalnızca giriş yapmış üyelere gösterilir. İlanı istediğin zaman, bir sebep seçerek kaldırabilirsin.</p>
+<h2>Ne için kullanıyoruz?</h2>
+<p>Üyeliğini yönetmek, gönderi ve yorumları göstermek, ilanları yayınlamak ve kötüye kullanımı önlemek için.</p>
+<h2>Kimler görebilir?</h2>
+<p>Kullanıcı adın, gönderilerin ve yorumların herkese açıktır. E-posta adresin herkese açık değildir. İlanda yazdığın iletişim bilgisi yalnızca giriş yapmış üyelere gösterilir.</p>
+<h2>Nerede saklanıyor?</h2>
+<p>Veriler, üyelik ve veritabanı hizmeti sağlayan Supabase altyapısında saklanır. Oturum bilgin ve tema tercihin (açık/koyu) tarayıcında tutulur.</p>
+${ADS_ON ? `<h2>Reklamlar (Google AdSense)</h2>
+<p>Bu sitede Google AdSense reklamları gösterilebilir. Reklamlar yalnızca çerez bildirimindeki "Kabul et" seçeneğini seçersen yüklenir. Kabul edersen Google ve ortakları reklamları göstermek ve ölçmek için tarayıcında çerez kullanabilir. Tercihini sayfa altındaki "Çerez tercihleri" bağlantısından istediğin zaman değiştirebilirsin. Google'ın verileri nasıl işlediği Google'ın gizlilik politikasında anlatılır.</p>` : ""}
+<h2>Instagram paylaşımları</h2>
+<p>Ana sayfadaki ve "Paylaşımlar" sayfasındaki Instagram gönderileri, Instagram'ın (Meta) kendi gömme (embed) yöntemiyle yüklenir. Bu paylaşımlar görüntülenirken IP adresin ve tarayıcı bilgilerin Instagram sunucularına iletilebilir ve Instagram kendi çerezlerini kullanabilir. Bu veriler Instagram'ın gizlilik politikasına tabidir.</p>
+<h2>Haber bağlantıları ve görseller</h2>
+<p>Yöneticiler başka sitelerden haber bağlantısı ekleyebilir. Bu içeriklerin başlık ve özeti kaynak sitenin sayfasından alınır, tıklandığında kaynak siteye gidilir. Kaynak sitelerden gelen görseller o sitelerin sunucularından yüklenebilir; bu sırada IP adresin o sitelere iletilebilir.</p>
+<h2>Hakların</h2>
+<p>Verilerine erişmek, düzeltmek ya da silinmesini istemek için yukarıdaki iletişim adresine yazabilirsin (KVKK madde 11). Kendi gönderilerini sitede istediğin zaman silebilirsin.</p></article>`
+}));
 
 write("index.html", layout({
   title: "Eczacı Direnişi", desc: "Vatansever Genç Türk Eczacılar Topluluğu", active: "/", path: "",
   ld: { "@context": "https://schema.org", "@type": "Organization", name: "Eczacı Direnişi", url: SITE_URL, sameAs: ["https://www.instagram.com/eczacidirenisi/"] },
-  body: `<div class="intro"><span class="kicker">${posts.length} paylaşım · ${ilanList("is").length} iş ilanı · ${ilanList("devir").length} devir ilanı</span>
+  body: `<div class="intro"><span class="kicker">Meslek gündemi · haberler · ilanlar</span>
 <h1>Vatansever Genç Türk Eczacılar Topluluğu</h1></div>
-<h2>Öne çıkan</h2>
-<div class="hero">${card(featured, "./", true)}<div style="display:grid;gap:16px">${popular.map(p => card(p, "./")).join("")}</div></div>
+<div id="ozne-sec" hidden><h2>Öne çıkan</h2><div id="ozne"></div></div>
+<div id="haberler-sec" hidden><h2>Haberler</h2><div class="grid" id="haberler"></div></div>
+<div id="ig-sec" hidden><h2>Instagram'dan</h2>
+<div class="igs" id="ig-home" data-limit="6"></div>
+<p><a class="btn ghost" href="paylasimlar.html">Tüm paylaşımlar →</a></p></div>
+<div class="ad-slot ad-inline" data-slot="icerik" data-etiket="Reklam"></div>
 <h2>İlanlar</h2>
 <div class="cols2">${homeIlan("is")}${homeIlan("devir")}</div>
-<h2>Son yazılar</h2><div class="list">${latest.map(p => item(p, "./")).join("")}</div>
-<p><a class="btn ghost" href="arsiv.html">Tüm arşiv →</a></p>`
+<div id="son-sec" hidden><h2>Son yazılar</h2><div class="list" id="son-yazilar"></div>
+<p><a class="btn ghost" href="arsiv.html">Tüm arşiv →</a></p></div>
+<noscript><p class="note">İçerikleri görmek için JavaScript gerekir.</p></noscript>`
 }));
 
 // ---------- Gündem ----------
 write("gundem.html", layout({
-  title: "Gündem · Eczacı Direnişi", active: "/gundem.html", path: "gundem.html", desc: "Son açıklamalar ve tepkiler.",
-  body: `<h1>Gündem</h1><p class="lead">Son açıklamalar ve tepkiler, tarih sırasıyla.</p>
-<div class="list">${rich.slice(0, 40).map(p => item(p, "./")).join("")}</div>
-<p><a class="btn ghost" href="arsiv.html">Daha eski paylaşımlar için arşiv →</a></p>`
+  title: "Gündem · Eczacı Direnişi", active: "/gundem.html", path: "gundem.html", desc: "Son açıklamalar, haberler ve yazılar.",
+  body: `<h1>Gündem</h1><p class="lead">Son açıklamalar, haberler ve yazılar, yeniden eskiye.</p>
+<div class="list" id="gundem" data-sayfa="20"><p class="muted">Yükleniyor…</p></div>
+<noscript><p class="note">İçerikleri görmek için JavaScript gerekir.</p></noscript>`
 }));
 
 // ---------- Konular ----------
 write("konular.html", layout({
   title: "Konular · Eczacı Direnişi", active: "/konular.html", path: "konular.html", desc: "Süreklilik gösteren konular, tek sayfada.",
   body: `<h1>Konular</h1><p class="lead">Süreklilik gösteren konular, tek sayfada toplanmış.</p>
-<div class="grid" style="margin-top:20px">${THEMES.map(t => `<a class="card" href="konu/${t.slug}.html"><div class="meta">${counts[t.slug]} paylaşım</div><h3>${esc(t.name)}</h3><p>${esc(t.desc)}</p></a>`).join("")}</div>`
+<div class="grid" id="konular-liste" style="margin-top:20px"><p class="muted">Yükleniyor…</p></div>
+<noscript><p class="note">Konuları görmek için JavaScript gerekir.</p></noscript>`
 }));
-
+// Tek konu sayfası: konu.html?s=KONU-ADRESI (konular veritabanından gelir, yönetimden eklenebilir)
+write("konu.html", layout({
+  title: "Konu · Eczacı Direnişi", active: "/konular.html", path: "konu.html", desc: "Konuya ait içerikler.",
+  body: `<p class="meta"><a href="konular.html">← Konular</a></p><h1 id="konu-baslik">Konu</h1>
+<p class="lead" id="konu-aciklama"></p>
+<div class="list" id="konu-liste"><p class="muted">Yükleniyor…</p></div>`
+}));
+// Eski konu adresleri (konu/ADRES.html) yeni sayfaya yönlenir
 for (const t of THEMES) {
-  const list = posts.filter(p => p.themes.includes(t.slug));
-  const tl = list.filter(p => p.article);
-  write(`konu/${t.slug}.html`, layout({
-    title: `${t.name} · Eczacı Direnişi`, desc: t.desc, active: "/konular.html", depth: 1, path: `konu/${t.slug}.html`,
-    body: `<p class="meta"><a href="../konular.html">← Konular</a></p><h1>${esc(t.name)}</h1>
-<p class="lead">${esc(t.desc)}</p>
-<p class="facts"><span><b>${list.length}</b> paylaşım</span><span>İlk paylaşım <b>${list.length ? fmtDate(list[list.length - 1].date) : "-"}</b></span><span><b>${list.reduce((s, p) => s + p.likes, 0).toLocaleString("tr-TR")}</b> toplam beğeni</span></p>
-<h2>Zaman çizelgesi</h2><div class="list">${(tl.length ? tl : list).slice(0, 60).map(p => item(p, "../")).join("")}</div>`
-  }));
+  write(`konu/${t.slug}.html`, `<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Yönlendiriliyor…</title>
+<meta http-equiv="refresh" content="0;url=../konu.html?s=${t.slug}"><script>location.replace('../konu.html?s=${t.slug}')</script></head>
+<body><a href="../konu.html?s=${t.slug}">Konuya git</a></body></html>`);
 }
 
-// ---------- Yazılar ----------
-for (const [i, p] of articles.entries()) {
-  const rel = posts.filter(x => x.rich && x.slug !== p.slug && x.themes.some(s => p.themes.includes(s))).slice(0, 4);
-  const newer = articles[i - 1], older = articles[i + 1];
-  const minutes = Math.max(1, Math.round(p.text.split(/\s+/).length / 200));
-  write(`yazi/${p.slug}.html`, layout({
-    title: `${p.title} · Eczacı Direnişi`, desc: excerpt(p.text, 150) || "Eczacı Direnişi Instagram paylaşımı", active: "/gundem.html", depth: 1,
-    path: `yazi/${p.slug}.html`, type: "article", image: p.img ? `assets/posts/${p.slug}.jpg` : "",
-    ld: { "@context": "https://schema.org", "@type": "NewsArticle", headline: p.title.slice(0, 110), datePublished: p.date + "Z",
-      publisher: { "@type": "Organization", name: "Eczacı Direnişi" }, mainEntityOfPage: `${SITE_URL}/yazi/${p.slug}.html` },
-    body: `<div class="progress" id="pg"></div><article class="post"><p class="meta"><a href="../gundem.html">← Gündem</a></p>
-<div>${tags(p, "../")}</div><h1>${esc(p.title)}</h1>
-<p class="facts"><span><time datetime="${p.date}">${fmtDate(p.date)}</time></span><span>${minutes} dk okuma</span><span>${p.likes} beğeni</span><span>${p.comments} yorum</span></p>
-${p.img ? `<figure class="shot"><img src="../assets/posts/${p.slug}.jpg" alt="${p.rich ? "Paylaşımın görseli" : "Paylaşım görseli (metin görselin içindedir)"}" decoding="async"></figure>` : ""}
-${p.rich ? `<div class="body">${esc(p.text.replace(p.title, "").trim() || p.text)}</div>` : ""}
-<p class="note">Bu yazı Instagram paylaşımından derlenmiştir. Orijinal görsel ve yorumlar için Instagram'a bakın.</p>
-<div class="actions"><a class="btn" href="${p.url}">Instagram'da gör</a>
-<button class="btn ghost" id="share" type="button">Bağlantıyı kopyala</button></div></article>
-<nav class="pn" aria-label="Yazılar arası gezinme">${older ? `<a href="${older.slug}.html"><small>← Önceki</small>${esc(excerpt(older.title, 70))}</a>` : "<span></span>"}${newer ? `<a class="next" href="${newer.slug}.html"><small>Sonraki →</small>${esc(excerpt(newer.title, 70))}</a>` : "<span></span>"}</nav>
-${rel.length ? `<h2>İlgili yazılar</h2><div class="list">${rel.map(x => item(x, "../")).join("")}</div>` : ""}
-<script>
-const pg=document.getElementById('pg');addEventListener('scroll',()=>{const h=document.documentElement;pg.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight||1)*100)+'%'},{passive:true});
-document.getElementById('share').addEventListener('click',async e=>{const b=e.currentTarget;try{await navigator.clipboard.writeText(location.href);b.textContent='Kopyalandı ✓'}catch{b.textContent='Kopyalanamadı'}setTimeout(()=>b.textContent='Bağlantıyı kopyala',2000)});
-</script>`
-  }));
+// ---------- Yazı sayfası (tek sayfa, içerik veritabanından: yazi.html?id=…) ----------
+write("yazi.html", layout({
+  title: "Yazı · Eczacı Direnişi", active: "/gundem.html", path: "yazi.html", desc: "Eczacı Direnişi yazısı.", type: "article",
+  body: `<div class="progress" id="pg"></div>
+<p class="meta"><a href="gundem.html">← Gündem</a></p>
+<div id="yazi-kutu"><p class="muted">Yükleniyor…</p></div>
+<div class="ad-slot ad-inline" data-slot="icerik" data-etiket="Reklam"></div>
+<div id="yorumlar-kutu"></div>
+<noscript><p class="note">Yazıyı görmek için JavaScript gerekir.</p></noscript>`
+}));
+// Eski adresler (yazi/KOD.html) yeni sayfaya yönlenir
+for (const s of SEED) {
+  write(`yazi/${s.kod}.html`, `<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Yönlendiriliyor…</title>
+<meta http-equiv="refresh" content="0;url=../yazi.html?k=${s.kod}"><script>location.replace('../yazi.html?k=${s.kod}')</script></head>
+<body><a href="../yazi.html?k=${s.kod}">Yazıya git</a></body></html>`);
 }
 
 // ---------- 404, sitemap, robots ----------
@@ -293,23 +312,18 @@ write("404.html", layout({
   body: `<h1>Sayfa bulunamadı</h1><p class="lead">Aradığın sayfa taşınmış ya da hiç var olmamış olabilir.</p>
 <p><a class="btn" href="${SITE_URL}/index.html">Ana sayfaya dön</a> <a class="btn ghost" href="${SITE_URL}/arsiv.html">Arşivde ara</a></p>`
 }));
-const urls = ["", "gundem.html", "is-ilanlari.html", "devir-ilanlari.html", "ilan-ver.html", "konular.html", "arsiv.html", "hakkimizda.html",
-  ...THEMES.map(t => `konu/${t.slug}.html`), ...articles.map(p => `yazi/${p.slug}.html`)];
+const urls = ["", "gundem.html", "akis.html", "paylasimlar.html", "is-ilanlari.html", "devir-ilanlari.html", "gizlilik.html", "konular.html", "arsiv.html", "hakkimizda.html"];
 write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map(u => `<url><loc>${SITE_URL}/${u}</loc></url>`).join("")}</urlset>`);
 write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}/sitemap.xml\n`);
 
 // ---------- Arşiv ----------
 write("arsiv.html", layout({
-  title: "Arşiv · Eczacı Direnişi", active: "/arsiv.html", path: "arsiv.html", desc: "Tüm paylaşımlar, konuya göre filtrelenebilir.",
-  body: `<h1>Arşiv</h1><p class="lead">${posts.length} paylaşımın tamamı. Konuya göre filtrele ya da ara.</p>
-<div class="filters"><input id="q" type="search" placeholder="Ara…" aria-label="Ara">
-<button class="on" data-t="">Tümü</button>${THEMES.map(t => `<button data-t="${t.slug}">${esc(t.name)}</button>`).join("")}</div>
-<p class="meta" id="count"></p><div class="list" id="list">${posts.map(p => item(p, "./")).join("")}</div>
-<script>
-const items=[...document.querySelectorAll('#list .item')],q=document.getElementById('q'),c=document.getElementById('count');let t='';
-function run(){const s=q.value.toLowerCase().trim();let n=0;items.forEach(e=>{const ok=(!t||e.dataset.themes.split(' ').includes(t))&&(!s||e.dataset.q.includes(s));e.style.display=ok?'':'none';if(ok)n++});c.textContent=n+' sonuç'}
-q.addEventListener('input',run);document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('on'));b.classList.add('on');t=b.dataset.t;run()}));run();
-</script>`
+  title: "Arşiv · Eczacı Direnişi", active: "/arsiv.html", path: "arsiv.html", desc: "Tüm içerikler, konuya göre filtrelenebilir.",
+  body: `<h1>Arşiv</h1><p class="lead" id="arsiv-lead">Tüm içerikler. Konuya göre filtrele ya da ara.</p>
+<div class="filters" id="konu-filtre"><input id="q" type="search" placeholder="Ara…" aria-label="Ara">
+<button class="on" data-t="">Tümü</button></div>
+<p class="meta" id="count"></p><div class="list" id="list"><p class="muted">Yükleniyor…</p></div>
+<noscript><p class="note">İçerikleri görmek için JavaScript gerekir.</p></noscript>`
 }));
 
 // ---------- Hakkımızda ----------
@@ -321,5 +335,4 @@ write("hakkimizda.html", layout({
 <p><a class="btn" href="https://www.instagram.com/eczacidirenisi/">Instagram'da takip et</a></p></article>`
 }));
 
-console.log("Ana sayfa görselsiz:", [featured, ...popular, ...latest].filter(p => !p.img).map(p => p.slug).join(" ") || "yok");
-console.log(`Üretildi: ${posts.length} paylaşım, ${articles.length} yazı sayfası, ${ilanList("is").length} iş ilanı, ${ilanList("devir").length} devir ilanı → docs/`);
+console.log(`Üretildi: ${SEED.length} yönlendirme, ${THEMES.length} konu → docs/`);

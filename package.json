@@ -1,0 +1,11 @@
+{
+  "name": "eczacidirenisi-site",
+  "private": true,
+  "description": "Eczacı Direnişi topluluk sitesi (statik sayfalar + Supabase)",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "build": "node build.mjs",
+    "demo": "node build.mjs && node tools/demo/sunucu.mjs",
+    "start": "node build.mjs && node serve.mjs"
+  }
+}

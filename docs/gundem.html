@@ -1,7 +1,7 @@
 <!doctype html><html lang="tr" data-base="./"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#e30a17">
-<link rel="icon" href="./assets/logo.jpg">
+<link rel="icon" href="./assets/logo.jpg"><link rel="apple-touch-icon" href="./assets/logo.jpg"><link rel="manifest" href="./site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Source+Serif+4:wght@400;700&display=swap" rel="stylesheet">
 <title>Gündem · Eczacı Direnişi</title><meta name="description" content="Son açıklamalar, haberler ve yazılar.">
@@ -290,17 +290,30 @@ html.js h2.rv.in{clip-path:var(--brush)}
 .shell{display:block}
 .rail{display:none}
 .ad-slot{display:none;overflow:hidden;text-align:center}
+.ad-slot.dolu,.ad-slot.kutu{display:block}
+.ad-slot a{display:block;text-decoration:none}
+.ad-slot img{display:block;max-width:100%;height:auto;margin:0 auto}
+.ad-banner{margin:0 0 22px}
+main .ad-banner:last-child{margin:34px 0 0}
+.ad-banner img,.ad-inline img{max-height:120px;width:auto}
+.rail .ad-slot img{max-height:600px;width:100%;object-fit:contain}
+.ad-slot.kutu a{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;min-height:72px;padding:8px;border:1px dashed var(--line2);background:var(--soft);color:var(--muted)}
+.ad-slot.kutu b{font:600 15px Oswald,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--red-t)}
+.ad-slot.kutu span{font:500 12px Oswald,sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.ad-slot.kutu a:hover{border-color:var(--red)}
+.rail .ad-slot.kutu a{min-height:600px;text-align:center}
+.ad-slot.kutu::before{display:none}
 @media(min-width:1440px){
   .shell{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1040px) minmax(0,1fr);column-gap:24px;align-items:start}
   .rail{display:block;position:sticky;top:16px;padding-top:34px;min-width:0}
   .rail-l{justify-self:end}
   .rail-r{justify-self:start}
-  html.ads-on .rail .ad-slot,html.ads-preview .rail .ad-slot{display:block;width:160px;min-height:600px}
+  .rail .ad-slot{width:160px}
+  html.ads-preview .rail .ad-slot{display:block;min-height:600px}
 }
-@media(min-width:1800px){html.ads-on .rail .ad-slot,html.ads-preview .rail .ad-slot{width:300px}}
-html.ads-on .ad-inline,html.ads-preview .ad-inline{display:block;margin:22px 0;min-height:90px}
+.ad-inline{margin:22px 0}
+html.ads-preview .ad-inline,html.ads-preview .ad-banner{display:grid;min-height:90px}
 html.ads-preview .ad-slot{border:2px dashed var(--ink);color:var(--muted);font:600 13px Oswald,sans-serif;letter-spacing:.08em;text-transform:uppercase;display:grid;place-items:center}
-html.ads-on .ad-slot:empty{display:none}
 .ad-slot::before{content:attr(data-etiket);display:block;font:500 11px Oswald,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
 html.ads-preview .ad-slot::before{display:none}
 
@@ -324,15 +337,47 @@ html.ads-preview .ad-slot::before{display:none}
 .kaldir .actions{margin:10px 0 0}
 .badge.on{background:#1f7a3d;color:#fff}
 .badge.off{background:var(--muted);color:var(--paper)}
+
+/* ---------- Altbilgi sütunları ---------- */
+.foot{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 32px}
+.foot nav{display:flex;flex-direction:column;flex-wrap:nowrap;align-items:flex-start;gap:6px;font-size:15px;text-transform:none;letter-spacing:0}
+.foot nav b{font-size:13px;letter-spacing:.14em;text-transform:uppercase;border-bottom:2px solid var(--red);padding-bottom:3px;margin-bottom:4px}
+footer .foot nav a{color:var(--foot-a);padding:2px 0;min-height:0;display:inline;background:none;text-decoration:none}
+footer .foot nav a:hover{text-decoration:underline}
+.foot-not{margin:22px 0 0;padding-top:12px;border-top:1px solid #4a4440;font-size:14px}
+@media(max-width:600px){.foot{grid-template-columns:1fr}}
+
+/* ---------- Akış kategorileri, ilan vurgusu, hesap, yasal metinler ---------- */
+.kat{display:inline-block;margin-left:8px;padding:0 7px;border:1px solid var(--line2);font-size:12px;letter-spacing:.06em;color:var(--red-t)}
+.composer .crow{flex-wrap:wrap}
+.kat-sec{font:16px "Source Serif 4",Georgia,serif;padding:7px 10px;border:2px solid var(--line);background:var(--paper);color:var(--ink);border-radius:0;margin-left:auto;max-width:100%}
+.filters-ilan select:disabled{opacity:.55;cursor:default}
+.ilan.vurgu{outline:3px solid var(--red);outline-offset:6px}
+.ilan>.kaldir,.reply>.kaldir,.tw>.kaldir{margin-top:10px}
+.form.tehlike{margin-top:36px;border:2px solid var(--red);padding:0 16px 16px;background:var(--tint)}
+a.who{color:#fff;text-decoration:none}
+a.who:hover{text-decoration:underline}
+.eksik{background:#ffe58a;color:#16110f;padding:0 4px}
+.tablo{overflow-x:auto}
+.tablo table{border-collapse:collapse;width:100%;font-size:16px}
+.tablo th,.tablo td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line2);vertical-align:top}
+.tablo th{font:600 13px Oswald,sans-serif;letter-spacing:.08em;text-transform:uppercase;border-bottom:3px solid var(--line)}
+.liste-kutu{list-style:none;padding:0}
+.liste-kutu li{position:relative;padding:8px 0 8px 30px;border-bottom:1px solid var(--line2)}
+.liste-kutu li::before{content:"";position:absolute;left:2px;top:.85em;width:13px;height:13px;border:2px solid var(--red)}
 </style></head><body>
 <a class="skip" href="#icerik">İçeriğe geç</a>
-<header class="site"><div class="wrap"><a class="brand" href="./index.html" aria-label="Eczacı Direnişi ana sayfa"><img src="./assets/logo.jpg" alt="" width="52" height="52"><span>Eczacı <b>Direnişi</b></span></a><nav aria-label="Ana menü"><a href="./">Ana sayfa</a><a href="./gundem.html" class="on" aria-current="page">Gündem</a><a href="./akis.html">Akış</a><a href="./is-ilanlari.html">İş ilanları</a><a href="./devir-ilanlari.html">Devir ilanları</a><a href="./arsiv.html">Arşiv</a><a href="./hakkimizda.html">Hakkımızda</a></nav><div class="hdr-tools"><button class="tema-btn" id="tema" type="button" aria-label="Tema">◐</button><div class="auth" id="auth"></div></div></div></header>
+<header class="site"><div class="wrap"><a class="brand" href="./index.html" aria-label="Eczacı Direnişi ana sayfa"><img src="./assets/logo.jpg" alt="" width="52" height="52"><span>Eczacı <b>Direnişi</b></span></a><nav aria-label="Ana menü"><a href="./">Ana sayfa</a><a href="./gundem.html" class="on" aria-current="page">Gündem</a><a href="./kose-yazilari.html">Köşe yazıları</a><a href="./akis.html">Akış</a><a href="./is-ilanlari.html">İş ilanları</a><a href="./devir-ilanlari.html">Devir ilanları</a><a href="./rehber.html">Rehber</a><a href="./arsiv.html">Arşiv</a></nav><div class="hdr-tools"><button class="tema-btn" id="tema" type="button" aria-label="Tema">◐</button><div class="auth" id="auth"></div></div></div></header>
 <div class="shell"><aside class="rail rail-l" aria-label="Reklam alanı"><div class="ad-slot" data-slot="sol" data-etiket="Reklam"></div></aside>
-<main id="icerik"><div class="wrap"><h1>Gündem</h1><p class="lead">Son açıklamalar, haberler ve yazılar, yeniden eskiye.</p>
+<main id="icerik"><div class="wrap"><div class="ad-slot ad-banner" data-slot="ust" data-etiket="Reklam"></div><h1>Gündem</h1><p class="lead">Son açıklamalar, haberler ve yazılar, yeniden eskiye.</p>
 <div class="list" id="gundem" data-sayfa="20"><p class="muted">Yükleniyor…</p></div>
-<noscript><p class="note">İçerikleri görmek için JavaScript gerekir.</p></noscript></div></main>
+<noscript><p class="note">İçerikleri görmek için JavaScript gerekir.</p></noscript><div class="ad-slot ad-banner" data-slot="alt" data-etiket="Reklam"></div></div></main>
 <aside class="rail rail-r" aria-label="Reklam alanı"><div class="ad-slot" data-slot="sag" data-etiket="Reklam"></div></aside></div>
-<footer><div class="wrap"><a href="./konular.html">Konular</a> · <a href="./gizlilik.html">Gizlilik</a> · <button class="linkbtn" id="cerez-ac" type="button" hidden>Çerez tercihleri</button><span id="cerez-ayrac" hidden> · </span>Örnek çalışma, resmî site değildir · İçerik <a href="https://www.instagram.com/eczacidirenisi/">@eczacidirenisi</a> Instagram hesabından derlenmiştir.</div></footer>
+<footer><div class="wrap"><div class="foot">
+<nav aria-label="İçerik"><b>İçerik</b><a href="./konular.html">Konular</a><a href="./kose-yazilari.html">Köşe yazıları</a><a href="./rehber.html">Rehber</a><a href="./hakkimizda.html">Hakkımızda</a></nav>
+<nav aria-label="Yasal"><b>Yasal</b><a href="./gizlilik.html">KVKK aydınlatma metni</a><a href="./kullanim-kosullari.html">Kullanım koşulları</a><a href="./topluluk-kurallari.html">Topluluk kuralları</a></nav>
+<nav aria-label="İletişim"><b>İletişim</b><a href="./iletisim.html">İletişim ve içerik bildirimi</a><a href="./reklam-ver.html">Reklam verin</a><a href="https://www.instagram.com/eczacidirenisi/">Instagram</a></nav>
+</div><p class="foot-not"><button class="linkbtn" id="cerez-ac" type="button" hidden>Çerez tercihleri</button><span id="cerez-ayrac" hidden> · </span>Örnek çalışma, resmî site değildir · İçerik <a href="https://www.instagram.com/eczacidirenisi/">@eczacidirenisi</a> Instagram hesabından derlenmiştir.</p></div></footer>
 <script>
 (function(){
   var els=[].slice.call(document.querySelectorAll('main h2,.card,.list .item,.pn a,.note,.facts,.ilan,.empty'));

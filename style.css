@@ -277,17 +277,30 @@ html.js h2.rv.in{clip-path:var(--brush)}
 .shell{display:block}
 .rail{display:none}
 .ad-slot{display:none;overflow:hidden;text-align:center}
+.ad-slot.dolu,.ad-slot.kutu{display:block}
+.ad-slot a{display:block;text-decoration:none}
+.ad-slot img{display:block;max-width:100%;height:auto;margin:0 auto}
+.ad-banner{margin:0 0 22px}
+main .ad-banner:last-child{margin:34px 0 0}
+.ad-banner img,.ad-inline img{max-height:120px;width:auto}
+.rail .ad-slot img{max-height:600px;width:100%;object-fit:contain}
+.ad-slot.kutu a{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;min-height:72px;padding:8px;border:1px dashed var(--line2);background:var(--soft);color:var(--muted)}
+.ad-slot.kutu b{font:600 15px Oswald,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--red-t)}
+.ad-slot.kutu span{font:500 12px Oswald,sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.ad-slot.kutu a:hover{border-color:var(--red)}
+.rail .ad-slot.kutu a{min-height:600px;text-align:center}
+.ad-slot.kutu::before{display:none}
 @media(min-width:1440px){
   .shell{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1040px) minmax(0,1fr);column-gap:24px;align-items:start}
   .rail{display:block;position:sticky;top:16px;padding-top:34px;min-width:0}
   .rail-l{justify-self:end}
   .rail-r{justify-self:start}
-  html.ads-on .rail .ad-slot,html.ads-preview .rail .ad-slot{display:block;width:160px;min-height:600px}
+  .rail .ad-slot{width:160px}
+  html.ads-preview .rail .ad-slot{display:block;min-height:600px}
 }
-@media(min-width:1800px){html.ads-on .rail .ad-slot,html.ads-preview .rail .ad-slot{width:300px}}
-html.ads-on .ad-inline,html.ads-preview .ad-inline{display:block;margin:22px 0;min-height:90px}
+.ad-inline{margin:22px 0}
+html.ads-preview .ad-inline,html.ads-preview .ad-banner{display:grid;min-height:90px}
 html.ads-preview .ad-slot{border:2px dashed var(--ink);color:var(--muted);font:600 13px Oswald,sans-serif;letter-spacing:.08em;text-transform:uppercase;display:grid;place-items:center}
-html.ads-on .ad-slot:empty{display:none}
 .ad-slot::before{content:attr(data-etiket);display:block;font:500 11px Oswald,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
 html.ads-preview .ad-slot::before{display:none}
 
@@ -311,3 +324,31 @@ html.ads-preview .ad-slot::before{display:none}
 .kaldir .actions{margin:10px 0 0}
 .badge.on{background:#1f7a3d;color:#fff}
 .badge.off{background:var(--muted);color:var(--paper)}
+
+/* ---------- Altbilgi sütunları ---------- */
+.foot{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 32px}
+.foot nav{display:flex;flex-direction:column;flex-wrap:nowrap;align-items:flex-start;gap:6px;font-size:15px;text-transform:none;letter-spacing:0}
+.foot nav b{font-size:13px;letter-spacing:.14em;text-transform:uppercase;border-bottom:2px solid var(--red);padding-bottom:3px;margin-bottom:4px}
+footer .foot nav a{color:var(--foot-a);padding:2px 0;min-height:0;display:inline;background:none;text-decoration:none}
+footer .foot nav a:hover{text-decoration:underline}
+.foot-not{margin:22px 0 0;padding-top:12px;border-top:1px solid #4a4440;font-size:14px}
+@media(max-width:600px){.foot{grid-template-columns:1fr}}
+
+/* ---------- Akış kategorileri, ilan vurgusu, hesap, yasal metinler ---------- */
+.kat{display:inline-block;margin-left:8px;padding:0 7px;border:1px solid var(--line2);font-size:12px;letter-spacing:.06em;color:var(--red-t)}
+.composer .crow{flex-wrap:wrap}
+.kat-sec{font:16px "Source Serif 4",Georgia,serif;padding:7px 10px;border:2px solid var(--line);background:var(--paper);color:var(--ink);border-radius:0;margin-left:auto;max-width:100%}
+.filters-ilan select:disabled{opacity:.55;cursor:default}
+.ilan.vurgu{outline:3px solid var(--red);outline-offset:6px}
+.ilan>.kaldir,.reply>.kaldir,.tw>.kaldir{margin-top:10px}
+.form.tehlike{margin-top:36px;border:2px solid var(--red);padding:0 16px 16px;background:var(--tint)}
+a.who{color:#fff;text-decoration:none}
+a.who:hover{text-decoration:underline}
+.eksik{background:#ffe58a;color:#16110f;padding:0 4px}
+.tablo{overflow-x:auto}
+.tablo table{border-collapse:collapse;width:100%;font-size:16px}
+.tablo th,.tablo td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line2);vertical-align:top}
+.tablo th{font:600 13px Oswald,sans-serif;letter-spacing:.08em;text-transform:uppercase;border-bottom:3px solid var(--line)}
+.liste-kutu{list-style:none;padding:0}
+.liste-kutu li{position:relative;padding:8px 0 8px 30px;border-bottom:1px solid var(--line2)}
+.liste-kutu li::before{content:"";position:absolute;left:2px;top:.85em;width:13px;height:13px;border:2px solid var(--red)}

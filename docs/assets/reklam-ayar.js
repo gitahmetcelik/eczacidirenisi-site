@@ -1,1 +1,1 @@
-window.ED_ADS={"client":"","slots":{"sol":"","sag":"","icerik":""}};
+window.ED_ADS={"client":"","slots":{"ust":"","alt":"","icerik":"","sol":"","sag":""},"kutular":true};

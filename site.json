@@ -1,0 +1,7 @@
+{
+  "not": "Siteyi yeniden üretmeden (node build.mjs) değişiklikler görünmez. isIlanlari/akis kapatılırsa ilgili bölüm menüden ve sayfalardan kalkar (veritabanı yetkileri ayrıca değişmez). reklamKutulari: boş alanlarda 'Bu alana reklam verin' kutusu gösterir.",
+  "ozellikler": { "isIlanlari": true, "akis": true, "reklamKutulari": true },
+  "veriSorumlusu": "",
+  "iletisimEposta": "",
+  "adres": ""
+}

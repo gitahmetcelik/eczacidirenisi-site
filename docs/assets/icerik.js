@@ -5,7 +5,7 @@
   var E = window.ED; if (!E) return;
   var h = E.h, $ = E.$, clear = E.clear, msg = E.msg, trErr = E.trErr, BASE = E.BASE;
   var TEMALAR = [];   // konular veritabanından yüklenir (konularYukle)
-  var COLS = 'id,tur,kod,baslik,ozet,gorsel_url,gorsel_alt,gorsel_konum,link_url,link_etiket,link_dogrudan,kaynak_site,temalar,yayin_tarihi,yayinda,gundemde,one_cikan';
+  var COLS = 'id,tur,kod,baslik,ozet,gorsel_url,gorsel_alt,gorsel_konum,link_url,link_etiket,link_dogrudan,kaynak_site,temalar,yayin_tarihi,yayinda,gundemde,one_cikan,yazar_adi';
   var TUR_AD = { yazi: 'Yazı', haber: 'Haber', baglanti: 'Bağlantı', instagram: 'Instagram' };
   var KONUM_AD = { ust: 'Üst', alt: 'Alt', sol: 'Sol', sag: 'Sağ' };
 
@@ -48,7 +48,7 @@
 
   // ---------- kart ve satır ----------
   function resim(y, cls, eager) { var s = imgSrc(y.gorsel_url); return s ? h('img', { class: cls, src: s, alt: '', loading: eager ? 'eager' : 'lazy', decoding: 'async' }) : null; }
-  function metaYazi(y, t) { return tarih(y.yayin_tarihi) + (y.kaynak_site ? ' · ' + y.kaynak_site : '') + (t.ext ? ' ↗' : ''); }
+  function metaYazi(y, t) { return (y.yazar_adi ? y.yazar_adi + ' · ' : '') + tarih(y.yayin_tarihi) + (y.kaynak_site ? ' · ' + y.kaynak_site : '') + (t.ext ? ' ↗' : ''); }
   function haberKart(y, big) {
     var t = hedef(y);
     var a = h('a', { class: 'card' + (big ? ' big' : ''), href: t.href, target: t.ext ? '_blank' : null, rel: t.ext ? 'noopener noreferrer' : null },
@@ -73,6 +73,7 @@
     kutu.appendChild(h('h1', { text: y.baslik || '(Başlıksız)' }));
     var dk = Math.max(1, Math.round(((y.govde || '').split(/\s+/).length) / 200));
     var facts = h('p', { class: 'facts' }, h('span', { text: tarih(y.yayin_tarihi || new Date().toISOString()) }));
+    if (y.yazar_adi) facts.insertBefore(h('span', {}, 'Yazan ', h('b', { text: y.yazar_adi })), facts.firstChild);
     if (y.govde) facts.appendChild(h('span', { text: dk + ' dk okuma' }));
     if (y.kaynak_site) facts.appendChild(h('span', {}, 'Kaynak ', h('b', { text: y.kaynak_site })));
     kutu.appendChild(facts);
@@ -141,6 +142,10 @@
   function mountGundem() {
     var el = $('#gundem'); if (!el) return; if (!E.sb) return E.notReady(el);
     return sayfali(el, function (a, b) { return sorgu().select(COLS).eq('yayinda', true).eq('gundemde', true).order('yayin_tarihi', { ascending: false }).range(a, b); }, parseInt(el.getAttribute('data-sayfa') || '20', 10));
+  }
+  function mountKose() {
+    var el = $('#kose-liste'); if (!el) return; if (!E.sb) return E.notReady(el);
+    return sayfali(el, function (a, b) { return sorgu().select(COLS).eq('yayinda', true).not('yazar_adi', 'is', null).order('yayin_tarihi', { ascending: false }).range(a, b); }, 20, 'Henüz köşe yazısı yok.');
   }
   function mountKonu() {
     var el = $('#konu-liste'); if (!el || !$('#konu-baslik')) return; if (!E.sb) return E.notReady(el);
@@ -292,6 +297,7 @@
 
       var baslik = h('input', { name: 'baslik', maxlength: '200', value: d.baslik || '', placeholder: 'Başlık' });
       var ozet = h('textarea', { name: 'ozet', rows: '3', maxlength: '500', placeholder: 'Kartlarda görünecek kısa özet' }, d.ozet || '');
+      var yazar = h('input', { name: 'yazar_adi', maxlength: '80', value: d.yazar_adi || '', placeholder: 'Boş bırakılırsa köşe yazısı sayılmaz' });
       var govde = h('textarea', { name: 'govde', rows: '12', maxlength: '30000', placeholder: 'Yazının metni…' }, d.govde || '');
       var gUrl = h('input', { name: 'gorsel_url', type: 'url', placeholder: 'https://… ya da dosya yükle', value: d.gorsel_url || '' });
       var gDosya = h('input', { type: 'file', accept: 'image/jpeg,image/png,image/webp', 'aria-label': 'Fotoğraf yükle' });
@@ -314,7 +320,7 @@
       var oneCikan = h('input', { type: 'checkbox', name: 'one_cikan', checked: !!d.one_cikan });
       function kutu(girdi, yazi) { return h('label', { class: 'radio check' }, girdi, h('span', { text: yazi })); }
 
-      [turAlan && alan('Tür', turAlan), cekKutu, alan('Başlık', baslik, true), alan('Özet', ozet),
+      [turAlan && alan('Tür', turAlan), cekKutu, alan('Başlık', baslik, true), alan('Özet', ozet), alan('Yazar adı (köşe yazısı ise)', yazar),
         alan('İçerik', govde), h('p', { class: 'muted ipucu', text: 'Biçim: boş satır = yeni paragraf · "## " ile başlık · "- " ile liste · **kalın** · *italik* · [yazı](https://adres) ile bağlantı' }),
         h('fieldset', {}, h('legend', { text: 'Fotoğraf' }), alan('Dosya yükle (JPEG/PNG/WebP, otomatik küçültülür)', gDosya), alan('ya da görsel adresi', gUrl), alan('Görsel açıklaması', gAlt),
           h('div', { class: 'gsat' }, gOnizle, gSil), h('p', { class: 'muted', text: 'Fotoğrafın yazıdaki konumu:' }), konumlar),
@@ -335,7 +341,7 @@
         var v = function (x) { return (x.value || '').trim() || null; };
         return { tur: d.tur === 'instagram' ? 'instagram' : turAlan.value, baslik: baslik.value.trim(), ozet: v(ozet), govde: (govde.value || '').replace(/\s+$/, '') || null,
           gorsel_url: v(gUrl), gorsel_alt: v(gAlt), gorsel_konum: (f.konum && f.konum.value) || 'ust', link_url: v(lUrl), link_etiket: v(lEt), link_dogrudan: lDog.checked,
-          kaynak_site: v(kaynak), temalar: temalar, yayin_tarihi: tarihInp.value ? new Date(tarihInp.value).toISOString() : new Date().toISOString(),
+          kaynak_site: v(kaynak), yazar_adi: v(yazar), temalar: temalar, yayin_tarihi: tarihInp.value ? new Date(tarihInp.value).toISOString() : new Date().toISOString(),
           yayinda: yayinda.checked, gundemde: gundemde.checked, one_cikan: oneCikan.checked };
       }
       function guncelle() {
@@ -469,6 +475,6 @@
   // ---------- başlat ----------
   E.ready.then(async function () {
     await konularYukle();
-    mountHome(); mountGundem(); mountKonu(); mountKonular(); mountArsiv(); mountYazi(); mountAdmin(); mountKonuAdmin();
+    mountHome(); mountGundem(); mountKose(); mountKonu(); mountKonular(); mountArsiv(); mountYazi(); mountAdmin(); mountKonuAdmin();
   });
 })();

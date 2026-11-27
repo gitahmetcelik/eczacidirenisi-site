@@ -81,8 +81,8 @@ GitHub Pages, `main` dalındaki `docs/` klasörünü yayınlar: **`main` dalına
 
 ## Şu anki durum
 
-- Reklam sistemi, ilan süresi, sebepli bildirim, köşe yazıları, hesap sayfası ve yasal sayfalar yalnızca demo ile denendi.
-- `supabase/gecis-02.sql` henüz gerçek bir veritabanında **çalıştırılmadı**. Canlıya almadan önce çalıştırılıp sınanmalı.
+- Reklam sistemi, ilan süresi, sebepli bildirim, köşe yazıları, hesap sayfası ve yasal sayfalar arayüzde yalnızca demo ile denendi.
+- `supabase/gecis-02.sql` canlı veritabanında 27 Kasım 2026'da çalıştırıldı. Yeni erişim kuralları, sonunda geri alınan bir SQL testiyle sınandı.
 - Yasal sayfalar **taslaktır**. Sarı işaretli alanlar doldurulmalı ve metinler hukukçuya okutulmalı.
 - İlan yayını ve üyeli paylaşım alanı için yayından önce hukuki değerlendirme gerekiyor. Gerekirse `site.json` ile kapatılabilir.
 - Otomatik test yoktur.
